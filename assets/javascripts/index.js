@@ -31,6 +31,8 @@ $.get('/api/info', function(data) {
 });
 
 // UI Functionality
+var landingTogglerClicked = false;
+
 var main = function() {
     //// Landing Section
     $landingTogglers.click(function() {
@@ -39,6 +41,7 @@ var main = function() {
         if (!$(this).hasClass('landing-active')) {
             if (!$landingHead.hasClass('fade-out')) {
                 $landingHead.addClass('fade-out');
+                landingTogglerClicked = !landingTogglerClicked && !!$title.addClass('show-logo');
                 $(this).toggleClass('landing-active');
                 tempThis = this;
                 if ($(this).hasClass('dream')) {
@@ -222,7 +225,7 @@ var listeners = function() {
       pagePos = window.pageYOffset; //calculates current vertical scroll position
 
       //fixes title header to proper position
-      if (pagePos >= landingHeadFixPoint && !landingHeadFixed || pagePos < landingHeadFixPoint && landingHeadFixed) {
+      if (!landingTogglerClicked && (pagePos >= landingHeadFixPoint && !landingHeadFixed || pagePos < landingHeadFixPoint && landingHeadFixed)) {
           $landingHead.toggleClass('hide');
           $title.toggleClass('show-logo');
           landingHeadFixed = !landingHeadFixed;

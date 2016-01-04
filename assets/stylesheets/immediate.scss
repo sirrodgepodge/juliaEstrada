@@ -39,10 +39,6 @@ a, a:hover, a:visited {
     opacity: .12!important;
 }
 
-.fade-out {
-    opacity: 0!important;
-}
-
 .disable-link {
     pointer-events: none;
     cursor: default;
@@ -59,6 +55,11 @@ a, a:hover, a:visited {
 
 .hide {
     visibility: hidden!important;
+}
+
+.fade-out {
+    @include vend(transition, opacity 1s ease-in-out !important);
+    opacity: 0!important;
 }
 
 ////Landing

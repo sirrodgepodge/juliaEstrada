@@ -2,11 +2,11 @@ module.exports = {
     title: 'Julia Estrada',
     landing: {
         sect1: {
-          label: 'An Actress',
+          label: 'Upcoming',
           image: '/images/smiling.png'
         },
         sect2: {
-          label: 'An Activist',
+          label: 'About Me',
           image: '/images/protest.png'
         },
         logoImage: '/images/juliaEstradaHeading.png'
