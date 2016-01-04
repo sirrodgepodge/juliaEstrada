@@ -1,0 +1,21 @@
+script(type='text/javascript').
+  // Converts touch to hover for mobile and tablet
+  document.addEventListener("touchstart", function(){}, true);
+
+  // Handles expedited image load at top of page
+  var otherOneLoaded = false;
+  var preLoadShade = new Image();
+  preLoadShade.src = '/images/shader.png';
+  preLoadShade.onload = landing;
+  function landing() {
+    if (!otherOneLoaded) otherOneLoaded = true;
+    else {
+      document.getElementsByClassName('product-img')[0].className += ' show';
+      document.getElementsByClassName('landing-head')[0].className += ' show';
+      document.getElementsByClassName('landing-content')[0].className += ' show';
+      delete otherOneLoaded;
+      delete preLoadShade;
+      delete landing;
+    }
+  };
+  with(document.documentElement){className=className.replace(/\bno-js\b/,'js')}

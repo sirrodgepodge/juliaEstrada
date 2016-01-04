@@ -1,0 +1,182 @@
+// For contact section
+
+// For phone view
+$phone-adjust-factor: 0.6658;
+
+//// Height + width of contact image
+////// This value drives all other calculations ///////
+$contact-side: 40vh;
+$phone-contact-side: $contact-side * $phone-adjust-factor;
+$contact-margin-top: 18vh;
+$phone-contact-margin-top: $contact-margin-top * $phone-adjust-factor;
+
+
+//// Border width & margin
+$contact-border-width: $contact-side/25;
+$contact-margin: $contact-margin-top 0 $contact-border-width/.8;
+$phone-contact-margin: $phone-contact-margin-top 0 $contact-border-width/1.75*$phone-adjust-factor;
+
+//// Centering images behind contact and hanfling pop-out
+@mixin contactImgInit($name, $size-pct, $bg-color, $transition-time, $side, $dir-pct, $perp-pct) {
+    //// For pushing images out
+    $contact-side-strip: stripUnits($contact-side);
+    $contact-border-width-strip: stripUnits($contact-border-width);
+    $denom: 2*$contact-border-width-strip/$contact-side-strip;
+    $img-size: $size-pct*$contact-side;
+    $phone-img-size: $size-pct*$contact-side*$phone-adjust-factor;
+
+    .#{$name} {
+        @include vend(transition, ($transition-time ease-in-out));
+        width: $img-size;
+        height: $img-size;
+        left: calc(50vw - #{$img-size/2});
+        top: $contact-margin-top + $contact-side/2 - $img-size/2;
+        font-size: $img-size/1.5;
+        background-color: $bg-color;
+        @media (max-width: $phone-max) {
+            & {
+                width: $phone-img-size;
+                height: $phone-img-size;
+                font-size: $phone-img-size/1.5;
+                left: calc(50vw - #{$phone-img-size/2});
+                top: $phone-contact-margin-top + $phone-contact-side/2 - $phone-img-size/2;
+            }
+        }
+    }
+    .poppin .#{$name} {
+        @if $side == bottom or $side == right {
+            $adjust: 1;
+        } @else if $side == top or $side == left {
+            $adjust: -1;
+        }
+
+        @if $side == left or $side == right {
+            $side: X;
+            $perp-side: Y;
+            $perp-adjust: -1;
+        } @else if $side == top or $side == bottom {
+            $side: Y;
+            $perp-side: X;
+            $perp-adjust: 1;
+        }
+
+        $perp-side-transform: unquote("translate#{$perp-side}(#{($contact-side + $img-size)/2*$perp-pct*$perp-adjust})"); //for adjusting vertically along side
+        $phone-perp-side-transform: unquote("translate#{$perp-side}(#{($contact-side + $img-size)/2*$perp-pct*$perp-adjust*$phone-adjust-factor})");
+
+        //makes it hug the rounded part... so ridiculous lmao
+        $perp-pct: abs($perp-pct);
+        $push: stripUnits(($contact-side + $img-size)/2*$adjust);
+        $phone-push: $push*$phone-adjust-factor;
+        @if $perp-pct > (1 - $denom) {
+            $perp-pct-passed: ($perp-pct - 1)/$denom + 1;
+            $push: $push + $perp-adjust*($contact-border-width-strip - sqrt((1-$perp-pct-passed)*(1-$perp-pct-passed)*$contact-border-width-strip*$contact-border-width-strip));
+            $phone-push: $phone-push*$phone-adjust-factor + $perp-adjust*($contact-border-width-strip*$phone-adjust-factor - sqrt((1-$perp-pct-passed)*(1-$perp-pct-passed)*$contact-border-width-strip*$contact-border-width-strip*$phone-adjust-factor));
+        }
+        $push: $push*$dir-pct;
+        $phone-push: $phone-push*$dir-pct;
+        $side-transform: unquote("translate#{$side}(#{$push}vh)");
+        $phone-side-transform: unquote("translate#{$side}(#{$phone-push}vh)");
+
+
+        //Apply result with transform, regular and phone
+        @include vend(transform, ($side-transform $perp-side-transform translateZ(0)));
+        @media (max-width: $phone-max) {
+            & {
+                @include vend(transform, ($phone-side-transform $phone-perp-side-transform translateZ(0)));
+            }
+        }
+	@media (max-width: $tablet-max) {
+	    a {
+		pointer-events: none;
+		cursor: default;
+	    }
+	}
+    }
+}
+//// Refactor for transform3d
+
+// Contact section
+.contact {
+    clear: both;
+    text-align: center;
+    display: block;
+    .contact-head {
+        @include vend(border-radius, $contact-border-width/4);
+        border: $theme-color solid $contact-border-width;
+        display: inline-block;
+        width: $contact-side;
+        height: $contact-side;
+        margin: $contact-margin;
+        padding: 0;
+        z-index: 1;
+        @media (max-width: $phone-max) {
+            & {
+                @include vend(border-radius, #{$contact-border-width * $phone-adjust-factor});
+                border: $theme-color solid #{$contact-border-width * $phone-adjust-factor};
+                width: $contact-side * $phone-adjust-factor;
+                height: $contact-side * $phone-adjust-factor;
+                margin: $phone-contact-margin;
+            }
+        }
+    }
+    .contact-sub {
+        @include vend(border-radius, $contact-border-width/4);
+        @include vend(transition, .6s ease-in-out);
+        display: block;
+        margin: 0 auto 11.5vh;
+        border-top: $theme-color solid $contact-border-width/7.15;
+        border-bottom: $theme-color solid $contact-border-width/6.25;
+        border-left: $theme-color solid $contact-border-width/1.75;
+        border-right: $theme-color solid $contact-border-width/1.75;
+        background-color: $theme-color;
+        text-align: center;
+        font-size: $contact-side/12;
+        color: white;
+        font-family: lato, sans-serif;
+        .contact-sub-inside {
+            @include vend(transition, .5s);
+            display: inline !important;
+            white-space: nowrap;
+            opacity: 0;
+        }
+        &:hover {
+            @include vend(transition, .375s ease-in-out);
+            text-shadow: 0 0 8px #FFF;
+        }
+        @media (max-width: $phone-max) {
+            & {
+                @include vend(border-radius, $contact-border-width/4 * $phone-adjust-factor);
+                border-top: $theme-color solid $contact-border-width/7.15 * $phone-adjust-factor;
+                border-bottom: $theme-color solid $contact-border-width/6.25 * $phone-adjust-factor;
+                border-left: $theme-color solid $contact-border-width/3.55 * $phone-adjust-factor;
+                border-right: $theme-color solid $contact-border-width/3.55 * $phone-adjust-factor;
+                font-size: $contact-side/12 * $phone-adjust-factor * 1.25;
+            }
+        }
+    }
+    .contact-img {
+        @include vend(border-radius, 50%);
+        @include vend(transform, translate3d(0, 0, 0));
+        z-index: 0;
+        position: absolute;
+        i {
+          color: rgb(66,72,91);
+        }
+        &.address {
+            letter-spacing: -.45rem;
+            line-height: 1.6;
+        }
+        &.phone {
+            line-height: 1.44;
+        }
+        a:hover {
+            text-shadow: 0 0 25px #fff;
+        }
+    }
+}
+
+@include contactImgInit(facebook, .6666666, theme-color-fade(0.13), .55s, left, .87, -.25);
+@include contactImgInit(phone, .4166666, theme-color-fade(0.23), .6s, left, .87, .705);
+@include contactImgInit(email, .3448275, theme-color-fade(0.34), .65s, top, .905, -.1);
+@include contactImgInit(address, .37037037, theme-color-fade(0.44), .5s, right, .9, .85);
+@include contactImgInit(instagram, .5, theme-color-fade(0.61), .45s, right, .9, .15);

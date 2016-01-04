@@ -1,0 +1,76 @@
+// Stored values
+$phone-max: 767px;
+$tablet-min: 768px;
+$tablet-max: 991px;
+$laptop-min: 992px;
+$grayish-yellowish: #e1ded9;
+$main-color: #900d13;
+$title-height: 11.5;
+
+//colors
+$theme-color: #242B40; //rgb equivalent = rgb(36, 43, 64)
+
+@function theme-color-fade($alpha) {
+  @return rgba(36, 43, 64, $alpha);
+}
+
+
+// Add Square Root function
+@function sqrt($r) {
+  $x0: 1;
+  $x1: $x0;
+
+  @for $i from 1 through 10 {
+    $x1: $x0 - ($x0 * $x0 - abs($r)) / (2 * $x0);
+    $x0: $x1;
+  }
+
+  @return $x1;
+}
+
+
+// Add function to strip the units from a variable
+@function stripUnits($number) {
+  @return $number / ($number * 0 + 1);
+}
+
+//create font-adding mixin
+@mixin addFont($fontname) {
+   @font-face {
+       font-family: #{$fontname};
+       src: url('/fonts/#{$fontname}/#{$fontname}.eot');
+       src: url('/fonts/#{$fontname}/#{$fontname}.eot?#iefix') format('embedded-opentype'),
+            url('/fonts/#{$fontname}/#{$fontname}.woff2') format('woff2'),
+            url('/fonts/#{$fontname}/#{$fontname}.woff') format('woff'),
+            url('/fonts/#{$fontname}/#{$fontname}.ttf') format('truetype'),
+            url('/fonts/#{$fontname}/#{$fontname}.svg##{$fontname}') format('svg');
+       font-weight: normal;
+       font-style: normal;
+   }
+}
+
+// Handle vendor property prefixes
+@mixin vend($prop, $val) {
+    -webkit-#{$prop}: $val;
+    -moz-#{$prop}: $val;
+    -ms-#{$prop}: $val;
+    -o-#{$prop}: $val;
+    #{$prop}: $val;
+}
+
+// Handle vendor value prefixes
+@mixin vendVal($prop, $val) {
+    #{$prop}: -webkit-#{$val};
+    #{$prop}: -moz-#{$val};
+    #{$prop}: -ms-#{$val};
+    #{$prop}: -o-#{$val};
+    #{$prop}: #{$val};
+}
+
+// Do text-shadow (not used at present)
+@mixin text-trace($color, $px) {
+    text-shadow: -$px #{-$px} 0 $color,
+                 $px #{-$px} 0 $color,
+                 -$px $px 0 $color,
+                 $px $px 0 $color;
+}

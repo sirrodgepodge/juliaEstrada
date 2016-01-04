@@ -1,0 +1,25 @@
+// Title section
+.title, .place-holder {
+    height: #{$title-height}vh;
+    min-height: 80px;
+    width: 100%;
+    &.no-show {
+        display: none;
+    }
+}
+.title {
+    background-color: $theme-color !important;
+    background-size: 0 !important;
+    border-bottom: solid 2px $grayish-yellowish;
+    left: 0;
+    padding: 2px 0;
+    z-index: 6;
+    box-shadow: 0 16px 8px -9px #FFF;
+    &.sticky {
+        top: 0;
+        position: fixed;
+    }
+    &.show-logo {
+        background-size: contain !important;
+    }
+}

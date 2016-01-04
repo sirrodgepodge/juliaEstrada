@@ -1,0 +1,19 @@
+.place-holder.no-show
+.landing-head(style="opacity: 0; background: url(#{locals.landing.logoImage}) no-repeat center/contain")
+.landing
+  .shading(style="background: url('/images/shader.png') repeat; position: absolute; width: 100%; height: 100%;")
+  .landing-content
+    .landing-info
+      .dream
+        .head= locals.landing.sect1.label
+        .full 
+          p As a patron, great coffee was few and far between when I moved west in 2013 from the Washington DC area. &nbsp;There were some solid shops here in the Reno-Tahoe area, but they were kinda pricy. &nbsp;Nobody blew my mind with the cups they were giving, but their prices sure did! #[br]#[br] My friend convinced me to roast beans for myself at a quarter of the price of the local coffee chains, but with unrivaled flavor. &nbsp;So I give to you my passion and meticulously microroasted coffee. &nbsp;Roasting less than a pound at a time allows a handcrafted experience that you won't find anywhere else. &nbsp;Thanks, again, for being a part of this and joining me in this beautiful world of coffee!
+          p.quote -Julian Banuelos
+      .product
+        .head= locals.landing.sect2.label
+        .full
+          p You might not know that coffee actually comes from the inside of coffee cherries, like the ones in this picture. #[br]#[br] The coffee connoisseurs of Cafe Jefe sure do though! &nbsp;Their travels will take them to tropical climates to find the best coffees on the planet. &nbsp;It's not enough to stop there though, we also ensure that the farmers growing our lovely beans are getting fair pay for their work and product.  We toil to keep prices fair so that customers feel good about  purchasing on a personal and collective level. #[br]#[br] We hope you enjoy our product! &nbsp;If you have any suggestions, or just want to say hey, reach out to #[a(href='mailto:julian@cafejefe.com') julian@cafejefe.com]
+    .down-anim.glyphicon.glyphicon-menu-down
+  img(src="#{locals.landing.sect2.image}", onload="landing()", style="opacity:0;").landing-img.product-img
+  .landing-img.dream-img(style="background: url(#{locals.landing.sect1.image}) no-repeat center /cover; opacity:0;")
+.title(style="background: url(#{locals.siteHeader.image}) no-repeat center/contain;")
