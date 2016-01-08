@@ -25,10 +25,10 @@ if (process.env.NODE_ENV !== 'production') {
     var server = https.createServer(httpsOptions, app);
 
     // Create HTTP server for redirecting to HTTPS
-    http.createServer(function(req, res) {
-        res.writeHead(301, {"Location": "https://" + req.headers['host'] + req.url});
-        res.end();
-    }).listen(port - 1);
+    // http.createServer(function(req, res) {
+    //     res.writeHead(301, {"Location": "https://" + req.headers['host'] + req.url});
+    //     res.end();
+    // }).listen(port - 1);
 } else {
     var server = http.createServer(app);
 }
