@@ -27,7 +27,6 @@ $.get('/api/info', function(data) {
     coffee = data.coffee.product;
     merch = data.merch;
     contact = data.contact;
-    //mapLoad(data.addresses); // Addresses array for map markers
 });
 
 // UI Functionality
@@ -146,66 +145,6 @@ var main = function() {
         }, $(window).scrollTop() * 1.5);
     });
 };
-
-
-// Load Google Maps
-function mapLoad(addresses) {
-    $.getJSON('//maps.googleapis.com/maps/api/geocode/json?address=' + addresses[0] , null, function(centerData) {
-        var centerCoord = centerData.results[0].geometry.location;
-        var map,
-            mapOptions = {
-                center: new google.maps.LatLng(centerCoord.lat, centerCoord.lng),
-                mapTypeId: google.maps.MapTypeId.ROADMAP,
-                styles: [{
-                    stylers: [{
-                        'saturation': -100
-                    }, {
-                        'lightness': 0
-                    }, {
-                        'gamma': 0.5
-                    }]
-                }, ],
-                zoom: 15,
-                scrollwheel: false,
-                draggable: true,
-            };
-
-        map = new google.maps.Map($('#map')[0], mapOptions);
-
-        var bounds = new google.maps.LatLngBounds(); //this code autofits & zooms to include all markers, bad if there's only one
-        addresses.forEach(function(val, index) {
-            $.getJSON('//maps.googleapis.com/maps/api/geocode/json?address=' + val, null, function(data) {
-                var p = data.results[0].geometry.location;
-                var latlng = new google.maps.LatLng(p.lat, p.lng);
-                bounds.extend(latlng);
-
-                //Add marker
-                var marker = new google.maps.Marker({
-                    position: latlng,
-                    map: map,
-                    icon: 'images/Marker_Mask.png'
-                });
-
-                //Create pop-up window object
-                var infowindow = new google.maps.InfoWindow({
-                    content: '<p class="marker-caption">' + val + '</p>'
-                });
-
-                //Add listeners to marker to open and close info window on click
-                google.maps.event.addListener(marker, 'click', function() {
-                    infowindow.open(map, marker);
-                    map.panTo(marker.getPosition());
-                });
-
-                // google.maps.event.addListener(infowindow, 'closeclick', function() {
-                //     map.setCenter(marker.getPosition());
-                // });
-
-                if (index > 0) map.fitBounds(bounds);
-            });
-        });
-    });
-}
 
 // Store trigger points for state changes
 var titleTop = Math.ceil($landing.outerHeight()),
