@@ -88,8 +88,8 @@ module.exports = {
             link: 'https://www.google.com/maps/place/Pedalers+Deli/@39.471266,-119.8087336,17z/data=!3m1!4b1!4m2!3m1!1s0x80994014c55a99eb:0xcf7d2a91ee0370be'
         },
         facebook: {
-            text: 'facebook.com/juliaestrada',
-            link: 'http://www.facebook.com/juliaestrada'
+            text: 'facebook.com/julia.estrada1',
+            link: 'http://www.facebook.com/julia.estrada1'
         },
         phone: {
             text: '(703) 973-9227',
