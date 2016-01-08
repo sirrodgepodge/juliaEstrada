@@ -12,7 +12,7 @@ var $purchaseToggle = $('.purchase-toggle'),
     $landingHead = $('.landing-head'),
     $landing = $('.landing'),
     $landingContent = $landing.find('.landing-content').children(),
-    $landingTogglers = $landing.find('.dream, .product'),
+    $landingTogglers = $landing.find('.landing-tab'),
     $downAnim = $landing.find('.down-anim'),
     $contactImg = $('.contact-img'),
     $contactSub = $('.contact-sub'),
@@ -44,13 +44,13 @@ var main = function() {
                 landingTogglerClicked = !landingTogglerClicked && !!$title.addClass('show-logo');
                 $(this).toggleClass('landing-active');
                 tempThis = this;
-                if ($(this).hasClass('dream')) {
+                if ($(this).hasClass('tab-2')) {
                     notSelImg = $('.landing-img').not('.show');
                     $('.landing-img.show').toggleClass('show');
                     setTimeout(function() {
                         $(tempThis).children('.full').toggleClass('show');
                         notSelImg.toggleClass('show');
-                    }, 500);
+                    }, 400);
                 } else {
                     setTimeout(function() {
                         $(tempThis).children('.full').toggleClass('show');
@@ -67,7 +67,7 @@ var main = function() {
                 setTimeout(function() {
                     $(tempThis).children('.full').toggleClass('show');
                     notSelImg.toggleClass('show');
-                }, 500);
+                }, 400);
             }
         }
     });

@@ -9,6 +9,8 @@ $title-height: 11.5;
 
 //colors
 $theme-color: #242B40; //rgb equivalent = rgb(36, 43, 64)
+$black: #000;
+$white: #fff;
 
 @function theme-color-fade($alpha) {
   @return rgba(36, 43, 64, $alpha);

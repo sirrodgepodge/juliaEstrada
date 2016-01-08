@@ -138,11 +138,14 @@ a, a:hover, a:visited {
         position: absolute;
         min-height: 100vh;
         min-width: 100vw;
-        &.product-img {
+        &.img-init {
             z-index: -2;
         }
-        &.dream-img {
+        &.img-tab-1 {
             z-index: -3;
+        }
+        &.img-tab-2 {
+            z-index: -4;
         }
     }
     // Shading
@@ -160,24 +163,23 @@ a, a:hover, a:visited {
         opacity: 0;
         color: white;
 
-        //Dream & Product
+        // Landing Tabs
         .landing-info {
 	        @include vendVal(display, flex);
             position: absolute;
-	        top: 2.5vh;
             text-align: center;
             margin: 0 9vw;
             font-family: 'FaberSansPro-Normal', sans-serif;
             vertical-align: top;
-            .dream, .product {
+            .landing-tab {
                 margin: 0 1.5vw;
                 width: 38vw;
                 vertical-align: top;
             }
-            .dream .head {
+            .tab-1 .head {
                 text-align: right;
             }
-            .product .head {
+            .tab-2 .head {
                 text-align: left;
             }
             .head {
@@ -187,7 +189,7 @@ a, a:hover, a:visited {
                 border-bottom: solid 3px rgba(255, 255, 255, 0);
             }
             .head:hover, .landing-active .head {
-                border-bottom: solid 3px rgba(255, 255, 255, 1);
+                border-bottom-color: rgba(255, 255, 255, 1);
             }
             .full {
                 @include vend(transition, .5s);
@@ -200,13 +202,13 @@ a, a:hover, a:visited {
                     font-style: italic;
                     text-align: right;
                 }
-                a {
+                .email-link {
                     color: white;
                     font-weight: 500;
                     transition: .3s;
                 }
-                a:hover {
-                    text-shadow: 0 0 8px #FFF;
+                .email-link:hover {
+                    text-shadow: 0 0 8px $white;
                     text-decoration: none;
                 }
             }
@@ -225,7 +227,7 @@ a, a:hover, a:visited {
             transition: text-shadow .8s;
         }
         .down-anim:hover {
-            text-shadow: 0 0 8px #FFF;
+            text-shadow: 0 0 8px $white;
         }
     }
 }
@@ -234,10 +236,11 @@ a, a:hover, a:visited {
 @media(max-width: $phone-max) {
     .landing {
         .landing-info,
-        .dream-img {
+        .img-tab-1,
+        .img-tab-2 {
             display: none !important;
         }
-        .landing-img {
+        .img-init {
             right: -222px;
         }
     }
