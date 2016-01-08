@@ -6,7 +6,7 @@ require('newrelic');
 // Module dependencies
 var app = require('../app');
 var debug = require('debug')('juliaEstrada:server');
-// var http = require('http');
+var http = require('http');
 var https = require('https');
 var fs = require('fs');
 var path = require('path');
