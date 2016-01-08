@@ -27,7 +27,7 @@ $.get('/api/info', function(data) {
     coffee = data.coffee.product;
     merch = data.merch;
     contact = data.contact;
-    mapLoad(data.addresses); // Addresses array for map markers
+    //mapLoad(data.addresses); // Addresses array for map markers
 });
 
 // UI Functionality
@@ -207,66 +207,67 @@ function mapLoad(addresses) {
     });
 }
 
-// Store page height of top of title
+// Store trigger points for state changes
 var titleTop = Math.ceil($landing.outerHeight()),
-    landingHeadFixPoint = titleTop - Math.ceil($landingHead.offset().top),
+    landingHeadFixPoint = titleTop - Math.ceil($landingHead.position().top),
     contactTop = Math.ceil($contact.offset().top) * 0.92,
-    downAnimReached = titleTop * 0.395 + 4.5; //when Page position is such that the white "CafeJefe" is right above the down arrow;
+    downAnimReached = titleTop * 0.395 + 4.5; //when page position is such that the centered landing header is right above the down arrow;
+
+// State booleans
+var pagePos = 0,
+    titleFixed = false,
+    landingHeadFixed = false,
+    topTextShowing = true,
+    contactPopped = false;
 
 // Handle fixing title bar at the top of the page
-var listeners = function() {
-  var pagePos = 0,
-      titleFixed = false,
-      landingHeadFixed = false,
-      topTextShowing = true,
-      contactPopped = false;
-
-  var landingScroll = function() {
-      pagePos = window.pageYOffset; //calculates current vertical scroll position
-
-      //fixes title header to proper position
-      if (!landingTogglerClicked && (pagePos >= landingHeadFixPoint && !landingHeadFixed || pagePos < landingHeadFixPoint && landingHeadFixed)) {
-          $landingHead.toggleClass('hide');
-          $title.toggleClass('show-logo');
-          landingHeadFixed = !landingHeadFixed;
-      }
-
-      // //dims top title once below DownAnim
-      // if (pagePos >= downAnimReached && !landingHeadDimmed || pagePos < downAnimReached && landingHeadDimmed) {
-      //     $landingHead.toggleClass('dim');
-      //     landingHeadDimmed = !landingHeadDimmed;
-      // }
-
-      //fixes main title to top of page
-      if (pagePos >= titleTop && !titleFixed || pagePos < titleTop && titleFixed) {
-          $title.toggleClass('sticky');
-          $placeHolder.toggleClass('no-show');
-          titleFixed = !titleFixed;
-      }
-
-      //make contact pop
-      if (pagePos >= contactTop && !contactPopped || pagePos < contactTop && contactPopped) {
-          $contact.toggleClass('poppin');
-          contactPopped = !contactPopped;
-      }
-
-      //fades all but title with scroll
-      if (pagePos < downAnimReached && !topTextShowing) topTextShowing = true;
-      if (pagePos === 0) $landingContent.add($downAnim).css('opacity', 1);
-      else if (pagePos >= downAnimReached && topTextShowing) $landingContent.add($downAnim).css('opacity', +(topTextShowing = false));
-      else if (pagePos > 0 && pagePos < downAnimReached) $landingContent.add($downAnim).css('opacity', 1 - pagePos / downAnimReached);
-  };
+function listeners() {
+  // initial sync of state with HTML elements
   landingScroll();
 
-  //Re-measure title distance from top of screen if screen is resized
+  // update state change triggers when screen is resized
   $(window).resize(function() {
+      console.log('landingHeadFixPoint', landingHeadFixPoint);
+      console.log('titleTop', titleTop);
       titleTop = Math.ceil($landing.outerHeight());
-      landingHeadTop = titleTop - Math.ceil($landingHead.offset().top);
+      landingHeadFixPoint = titleTop - Math.ceil($landingHead.position().top);
       downAnimReached = titleTop * 0.395 + 4.5;
       contactTop = Math.ceil($contact.offset().top) * 0.9;
       landingScroll();
   });
+
+  // update state based on scroll position
   window.addEventListener('scroll', landingScroll);
-};
+}
+
+function landingScroll() {
+    pagePos = window.pageYOffset; //calculates current vertical scroll position
+
+    //fixes title header to proper position
+    if (!landingTogglerClicked && (pagePos >= landingHeadFixPoint && !landingHeadFixed || pagePos < landingHeadFixPoint && landingHeadFixed)) {
+        $landingHead.toggleClass('hide');
+        $title.toggleClass('show-logo');
+        landingHeadFixed = !landingHeadFixed;
+    }
+
+    //fixes main title to top of page
+    if (pagePos >= titleTop && !titleFixed || pagePos < titleTop && titleFixed) {
+        $title.toggleClass('sticky');
+        $placeHolder.toggleClass('no-show');
+        titleFixed = !titleFixed;
+    }
+
+    //make contact pop
+    if (pagePos >= contactTop && !contactPopped || pagePos < contactTop && contactPopped) {
+        $contact.toggleClass('poppin');
+        contactPopped = !contactPopped;
+    }
+
+    //fades all but title with scroll
+    if (pagePos < downAnimReached && !topTextShowing) topTextShowing = true;
+    if (pagePos === 0) $landingContent.add($downAnim).css('opacity', 1);
+    else if (pagePos >= downAnimReached && topTextShowing) $landingContent.add($downAnim).css('opacity', +(topTextShowing = false));
+    else if (pagePos > 0 && pagePos < downAnimReached) $landingContent.add($downAnim).css('opacity', 1 - pagePos / downAnimReached);
+}
 
 $(document).ready(main, listeners());

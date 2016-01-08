@@ -12,7 +12,7 @@ var fs = require('fs');
 var path = require('path');
 
 // Get port from environment and store in Express.
-var port = normalizePort(process.env.PORT || 3001);
+var port = normalizePort(process.env.PORT || 3000);
 app.set('port', port);
 
 // Run HTTPS server if not in Heroku
@@ -28,7 +28,7 @@ if (process.env.NODE_ENV !== 'production') {
     http.createServer(function(req, res) {
         res.writeHead(301, {"Location": "https://" + req.headers['host'] + req.url});
         res.end();
-    }).listen(3000);
+    }).listen(port - 1);
 } else {
     var server = http.createServer(app);
 }
