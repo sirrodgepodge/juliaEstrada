@@ -141,7 +141,7 @@ $phone-contact-margin: $phone-contact-margin-top 0 $contact-border-width/1.75*$p
         }
         &:hover {
             @include vend(transition, .375s ease-in-out);
-            text-shadow: 0 0 8px #FFF;
+            text-shadow: 0 0 8px $white;
         }
         @media (max-width: $phone-max) {
             & {
@@ -160,7 +160,7 @@ $phone-contact-margin: $phone-contact-margin-top 0 $contact-border-width/1.75*$p
         z-index: 0;
         position: absolute;
         i {
-          color: rgb(66,72,91);
+        //   color: rgb(66,72,91);
         }
         &.address {
             letter-spacing: -.45rem;
