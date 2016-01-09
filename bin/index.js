@@ -7,7 +7,7 @@ require('newrelic');
 var app = require('../app');
 var debug = require('debug')('juliaEstrada:server');
 var http = require('http');
-var https = require('https');
+// var https = require('https');
 var fs = require('fs');
 var path = require('path');
 
@@ -18,11 +18,12 @@ app.set('port', port);
 // Run HTTPS server if not in Heroku
 if (process.env.NODE_ENV !== 'production') {
     // Load self-signed certificate
-    var httpsOptions = {
-        key: fs.readFileSync(path.join(__dirname, 'certs/key.pem')),
-        cert: fs.readFileSync(path.join(__dirname, 'certs/cert.pem'))
-    };
-    var server = https.createServer(httpsOptions, app);
+    // var httpsOptions = {
+    //     key: fs.readFileSync(path.join(__dirname, 'certs/key.pem')),
+    //     cert: fs.readFileSync(path.join(__dirname, 'certs/cert.pem'))
+    // };
+    var server = http.createServer(app);
+    // var server = http.createServer(httpsOptions, app);
 
     // Create HTTP server for redirecting to HTTPS
     // http.createServer(function(req, res) {

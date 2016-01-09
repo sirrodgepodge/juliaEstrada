@@ -123,7 +123,7 @@ a, a:hover, a:visited {
 // Main
 .landing {
     height: 100vh;
-    background-color: $theme-color;
+    background-color: rgb(16,19,29);
     position: relative;
     z-index: -4;
     height: 100vh;
@@ -133,8 +133,7 @@ a, a:hover, a:visited {
     box-sizing: content-box;
     // Image
     .landing-img {
-        @include vend(transition,
-        1.5s);
+        @include vend(transition, 1.5s);
         position: absolute;
         min-height: 100vh;
         min-width: 100vw;
