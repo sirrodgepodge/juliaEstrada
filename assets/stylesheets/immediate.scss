@@ -30,7 +30,7 @@ body * {
 //     clear: both;
 // }
 a, a:hover, a:visited {
-    color: white;
+    color: white !important;
     text-decoration: none;
     transition: .25s;
 }
@@ -116,12 +116,12 @@ a, a:hover, a:visited {
     top: calc(39vh + 8px);
     z-index: 10;
     width: 100%;
-    height: calc(#{$title-height}vh - 2px);
+    height: calc(#{$title-height}vh - 4px);
     min-height: 78px;
 }
 
 // Main
-.landing {
+#landing {
     height: 100vh;
     background-color: rgb(16,19,29);
     position: relative;
@@ -233,7 +233,7 @@ a, a:hover, a:visited {
 
 //hide info on phone
 @media(max-width: $phone-max) {
-    .landing {
+    #landing {
         .landing-info,
         .img-tab-1,
         .img-tab-2 {
@@ -244,3 +244,6 @@ a, a:hover, a:visited {
         }
     }
 }
+
+// Shared vars
+@import 'title';

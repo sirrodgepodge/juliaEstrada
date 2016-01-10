@@ -1,25 +1,60 @@
 // Title section
+.place-holder.no-show {
+    display: none;
+}
 .title, .place-holder {
     height: #{$title-height}vh;
     min-height: 80px;
     width: 100%;
-    &.no-show {
-        display: none;
-    }
 }
 .title {
     background-color: $theme-color !important;
     background-size: 0 !important;
-    border-bottom: solid 2px $grayish-yellowish;
     left: 0;
     padding: 2px 0;
     z-index: 6;
-    box-shadow: 0 16px 8px -9px #FFF;
+    box-shadow: 0 0 4px rgba(16,19,29,0.14), 0 4px 8px rgba(16,19,29,0.28);
+    text-align: center;
+    color: $white;
+    white-space: nowrap;
+
+    .title-section {
+        @include vend(transition, (opacity .5s ease-in-out, text-shadow .25s ease-in-out));
+        opacity: 0;
+        min-width: 100px;
+        width: 6.5%;
+        font-size: 2rem;
+        font-weight: 500;
+        cursor: pointer;
+        &:hover {
+          text-shadow: 0 -1.5px 3px $white;
+        }
+    }
+    .title-main {
+        @include vend(transform, translateY(-50%));
+        top: 50%;
+        max-height: 100%;
+        max-width: 100%;
+        visibility: hidden;
+    }
+    .title-main, .title-section {
+        display: inline-block;
+    }
     &.sticky {
         top: 0;
         position: fixed;
     }
     &.show-logo {
-        background-size: contain !important;
+        .title-main {
+            visibility: visible;
+        }
+        .title-section {
+            opacity: 1;
+        }
+    }
+    @media (max-width: $phone-max) {
+      .title-section {
+        display: none;
+      }
     }
 }

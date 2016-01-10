@@ -5,18 +5,18 @@ var $purchaseToggle = $('.purchase-toggle'),
     $coffeePrice = $('.coffee-price'),
     $merchIndBack = $('.merch-ind .back'),
     $size = $merchIndBack.children('.size'),
-    $backToTop = $('.back-to-top, .title, .footer-logo'),
-    $title = $('.title'),
-    $contact = $('.contact'),
     $placeHolder = $('.place-holder'),
     $landingHead = $('.landing-head'),
-    $landing = $('.landing'),
+    $title = $('.title'),
+    $contact = $('#contact'),
+    $landing = $('#landing'),
     $landingContent = $landing.find('.landing-content').children(),
     $landingTogglers = $landing.find('.landing-tab'),
     $downAnim = $landing.find('.down-anim'),
     $contactImg = $('.contact-img'),
     $contactSub = $('.contact-sub'),
-    $contactSubInside = $contactSub.find('.contact-sub-inside');
+    $contactSubInside = $contactSub.find('.contact-sub-inside'),
+    $scrollTo = $('.scroll-to');
 
 // Getting back end data
 var coffee = [],
@@ -33,6 +33,13 @@ $.get('/api/info', function(data) {
 var landingTogglerClicked = false;
 
 var main = function() {
+    //// Setting up scrollTo animation
+    $scrollTo.click(function(){
+      $($(this).data("scrollTo")).ScrollTo({
+        duration: 1000
+      });
+    });
+
     //// Landing Section
     $landingTogglers.click(function() {
         var notSelImg;
@@ -137,13 +144,6 @@ var main = function() {
             slideSwitchText(contact[selected].text);
         }
     });
-
-    //// back to top button on map
-    $backToTop.click(function() {
-        $('html, body').animate({
-            scrollTop: 0
-        }, $(window).scrollTop() * 1.5);
-    });
 };
 
 // Store trigger points for state changes
@@ -166,12 +166,10 @@ function listeners() {
 
   // update state change triggers when screen is resized
   $(window).resize(function() {
-      console.log('landingHeadFixPoint', landingHeadFixPoint);
-      console.log('titleTop', titleTop);
       titleTop = Math.ceil($landing.outerHeight());
       landingHeadFixPoint = titleTop - Math.ceil($landingHead.position().top);
       downAnimReached = titleTop * 0.395 + 4.5;
-      contactTop = Math.ceil($contact.offset().top) * 0.9;
+      contactTop = Math.ceil($contact.offset().top) * 0.8;
       landingScroll();
   });
 
@@ -208,5 +206,6 @@ function landingScroll() {
     else if (pagePos >= downAnimReached && topTextShowing) $landingContent.add($downAnim).css('opacity', +(topTextShowing = false));
     else if (pagePos > 0 && pagePos < downAnimReached) $landingContent.add($downAnim).css('opacity', 1 - pagePos / downAnimReached);
 }
+
 
 $(document).ready(main, listeners());
