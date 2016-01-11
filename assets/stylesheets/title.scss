@@ -12,11 +12,13 @@
     background-size: 0 !important;
     left: 0;
     padding: 2px 0;
+    margin-bottom: 0;
     z-index: 6;
     box-shadow: 0 0 4px rgba(16,19,29,0.14), 0 4px 8px rgba(16,19,29,0.28);
     text-align: center;
     color: $white;
     white-space: nowrap;
+    max-width: 100%;
 
     .title-section {
         @include vend(transition, (opacity .5s ease-in-out, text-shadow .25s ease-in-out));
@@ -40,9 +42,41 @@
     .title-main, .title-section {
         display: inline-block;
     }
+    .paper-resume-wrapper {
+        @include vend(overflow, hidden);
+        position: absolute;
+        top: calc(100% + 30px);
+        right: 0;
+        height: 100px;
+        width: 125px;
+        opacity: .999; // super odd fix to webkit bug
+
+    .paper-resume {
+            @include vend(transform, rotateZ(90deg) translateY(calc(-105% - 31px)));
+            @include vend(transition, (transform .35s ease-in-out, background-color .25s ease-in-out));
+            display: block;
+            background-image: url('/images/paper_resume.png');
+            background-size: cover;
+            top: 5px;
+            left: 5px;
+            height: calc(100% - 10px);
+            width: 90px;
+            border-radius: 50%;
+            background-color: $white;
+            box-shadow: 0 0 0 5px #4a4849;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #B5C3EC;
+            }
+        }
+    }
     &.sticky {
         top: 0;
         position: fixed;
+        .paper-resume {
+            @include vend(transform, rotateZ(0));
+        }
     }
     &.show-logo {
         .title-main {
