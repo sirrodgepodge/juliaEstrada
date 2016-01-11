@@ -12,7 +12,8 @@ module.exports = {
         logoImage: '/images/juliaEstradaHeading.png'
     },
     siteHeader: {
-      image: '/images/juliaEstradaHeading.png'
+      image: '/images/juliaEstradaHeading.png',
+      resumeLink: 'https://drive.google.com/file/d/0B0sjwjXhovDMYXR1Q3hQb1pmeENjMWZBNWJyNUNXR3hjdHZV/view?usp=sharing'
     },
     fom: {
         header: 'Mi café es su café',
