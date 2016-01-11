@@ -43,9 +43,9 @@
         display: inline-block;
     }
     .paper-resume-wrapper {
-        @include vend(overflow, hidden);
         position: absolute;
-        top: calc(100% + 28px);
+        overflow: hidden;
+        top: calc(100% + 25px);
         right: 0;
         height: 110px;
         width: 125px;
