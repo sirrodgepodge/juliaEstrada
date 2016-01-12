@@ -189,5 +189,4 @@ function landingScroll() {
     }
 }
 
-
 $(document).ready(main);
