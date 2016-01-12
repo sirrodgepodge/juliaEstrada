@@ -2893,3 +2893,27 @@
 {"v":0,"level":30,"name":"newrelic","hostname":"Roger-Beaman","pid":20195,"time":"2016-01-12T06:27:06.004Z","msg":"Starting New Relic for Node.js connection process."}
 {"v":0,"level":30,"name":"newrelic","hostname":"Roger-Beaman","pid":20195,"time":"2016-01-12T06:27:07.648Z","msg":"Reporting to: https://rpm.newrelic.com/accounts/1032470/applications/9459143","component":"new_relic_response"}
 {"v":0,"level":30,"name":"newrelic","hostname":"Roger-Beaman","pid":20195,"time":"2016-01-12T06:27:07.649Z","msg":"Connected to collector-146.newrelic.com:443 with agent run ID 70407532993218573.","component":"collector_api"}
+{"v":0,"level":30,"name":"newrelic","hostname":"Roger-Beaman","pid":20252,"time":"2016-01-12T06:29:27.365Z","msg":"Starting New Relic for Node.js connection process."}
+{"v":0,"level":30,"name":"newrelic","hostname":"Roger-Beaman","pid":20252,"time":"2016-01-12T06:29:29.507Z","msg":"Reporting to: https://rpm.newrelic.com/accounts/1032470/applications/9459143","component":"new_relic_response"}
+{"v":0,"level":30,"name":"newrelic","hostname":"Roger-Beaman","pid":20252,"time":"2016-01-12T06:29:29.508Z","msg":"Connected to collector-146.newrelic.com:443 with agent run ID 70407532993224059.","component":"collector_api"}
+{"v":0,"level":30,"name":"newrelic","hostname":"Roger-Beaman","pid":20273,"time":"2016-01-12T06:31:38.147Z","msg":"Starting New Relic for Node.js connection process."}
+{"v":0,"level":30,"name":"newrelic","hostname":"Roger-Beaman","pid":20273,"time":"2016-01-12T06:31:39.805Z","msg":"Reporting to: https://rpm.newrelic.com/accounts/1032470/applications/9459143","component":"new_relic_response"}
+{"v":0,"level":30,"name":"newrelic","hostname":"Roger-Beaman","pid":20273,"time":"2016-01-12T06:31:39.806Z","msg":"Connected to collector-146.newrelic.com:443 with agent run ID 70407532993230349.","component":"collector_api"}
+{"v":0,"level":30,"name":"newrelic","hostname":"Roger-Beaman","pid":20290,"time":"2016-01-12T06:31:46.008Z","msg":"Starting New Relic for Node.js connection process."}
+{"v":0,"level":30,"name":"newrelic","hostname":"Roger-Beaman","pid":20290,"time":"2016-01-12T06:31:46.992Z","msg":"Reporting to: https://rpm.newrelic.com/accounts/1032470/applications/9459143","component":"new_relic_response"}
+{"v":0,"level":30,"name":"newrelic","hostname":"Roger-Beaman","pid":20290,"time":"2016-01-12T06:31:46.993Z","msg":"Connected to collector-146.newrelic.com:443 with agent run ID 70407532993230610.","component":"collector_api"}
+{"v":0,"level":30,"name":"newrelic","hostname":"Roger-Beaman","pid":20312,"time":"2016-01-12T06:31:57.459Z","msg":"Starting New Relic for Node.js connection process."}
+{"v":0,"level":30,"name":"newrelic","hostname":"Roger-Beaman","pid":20312,"time":"2016-01-12T06:31:58.439Z","msg":"Reporting to: https://rpm.newrelic.com/accounts/1032470/applications/9459143","component":"new_relic_response"}
+{"v":0,"level":30,"name":"newrelic","hostname":"Roger-Beaman","pid":20312,"time":"2016-01-12T06:31:58.440Z","msg":"Connected to collector-146.newrelic.com:443 with agent run ID 70407532993231014.","component":"collector_api"}
+{"v":0,"level":30,"name":"newrelic","hostname":"Roger-Beaman","pid":20326,"time":"2016-01-12T06:32:46.761Z","msg":"Starting New Relic for Node.js connection process."}
+{"v":0,"level":30,"name":"newrelic","hostname":"Roger-Beaman","pid":20348,"time":"2016-01-12T06:32:53.094Z","msg":"Starting New Relic for Node.js connection process."}
+{"v":0,"level":30,"name":"newrelic","hostname":"Roger-Beaman","pid":20348,"time":"2016-01-12T06:32:54.850Z","msg":"Reporting to: https://rpm.newrelic.com/accounts/1032470/applications/9459143","component":"new_relic_response"}
+{"v":0,"level":30,"name":"newrelic","hostname":"Roger-Beaman","pid":20348,"time":"2016-01-12T06:32:54.851Z","msg":"Connected to collector-146.newrelic.com:443 with agent run ID 70407532993233612.","component":"collector_api"}
+{"v":0,"level":30,"name":"newrelic","hostname":"Roger-Beaman","pid":20361,"time":"2016-01-12T06:33:46.574Z","msg":"Starting New Relic for Node.js connection process."}
+{"v":0,"level":30,"name":"newrelic","hostname":"Roger-Beaman","pid":20383,"time":"2016-01-12T06:33:52.794Z","msg":"Starting New Relic for Node.js connection process."}
+{"v":0,"level":30,"name":"newrelic","hostname":"Roger-Beaman","pid":20383,"time":"2016-01-12T06:33:54.543Z","msg":"Reporting to: https://rpm.newrelic.com/accounts/1032470/applications/9459143","component":"new_relic_response"}
+{"v":0,"level":30,"name":"newrelic","hostname":"Roger-Beaman","pid":20383,"time":"2016-01-12T06:33:54.544Z","msg":"Connected to collector-146.newrelic.com:443 with agent run ID 70407532993235991.","component":"collector_api"}
+{"v":0,"level":30,"name":"newrelic","hostname":"Roger-Beaman","pid":20397,"time":"2016-01-12T06:36:50.286Z","msg":"Starting New Relic for Node.js connection process."}
+{"v":0,"level":30,"name":"newrelic","hostname":"Roger-Beaman","pid":20419,"time":"2016-01-12T06:36:55.935Z","msg":"Starting New Relic for Node.js connection process."}
+{"v":0,"level":30,"name":"newrelic","hostname":"Roger-Beaman","pid":20419,"time":"2016-01-12T06:36:57.502Z","msg":"Reporting to: https://rpm.newrelic.com/accounts/1032470/applications/9459143","component":"new_relic_response"}
+{"v":0,"level":30,"name":"newrelic","hostname":"Roger-Beaman","pid":20419,"time":"2016-01-12T06:36:57.503Z","msg":"Connected to collector-146.newrelic.com:443 with agent run ID 70407532993243601.","component":"collector_api"}

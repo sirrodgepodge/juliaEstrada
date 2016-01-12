@@ -147,10 +147,10 @@ function listeners() {
 // Store trigger points for state changes
 function calcTriggerPoints() {
     // Calculate scroll values
-    titleTop = Math.ceil($landing.outerHeight());
+    titleTop = $title.offset().top;
     titleHeight = $title.height();
-    landingHeadFixPoint = titleTop - Math.ceil($landingHead.position().top);
-    contactTop = Math.ceil($contact.offset().top) * 0.92;
+    landingHeadFixPoint = titleTop - $landingHead.position().top;
+    contactTop = $contact.offset().top * 0.92;
     downAnimReached = titleTop * 0.395 + 4.5; //when page position is such that the centered landing header is right above the down arrow;
 
     // Check if any changes in DOM occur as a result of these calculations
