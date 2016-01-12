@@ -39,11 +39,33 @@
       }
 
       .quote {
+        display: block;
         color: $theme-color;
         font-weight: 300;
-        font-size: 14px;
+        font-size: 16px;
         font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
         margin-bottom: 0;
+        text-align: center;
+        min-height: 140px;
+
+        .author {
+          position: absolute;
+          color: theme-color-fade(.8);
+
+          display: block;
+          width: 100%;
+          margin-top: 20px;
+          text-align: center;
+          bottom: 0;
+        }
+
+        .fa-quote-left {
+          position: absolute;
+          color: theme-color-fade(.1);
+          left: -28px;
+          top: -2px;
+          font-size: 32px;
+        }
       }
 
       @media (min-width: 550px) {

@@ -40,7 +40,7 @@ var main = function() {
     $scrollTo.click(function(){
       $($(this).data("scrollTo")).ScrollTo({
         duration: 1000,
-        offsetTop: -1 * titleHeight
+        offsetTop: titleHeight - 16
       });
     });
 

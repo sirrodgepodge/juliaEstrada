@@ -82,7 +82,7 @@
             opacity: 1;
         }
     }
-    @media (max-width: $phone-max) {
+    @media (max-aspect-ratio: 1/1) {
       .title-section {
         display: none;
       }
