@@ -18,8 +18,11 @@ var $window = $(window),
     $contactSub = $('.contact-sub'),
     $contactSubInside = $contactSub.find('.contact-sub-inside'),
     $scrollTo = $('.scroll-to'),
+    $floatFold = $('.float-fold'),
     $backToTop = $('.back-to-top'),
     $paperResumeWrapper = $('.paper-resume-wrapper');
+
+var floatFoldImgRegex = /background-image: url\(\)/g;
 
 // Getting back end data
 var coffee = [],
@@ -43,6 +46,28 @@ var main = function() {
         offsetTop: titleHeight - 16
       });
     });
+
+    // how many times images will get sliced for animation
+    var totalSlices = 5,
+        struct	= '',
+        i;
+    // add tags to string
+    for(i = 1; i < totalSlices + 1; i++) {
+      struct	+= '<span class="overlay" ></span><div class="slice totalslices-' + totalSlices + ' slice-' + i + '" style="background-image: url() ;">';
+    }
+
+    for(i = totalSlices; i > 0; i--) {
+      struct	+= '</div>';
+    }
+
+		$floatFold.each(function() {
+			var $this = $(this),
+				  imgPath	= $this.attr('src'),
+          classes = $this.attr('class');
+
+      $this.replaceWith($('<div class=' + classes + '></div>')
+        .append($(struct.replace(floatFoldImgRegex, 'background-image: url('+ imgPath +')' ))));
+		});
 
     //// Landing Section
     $landingTogglers.click(function() {
