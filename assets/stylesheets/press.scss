@@ -1,78 +1,64 @@
-article#blurbs {
+#press {
   text-align: center;
   padding: 20px 0;
-  p {
-    color: #778fa9;
-    font-weight: 300;
-    font-size: 14px;
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    margin-bottom: 0;
-  }
-}
-article#blurbs section {
-  text-align: center;
-  vertical-align: top;
-}
-@media (min-width: 550px) {
-  article#blurbs section {
-    margin-left: 4%;
-    width: 22%;
-    float: left;
+
+  .inner {
+    border-top: 1px solid #dfe7ed;
+    border-bottom: 1px solid #dfe7ed;
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 5% 0;
     box-sizing: border-box;
-  }
-  article#blurbs section:first-child {
-    margin-left: 0;
-  }
-}
-article#blurbs section:last-child {
-  margin-right: 0;
-}
-article#blurbs section .tn-icon span {
-  display: none;
-}
-article#blurbs section p {
-  font-weight: 300;
-  font-size: 14px;
-}
+    *zoom: 1;
 
+    .press-sect {
+      text-align: center;
+      vertical-align: top;
+      padding: 0 7% 60px;
 
-article .inner {
-  border-top: 1px solid #dfe7ed;
-  border-bottom: 1px solid #dfe7ed;
-  position: relative;
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-  box-sizing: border-box;
-  *zoom: 1;
-  padding-bottom: 100px !important;
-  padding-top: 100px !important;
-}
-article .inner:before,
-article .inner:after {
-  content: "";
-  display: table;
-}
-article .inner:after {
-  clear: both;
-}
-@media (min-width: 400px) {
-  article .inner {
-    width: 87%;
-    padding: 0;
+      .press-icon {
+        margin: 0 auto 20px;
+        background-color: $white;
+        background-blend-mode: luminosity;
+
+        .text-behind-logo {
+          display: none;
+        }
+        &.landing-icon-journal-tribune {
+          background-image: url("http://www.journaltribune.com/styles/jtfooter3.png");
+          height: 100px;
+          width: 250px;
+        }
+        &.landing-icon-seacoast {
+          background-image: url("http://www.seacoastonline.com/Global/images/head/nameplate/SeacoastOnline_logo.png");
+          height: 100px;
+          width: 250px;
+        }
+      }
+
+      .quote {
+        color: $theme-color;
+        font-weight: 300;
+        font-size: 14px;
+        font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        margin-bottom: 0;
+      }
+
+      @media (min-width: 550px) {
+        float: left;
+        box-sizing: border-box;
+      }
+    }
+
+    &:before,
+    &:after {
+      content: "";
+      display: table;
+    }
+    &:after {
+      clear: both
+    }
   }
-}
-@media (min-width: 550px) {
-  article .inner {
-    width: 87%;
-  }
-}
-@media (min-width: 1300px) {
-  article .inner {
-    width: 1200px;
-  }
-}
-article:last-child .inner {
-  border-bottom: none;
 }

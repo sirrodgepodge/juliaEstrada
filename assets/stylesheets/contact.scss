@@ -131,32 +131,23 @@ $phone-contact-margin: $phone-contact-margin-top 0 $contact-border-width/1.75*$p
         background-color: $theme-color;
         text-align: center;
         font-size: $contact-side/12;
-        color: white;
+        color: $white;
         font-family: lato, sans-serif;
+
         .contact-sub-inside {
             @include vend(transition, .5s);
             display: inline !important;
             white-space: nowrap;
             opacity: 0;
         }
+
         &:hover {
             @include vend(transition, .375s ease-in-out);
             text-shadow: 0 0 8px $white;
         }
-        @media (max-width: $phone-max) {
-            & {
-                @include vend(border-radius, $contact-border-width/4 * $phone-adjust-factor);
-                border-top: $theme-color solid $contact-border-width/7.15 * $phone-adjust-factor;
-                border-bottom: $theme-color solid $contact-border-width/6.25 * $phone-adjust-factor;
-                border-left: $theme-color solid $contact-border-width/3.55 * $phone-adjust-factor;
-                border-right: $theme-color solid $contact-border-width/3.55 * $phone-adjust-factor;
-                font-size: $contact-side/12 * $phone-adjust-factor * 1.25;
-            }
-        }
     }
     .contact-img {
         @include vend(border-radius, 50%);
-        @include vend(transform, translate3d(0, 0, 0));
         z-index: 0;
         position: absolute;
         i {
@@ -171,6 +162,24 @@ $phone-contact-margin: $phone-contact-margin-top 0 $contact-border-width/1.75*$p
         }
         a:hover {
             text-shadow: 0 0 25px #fff;
+        }
+    }
+    .paper-resume {
+      display: none;
+      margin: 0 auto 50px;
+    }
+    @media (max-width: $phone-max) {
+        .contact-sub {
+            @include vend(border-radius, $contact-border-width/4 * $phone-adjust-factor);
+            border-top: $theme-color solid $contact-border-width/7.15 * $phone-adjust-factor;
+            border-bottom: $theme-color solid $contact-border-width/6.25 * $phone-adjust-factor;
+            border-left: $theme-color solid $contact-border-width/3.55 * $phone-adjust-factor;
+            border-right: $theme-color solid $contact-border-width/3.55 * $phone-adjust-factor;
+            font-size: $contact-side/12 * $phone-adjust-factor * 1.25;
+            margin-bottom: 30px;
+        }
+        .paper-resume {
+          display: block;
         }
     }
 }

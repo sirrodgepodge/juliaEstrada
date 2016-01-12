@@ -29,9 +29,10 @@ body * {
 //     width: 100%;
 //     clear: both;
 // }
+
 a, a:hover, a:visited {
     color: white !important;
-    text-decoration: none;
+    text-decoration: none !important;
     transition: .25s;
 }
 

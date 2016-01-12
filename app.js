@@ -23,7 +23,7 @@ app.use(sass({
   debug: true
 }));
 app.use(compression());
-app.use(favicon(path.join(__dirname, '/public/favicon.ico')));
+app.use(favicon(path.join(__dirname, '/public/favicon.png')));
 
 //app.use(require('./bin/redis_sessions')); //handles storing sessions in redis
 //app.use(passport.initialize());

@@ -1,5 +1,6 @@
 // Create static jQuery selector vars
-var $purchaseToggle = $('.purchase-toggle'),
+var $window = $(window),
+    $purchaseToggle = $('.purchase-toggle'),
     $coffeeInd = $('.coffee-ind'),
     $buyBtn = $('.buy-btn'),
     $coffeePrice = $('.coffee-price'),
@@ -16,7 +17,9 @@ var $purchaseToggle = $('.purchase-toggle'),
     $contactImg = $('.contact-img'),
     $contactSub = $('.contact-sub'),
     $contactSubInside = $contactSub.find('.contact-sub-inside'),
-    $scrollTo = $('.scroll-to');
+    $scrollTo = $('.scroll-to'),
+    $backToTop = $('.back-to-top'),
+    $paperResumeWrapper = $('.paper-resume-wrapper');
 
 // Getting back end data
 var coffee = [],
@@ -36,7 +39,8 @@ var main = function() {
     //// Setting up scrollTo animation
     $scrollTo.click(function(){
       $($(this).data("scrollTo")).ScrollTo({
-        duration: 1000
+        duration: 1000,
+        offsetTop: -1 * titleHeight
       });
     });
 
@@ -84,73 +88,41 @@ var main = function() {
         }, titleTop - $(window).scrollTop() * 0.8);
     });
 
-    // Get price type
-    var purchTypeVal = $('.active-purch-type').attr('id');
-
-    // Toggle between Subscription vs. One-Time Purchase
-    $purchaseToggle.click(function() {
-        if (!$(this).hasClass('active-purch-type')) {
-            $purchaseToggle.each(function() {
-                $(this).toggleClass('active-purch-type');
-            });
-            purchTypeVal = $(this).attr('id');
-            $buyBtn.find('.button-text').html(purchTypeVal.slice(0, 1).toUpperCase() + purchTypeVal.slice(1));
-            $coffeePrice.each(function(index, val) {
-                $(this).html('$' + coffee[index][purchTypeVal]);
-                var currVal = $($buyBtn[index]).attr('href').slice(0, $($buyBtn[index]).attr('href').lastIndexOf("-") + 1);
-                $($buyBtn[index]).attr('href', currVal + purchTypeVal);
-            });
-        }
-    });
-
-    $coffeeInd.click(function() {
-        if (!$(this).hasClass('active-coffee-amount')) {
-            $('.active-coffee-amount').toggleClass('active-coffee-amount');
-            $(this).children('.coffee-ind-inside').toggleClass('active-coffee-amount');
-        }
-    });
-
-    //// Merch Section
-    $size.mouseenter(function() {
-        $(this).parent().children('.t-shirt').first().attr('data-size', $(this).text());
-        if (!$(this).hasClass('active')) {
-            $(this).parent().children('.size.active').toggleClass('active');
-            $(this).toggleClass('active');
-        }
-        var buyMerchBtn = $(this).parent().children('.buy-merch').first();
-        buyMerchBtn.attr('href', buyMerchBtn.attr('href').slice(0,buyMerchBtn.attr('href').lastIndexOf('_')+1)+$(this).text());
-    });
-    //
-
-    //// Contact Section
-    //function for sliding box on text change in contact section
-    var slideSwitchText = function(val) {
-    $contactSubInside.toggleClass('show');
-        setTimeout(function(){
-            $contactSubInside.text(val);
-            $contactSubInside.toggleClass('show');
-            $contactSub.innerWidth($contactSubInside.width());
-        },525);
-    };
-
-    //run once to initialize
+    // set initial contact sub width
     $contactSub.innerWidth($contactSubInside.width());
 
+    // update contact sub width
     $contactImg.mouseenter(function() {
         var selected = $(this).attr('class').split(' ')[1];
         if ($contactSubInside.text() !== contact[selected].text) {
             $contactSub.attr('href', contact[selected].link);
-            if (!!contact[selected].link === $contactSub.hasClass('disable-link')) $contactSub.toggleClass('disable-link');
+            if (!!contact[selected].link === $contactSub.hasClass('disable-link')) $contactSub.toggleClass('disable-link');  // check if there's a link for the contact button toggled
             slideSwitchText(contact[selected].text);
         }
     });
+
+    //// Contact Section
+    //function for sliding box on text change in contact section
+    function slideSwitchText(val) {
+      $contactSubInside.toggleClass('show');
+          setTimeout(function(){
+              $contactSubInside.text(val);
+              $contactSubInside.toggleClass('show');
+              $contactSub.innerWidth($contactSubInside.width());
+          },525);
+    }
+
+    // Add scroll and resize listeners
+    listeners();
 };
 
 // Store trigger points for state changes
-var titleTop = Math.ceil($landing.outerHeight()),
-    landingHeadFixPoint = titleTop - Math.ceil($landingHead.position().top),
-    contactTop = Math.ceil($contact.offset().top) * 0.92,
-    downAnimReached = titleTop * 0.395 + 4.5; //when page position is such that the centered landing header is right above the down arrow;
+var titleTop,
+    titleHeight,
+    landingHeadFixPoint,
+    contactTop,
+    downAnimReached,
+    backToTopTop;
 
 // State booleans
 var pagePos = 0,
@@ -159,26 +131,37 @@ var pagePos = 0,
     topTextShowing = true,
     contactPopped = false;
 
-// Handle fixing title bar at the top of the page
+// Resize and Scroll listeners
 function listeners() {
   // initial sync of state with HTML elements
-  landingScroll();
+  calcTriggerPoints();
 
-  // update state change triggers when screen is resized
-  $(window).resize(function() {
-      titleTop = Math.ceil($landing.outerHeight());
-      landingHeadFixPoint = titleTop - Math.ceil($landingHead.position().top);
-      downAnimReached = titleTop * 0.395 + 4.5;
-      contactTop = Math.ceil($contact.offset().top) * 0.8;
-      landingScroll();
-  });
+  // update state and recalculate trigger points when screen is resized
+  $window.resize(calcTriggerPoints);
 
   // update state based on scroll position
-  window.addEventListener('scroll', landingScroll);
+  $window.scroll(landingScroll);
 }
 
+
+// Store trigger points for state changes
+function calcTriggerPoints() {
+    // Calculate scroll values
+    titleTop = Math.ceil($landing.outerHeight());
+    titleHeight = $title.height();
+    landingHeadFixPoint = titleTop - Math.ceil($landingHead.position().top);
+    contactTop = Math.ceil($contact.offset().top) * 0.92;
+    downAnimReached = titleTop * 0.395 + 4.5; //when page position is such that the centered landing header is right above the down arrow;
+
+    // Check if any changes in DOM occur as a result of these calculations
+    landingScroll();
+}
+
+
+// Check for DOM updates on scroll
 function landingScroll() {
-    pagePos = window.pageYOffset; //calculates current vertical scroll position
+    //calculates current vertical scroll position
+    pagePos = window.pageYOffset;
 
     //fixes title header to proper position
     if (!landingTogglerClicked && (pagePos >= landingHeadFixPoint && !landingHeadFixed || pagePos < landingHeadFixPoint && landingHeadFixed)) {
@@ -186,6 +169,11 @@ function landingScroll() {
         $title.toggleClass('show-logo');
         landingHeadFixed = !landingHeadFixed;
     }
+    //fades all but title with scroll
+    if (pagePos < downAnimReached && !topTextShowing) topTextShowing = true;
+    if (pagePos === 0) $landingContent.add($downAnim).css('opacity', 1);
+    else if (pagePos >= downAnimReached && topTextShowing) $landingContent.add($downAnim).css('opacity', +(topTextShowing = false));
+    else if (pagePos > 0 && pagePos < downAnimReached) $landingContent.add($downAnim).css('opacity', 1 - pagePos / downAnimReached);
 
     //fixes main title to top of page
     if (pagePos >= titleTop && !titleFixed || pagePos < titleTop && titleFixed) {
@@ -199,13 +187,7 @@ function landingScroll() {
         $contact.toggleClass('poppin');
         contactPopped = !contactPopped;
     }
-
-    //fades all but title with scroll
-    if (pagePos < downAnimReached && !topTextShowing) topTextShowing = true;
-    if (pagePos === 0) $landingContent.add($downAnim).css('opacity', 1);
-    else if (pagePos >= downAnimReached && topTextShowing) $landingContent.add($downAnim).css('opacity', +(topTextShowing = false));
-    else if (pagePos > 0 && pagePos < downAnimReached) $landingContent.add($downAnim).css('opacity', 1 - pagePos / downAnimReached);
 }
 
 
-$(document).ready(main, listeners());
+$(document).ready(main);
