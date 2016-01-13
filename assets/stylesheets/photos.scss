@@ -20,8 +20,9 @@
 
 .float-fold {
   @include vend(transition, transform .5s ease-in-out);
-  height: 200px;
-  width: 80%;
+  @include vendVal(background, linear-gradient(top, #000 50%,#FFF 100%));
+  height: 480px;
+  width: 720px;
   margin: 0 auto;
 
   .slice {
@@ -35,6 +36,14 @@
      // scoot all slices down their full height
      &:not(.slice-1) {
        @include vend(transform, translate3d(0, calc(100% - 1px),0));
+     }
+
+     .overlay {
+        display: block;
+        height: 100%;
+    	width: 100%;
+    	opacity: 0;
+    	position: absolute;
      }
   }
 
@@ -51,7 +60,10 @@
     @for $j from 1 to ($i + 1) {
       // delay folding for "peeling" effect
       .total-slices-#{$i}.slice-#{$j} {
-        transition-delay: #{($i - $j)*50ms};
+        @include vend(transition-delay, #{($i - $j)*50ms});
+        .overlay {
+          @include vend(transition, opacity #{($i - $j)*50ms} ease-in-out);
+        }
       }
 
       // adjust background position based on slice index
@@ -60,14 +72,35 @@
           background-position: center calc(#{100%/($i - 1)*$j - 100%/($i - 1)} + 1px); // scooch image down so that it's consistent with slice above/below
         }
       }
+      @if $j == $i {
+        .total-slices-#{$i}.slice-#{$j} > .overlay {
+          @include vendVal(background, linear-gradient(bottom, rgba(0,0,0,0.4) 0%,rgba(0,0,0,0.2) 100%));
+        }
+      }
+      @if $j == ($i - 1) {
+        .total-slices-#{$i}.slice-#{$j} > .overlay {
+          @include vendVal(background, linear-gradient(bottom, rgba(0,0,0,0.2) 0%,rgba(0,0,0,0.075) 100%));
+        }
+      }
+      @if $j == ($i - 2) {
+        .total-slices-#{$i}.slice-#{$j} > .overlay {
+          @include vendVal(background, linear-gradient(bottom, rgba(0,0,0,0.075) 0%,rgba(0,0,0,0.025) 100%));
+        }
+      }
+      @if $j == ($i - 3) {
+        .total-slices-#{$i}.slice-#{$j} > .overlay {
+          @include vendVal(background, linear-gradient(bottom, rgba(0,0,0,0.025) 0%,rgba(0,0,0,0) 100%));
+        }
+      }
     }
   }
 
-  $tilt-deg: 15;
+  $tilt-deg: 10;
   &:hover {
-    // .slice.slice-1 {
-    //   @include vend(transform, translate3d(0, #{-1 * $tilt-deg/180 * 100% + 6%}, 0) rotateX(#{$tilt-deg}deg));
-    // }
+    .overlay {
+      opacity: 1;
+    }
+
     @for $i from 1 to 10 {
       @for $j from 1 to ($i + 1) {
         // adjust background position based on slice index

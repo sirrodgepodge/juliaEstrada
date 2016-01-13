@@ -54,21 +54,21 @@ var main = function() {
 
     // add tags to string
     for(i = 1; i < totalSlices + 1; i++) {
-      struct	+= '<span class="overlay" ></span><div class="slice total-slices-' + totalSlices + ' slice-' + i + '" style="background-image: url() ;">';
+      struct	+= '<div class="slice total-slices-' + totalSlices + ' slice-' + i + '" style="background-image: url() ;"><span class="overlay" ></span>';
     }
 
     for(i = totalSlices; i > 0; i--) {
       struct	+= '</div>';
     }
 
-		$floatFold.each(function() {
-			var $this = $(this),
-				  imgPath	= $this.attr('src'),
-          classes = $this.attr('class');
+	$floatFold.each(function() {
+    	var $this = $(this),
+    		imgPath	= $this.attr('src'),
+            classes = $this.attr('class');
 
-      $this.replaceWith($('<div class=' + classes + '></div>')
-        .append($(struct.replace(floatFoldImgRegex, 'background-image: url('+ imgPath +')' ))));
-		});
+        $this.replaceWith($('<div class=' + classes + '></div>')
+             .append($(struct.replace(floatFoldImgRegex, 'background-image: url('+ imgPath +')' ))));
+    });
 
     //// Landing Section
     $landingTogglers.click(function() {
