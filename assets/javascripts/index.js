@@ -54,7 +54,7 @@ var main = function() {
 
     // add tags to string
     for(i = 1; i < totalSlices + 1; i++) {
-      struct	+= '<span class="overlay" ></span><div class="slice totalslices-' + totalSlices + ' slice-' + i + '" style="background-image: url() ;">';
+      struct	+= '<span class="overlay" ></span><div class="slice total-slices-' + totalSlices + ' slice-' + i + '" style="background-image: url() ;">';
     }
 
     for(i = totalSlices; i > 0; i--) {
