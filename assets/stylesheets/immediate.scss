@@ -1,5 +1,5 @@
 // Shared vars
-@import 'init';
+@import 'init/init';
 @include addFont('FaberSansPro-Normal');
 
 // Pre-Load Shader
@@ -237,6 +237,3 @@ a, a:hover, a:visited {
         }
     }
 }
-
-// Shared vars
-@import 'title';

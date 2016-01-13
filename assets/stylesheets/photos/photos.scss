@@ -73,7 +73,7 @@
         // adjust background position based on slice index
         @if $j > 1 {
           .total-slices-#{$i}.slice-#{$j} {
-            @include vend(transform, translate3d(0, #{100% - ($tilt-deg/180 * $j * .485) * 100%}, 0) rotateX(#{$tilt-deg}deg));
+            @include vend(transform, translate3d(0, #{100% - ($tilt-deg/180 * $j * .5) * 100%}, 0) rotateX(#{$tilt-deg}deg));
           }
         }
       }

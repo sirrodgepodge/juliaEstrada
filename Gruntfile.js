@@ -13,16 +13,16 @@ module.exports = function(grunt) {
                 dest: 'public/javascripts/index.min.js'
             }
         },
-        scsslint: {
-            allFiles: [
-                'assets/stylesheets/*.scss'
-            ],
-            options: {
-                colorizeOutput: true,
-                compact: true,
-                force: true
-            }
-        },
+        // scsslint: {
+        //     allFiles: [
+        //         'assets/stylesheets/*.scss'
+        //     ],
+        //     options: {
+        //         colorizeOutput: true,
+        //         compact: true,
+        //         force: true
+        //     }
+        // },
         jshint: {
             options: {
                 curly: false,
@@ -35,19 +35,41 @@ module.exports = function(grunt) {
             },
             all: ['Gruntfile.js', 'assets/javascripts/*.js']
         },
-        exec: {
-            browserifying: {
-                cmd: 'echo heyhey'
-            }
-        }
+        compass: {
+    			dist: {
+    				options: {
+              sassDir: 'assets/stylesheets',
+    					specify: ['assets/stylesheets/immediate.scss', 'assets/stylesheets/style.scss'],
+    					cssDir: 'public',
+              outputStyle: 'compressed'
+    				}
+    			}
+    		},
+    		watch: {
+    			css: {
+    				files: '**/*.scss',
+    				tasks: ['compass']
+    			},
+          js: {
+    				files: '**/*.scss',
+    				tasks: ['jshint', 'uglify']
+    			}
+    		}
+        // exec: {
+        //     browserifying: {
+        //         cmd: 'echo heyhey'
+        //     }
+        // }
     });
 
     // Load tasks
     grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-scss-lint');
+    // grunt.loadNpmTasks('grunt-scss-lint');
     grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-exec');
+    grunt.loadNpmTasks('grunt-contrib-compass');
+	  grunt.loadNpmTasks('grunt-contrib-watch');
+    //grunt.loadNpmTasks('grunt-exec');
 
     // Set default tasks
-    grunt.registerTask('default', ['uglify', 'scsslint', 'jshint', 'exec']);
+    grunt.registerTask('default', ['jshint', 'uglify', 'compass', 'watch']);
 };
