@@ -1,0 +1,39 @@
+// Coffee Purchasing
+
+//// Coffee Header
+.head {
+    margin-top: 24px;
+    font-size: 52px;
+    font-family: lato, sans-serif;
+    font-weight: 300;
+    text-align: center;
+    clear: both;
+    .sub-head {
+        font-size: 21px;
+        text-align: inherit;
+    }
+    .sub-sub-head {
+        font-size: 11px;
+        text-align: inherit;
+    }
+}
+
+$tilt-amount: 60px;
+.float-fold [class*="slice-"] {
+	@include vend(transform, translate3d($tilt-amount,0,0));
+}
+.view .s1 {
+	background-position: 0px 0px;
+}
+.view .s2 {
+	background-position: -60px 0px;
+}
+.view .s3 {
+	background-position: -120px 0px;
+}
+.view .s4 {
+	background-position: -180px 0px;
+}
+.view .s5 {
+	background-position: -240px 0px;
+}
