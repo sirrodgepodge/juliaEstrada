@@ -19,8 +19,8 @@
 }
 
 .float-fold {
-  @include vend(transition, transform .5s ease-in-out);
-  @include vendVal(background, linear-gradient(top, #000 50%,#FFF 100%));
+  @include vend(transition, (transform .5s ease-in-out, opacity .3s ease-in 0s));
+  @include vendVal(background, linear-gradient(top, #000 50%, #FFF 100%));
   height: 480px;
   width: 720px;
   margin: 0 auto;
@@ -97,6 +97,9 @@
 
   $tilt-deg: 10;
   &:hover {
+    @include vend(transition, (transform .5s ease-in-out, opacity .45s ease-in 0s));
+    opacity: 0;
+
     .overlay {
       opacity: 1;
     }
