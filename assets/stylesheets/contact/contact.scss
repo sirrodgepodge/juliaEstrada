@@ -44,23 +44,10 @@ $phone-contact-margin: $phone-contact-margin-top 0 $contact-border-width/1.75*$p
     }
   }
   .poppin .#{$name} {
-    @if $side == bottom or $side == right {
-        $adjust: 1;
-    } @else if $side == top or $side == left {
-        $adjust: -1;
-    }
-
-    @debug $side;
-
-    @if $side == left or $side == right {
-        $side: X;
-        $perp-side: Y;
-        $perp-adjust: -1;
-    } @else if $side == top or $side == bottom {
-        $side: Y;
-        $perp-side: X;
-        $perp-adjust: 1;
-    }
+    $adjust: if($side == bottom or $side == right, 1, -1);
+    $perp-adjust: if($side == left or $side == right, 1, -1);
+    $perp-side: if($side == left or $side == right, Y, X);
+    $side: if($side == left or $side == right, X, Y);
 
     $perp-side-transform: unquote("translate#{$perp-side}(#{($contact-side + $img-size)/2*$perp-pct*$perp-adjust})"); //for adjusting vertically along side
     $phone-perp-side-transform: unquote("translate#{$perp-side}(#{($contact-side + $img-size)/2*$perp-pct*$perp-adjust*$phone-adjust-factor})");
