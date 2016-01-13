@@ -18,19 +18,24 @@
     }
 }
 
-$tilt-amount: 80px;
 .float-fold {
+  @include vend(transition, transform .5s ease-in-out);
   height: 200px;
   width: 80%;
   margin: 0 auto;
 
-  // tilt each slice (which will also tilt its children)
   .slice {
-	   //@include vend(transform, translate3d(0, $tilt-amount ,0));
+	   // @include vend(transform, translate3d(0, $tilt-amount ,0));
      @include vend(transform-style, preserve-3d);
      width: 100%;
      height: 100%;
+     background-position: center 0;
      background-repeat: no-repeat;
+
+     // scoot all slices down their full height
+     &:not(.slice-1) {
+       @include vend(transform, translate3d(0, calc(100% - 1px),0));
+     }
   }
 
   @for $i from 1 to 10 {
@@ -44,15 +49,32 @@ $tilt-amount: 80px;
     }
 
     @for $j from 1 to ($i + 1) {
+      // delay folding for "peeling" effect
+      .total-slices-#{$i}.slice-#{$j} {
+        transition-delay: #{($i - $j)*50ms};
+      }
+
       // adjust background position based on slice index
-      @if $j == 1 {
+      @if $j > 1 {
         .total-slices-#{$i}.slice-#{$j} {
-          background-position: center 0;
+          background-position: center calc(#{100%/($i - 1)*$j - 100%/($i - 1)} + 1px); // scooch image down so that it's consistent with slice above/below
         }
-      } @else {
-        .total-slices-#{$i}.slice-#{$j} {
-          background-position: center #{100%/($i - 1)*$j - 100%/($i - 1)};
-          @include vend(transform, translate3d(0, 100%,0));
+      }
+    }
+  }
+
+  $tilt-deg: 15;
+  &:hover {
+    // .slice.slice-1 {
+    //   @include vend(transform, translate3d(0, #{-1 * $tilt-deg/180 * 100% + 6%}, 0) rotateX(#{$tilt-deg}deg));
+    // }
+    @for $i from 1 to 10 {
+      @for $j from 1 to ($i + 1) {
+        // adjust background position based on slice index
+        @if $j > 1 {
+          .total-slices-#{$i}.slice-#{$j} {
+            @include vend(transform, translate3d(0, #{100% - ($tilt-deg/180 * $j * .485) * 100%}, 0) rotateX(#{$tilt-deg}deg));
+          }
         }
       }
     }
