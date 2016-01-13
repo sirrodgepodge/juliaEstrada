@@ -39,26 +39,13 @@
       }
 
       .quote {
-        display: block;
+        display: inline-block;
         color: $theme-color;
         font-weight: 300;
         font-size: 16px;
-        font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
         margin-bottom: 0;
         text-align: center;
-        min-height: 140px;
-
-        .author {
-          position: absolute;
-          color: theme-color-fade(.8);
-
-          display: block;
-          width: 100%;
-          margin-top: 20px;
-          text-align: center;
-          font-style: italic;
-          bottom: 0;
-        }
+        min-height: calc(225px - 7.275vw);
 
         .fa-quote-left {
           position: absolute;
@@ -67,6 +54,31 @@
           top: -2px;
           font-size: 32px;
         }
+
+        .author {
+          color: theme-color-fade(.8);
+          display: inline-block;
+          font-weight: 300;
+          font-size: 16px;
+          font-style: italic;
+          text-align: center;
+          white-space: nowrap;
+          width: 100%;
+          bottom: 0;
+          left: 0;
+          position: absolute;
+        }
+      }
+
+      .author {
+        color: theme-color-fade(.8);
+        display: inline-block;
+        font-weight: 300;
+        font-size: 16px;
+        font-style: italic;
+        text-align: center;
+        white-space: nowrap;
+        width: 100%;
       }
 
       @media (min-width: 550px) {

@@ -48,9 +48,10 @@ var main = function() {
     });
 
     // how many times images will get sliced for animation
-    var totalSlices = 5,
+    var totalSlices = 6,
         struct	= '',
         i;
+
     // add tags to string
     for(i = 1; i < totalSlices + 1; i++) {
       struct	+= '<span class="overlay" ></span><div class="slice totalslices-' + totalSlices + ' slice-' + i + '" style="background-image: url() ;">';
@@ -146,8 +147,7 @@ var titleTop,
     titleHeight,
     landingHeadFixPoint,
     contactTop,
-    downAnimReached,
-    backToTopTop;
+    downAnimReached;
 
 // State booleans
 var pagePos = 0,
@@ -172,10 +172,10 @@ function listeners() {
 // Store trigger points for state changes
 function calcTriggerPoints() {
     // Calculate scroll values
-    titleTop = $title.offset().top;
-    titleHeight = $title.height();
-    landingHeadFixPoint = titleTop - $landingHead.position().top;
-    contactTop = $contact.offset().top * 0.92;
+    titleTop = Math.ceil($title.offset().top) + 1;
+    titleHeight = Math.ceil($title.height());
+    landingHeadFixPoint = titleTop - Math.ceil($landingHead.position().top);
+    contactTop = Math.ceil($contact.offset().top) * 0.92;
     downAnimReached = titleTop * 0.395 + 4.5; //when page position is such that the centered landing header is right above the down arrow;
 
     // Check if any changes in DOM occur as a result of these calculations

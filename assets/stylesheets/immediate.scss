@@ -109,7 +109,7 @@ a, a:hover, a:visited {
     top: calc(39vh + 8px);
     z-index: 10;
     width: 100%;
-    height: calc(#{$title-height}vh - 4px);
+    height: calc(#{$title-height}vh - 3.5px);
     min-height: 76px;
 }
 
