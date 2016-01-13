@@ -45,9 +45,14 @@ $phone-contact-margin: $phone-contact-margin-top 0 $contact-border-width/1.75*$p
   }
   .poppin .#{$name} {
     $adjust: if($side == bottom or $side == right, 1, -1);
-    $perp-adjust: if($side == left or $side == right, 1, -1);
-    $perp-side: if($side == left or $side == right, Y, X);
-    $side: if($side == left or $side == right, X, Y);
+
+    $isHoriz: $side == left or $side == right;
+
+    @debug $isHoriz;
+
+    $perp-adjust: if($isHoriz, -1, 1);
+    $perp-side: if($isHoriz, Y, X);
+    $side: if($isHoriz, X, Y);
 
     $perp-side-transform: unquote("translate#{$perp-side}(#{($contact-side + $img-size)/2*$perp-pct*$perp-adjust})"); //for adjusting vertically along side
     $phone-perp-side-transform: unquote("translate#{$perp-side}(#{($contact-side + $img-size)/2*$perp-pct*$perp-adjust*$phone-adjust-factor})");
