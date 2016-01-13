@@ -1,12 +1,12 @@
 /*
 Error: Undefined variable: "$perp-side".
-        on line 63 of /Users/rbeaman/projects/juliaEstrada/assets/stylesheets/contact/contact.scss, in `contactImgInit'
-        from line 188 of /Users/rbeaman/projects/juliaEstrada/assets/stylesheets/contact/contact.scss
+        on line 65 of /Users/rbeaman/projects/juliaEstrada/assets/stylesheets/contact/contact.scss, in `contactImgInit'
+        from line 190 of /Users/rbeaman/projects/juliaEstrada/assets/stylesheets/contact/contact.scss
         from line 5 of /Users/rbeaman/projects/juliaEstrada/assets/stylesheets/style.scss
 
 Backtrace:
-/Users/rbeaman/projects/juliaEstrada/assets/stylesheets/contact/contact.scss:63:in `contactImgInit'
-/Users/rbeaman/projects/juliaEstrada/assets/stylesheets/contact/contact.scss:188
+/Users/rbeaman/projects/juliaEstrada/assets/stylesheets/contact/contact.scss:65:in `contactImgInit'
+/Users/rbeaman/projects/juliaEstrada/assets/stylesheets/contact/contact.scss:190
 /Users/rbeaman/projects/juliaEstrada/assets/stylesheets/style.scss:5
 /Library/Ruby/Gems/2.0.0/gems/sass-3.4.20/lib/sass/script/tree/variable.rb:49:in `_perform'
 /Library/Ruby/Gems/2.0.0/gems/sass-3.4.20/lib/sass/script/tree/node.rb:50:in `perform'
@@ -101,4 +101,4 @@ Backtrace:
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined variable: \"$perp-side\".\A         on line 63 of /Users/rbeaman/projects/juliaEstrada/assets/stylesheets/contact/contact.scss, in `contactImgInit'\A         from line 188 of /Users/rbeaman/projects/juliaEstrada/assets/stylesheets/contact/contact.scss\A         from line 5 of /Users/rbeaman/projects/juliaEstrada/assets/stylesheets/style.scss"; }
+  content: "Error: Undefined variable: \"$perp-side\".\A         on line 65 of /Users/rbeaman/projects/juliaEstrada/assets/stylesheets/contact/contact.scss, in `contactImgInit'\A         from line 190 of /Users/rbeaman/projects/juliaEstrada/assets/stylesheets/contact/contact.scss\A         from line 5 of /Users/rbeaman/projects/juliaEstrada/assets/stylesheets/style.scss"; }

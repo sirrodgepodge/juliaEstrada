@@ -50,6 +50,8 @@ $phone-contact-margin: $phone-contact-margin-top 0 $contact-border-width/1.75*$p
         $adjust: -1;
     }
 
+    @debug $side;
+
     @if $side == left or $side == right {
         $side: X;
         $perp-side: Y;
