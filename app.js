@@ -16,12 +16,12 @@ app.set('view engine', 'jade');
 app.set('views', path.join(__dirname,'assets', 'views'));
 
 // loading middlewares
-app.use(sass({
-  src: path.join(__dirname, 'assets'), //where the sass files at
-  dest: path.join(__dirname, 'public'), //where they will be converted to css
-  outputStyle: 'compressed',
-  debug: true
-}));
+// app.use(sass({
+//   src: path.join(__dirname, 'assets'), //where the sass files at
+//   dest: path.join(__dirname, 'public'), //where they will be converted to css
+//   outputStyle: 'compressed',
+//   debug: true
+// }));
 app.use(compression());
 app.use(favicon(path.join(__dirname, '/public/favicon.png')));
 

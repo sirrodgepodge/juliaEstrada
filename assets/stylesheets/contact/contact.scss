@@ -48,8 +48,6 @@ $phone-contact-margin: $phone-contact-margin-top 0 $contact-border-width/1.75*$p
 
     $isHoriz: $side == left or $side == right;
 
-    @debug $isHoriz;
-
     $perp-adjust: if($isHoriz, -1, 1);
     $perp-side: if($isHoriz, Y, X);
     $side: if($isHoriz, X, Y);

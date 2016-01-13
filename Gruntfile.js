@@ -40,8 +40,9 @@ module.exports = function(grunt) {
     				options: {
               sassDir: 'assets/stylesheets',
     					specify: ['assets/stylesheets/immediate.scss', 'assets/stylesheets/style.scss'],
-    					cssDir: 'public',
-              outputStyle: 'compressed'
+    					cssDir: 'public/stylesheets',
+              outputStyle: 'compressed',
+              cache: false
     				}
     			}
     		},

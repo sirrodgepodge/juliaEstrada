@@ -35,22 +35,22 @@
 
      // scoot all slices down their full height
      &:not(.slice-1) {
-       @include vend(transform, translate3d(0, calc(100% - 1px),0));
+       @include vend(transform, translate3d(0, 100%,0));
      }
 
      .overlay {
-        display: block;
-        height: 100%;
-    	width: 100%;
-    	opacity: 0;
-    	position: absolute;
+       display: block;
+       height: 100%;
+       width: 100%;
+       opacity: 0;
+       position: absolute;
      }
   }
 
   @for $i from 1 to 10 {
     // adjust slice height based on total number of slices
     & > .total-slices-#{$i} {
-      height: #{100%/$i};
+      height: calc(#{100%/$i} + 1px);
     }
 
     .total-slices-#{$i} {
@@ -69,7 +69,7 @@
       // adjust background position based on slice index
       @if $j > 1 {
         .total-slices-#{$i}.slice-#{$j} {
-          background-position: center calc(#{100%/($i - 1)*$j - 100%/($i - 1)} + 1px); // scooch image down so that it's consistent with slice above/below
+          background-position: center #{100%/($i - 1)*$j - 100%/($i - 1)}; // scooch image down so that it's consistent with slice above/below
         }
       }
       @if $j == $i {
@@ -95,22 +95,35 @@
     }
   }
 
-  $tilt-deg: 10;
+
+
   &:hover {
     @include vend(transition, (transform .5s ease-in-out, opacity .45s ease-in 0s));
-    opacity: 0;
+    // opacity: 0;
 
     .overlay {
       opacity: 1;
     }
 
-    @for $i from 1 to 10 {
-      @for $j from 1 to ($i + 1) {
-        // adjust background position based on slice index
-        @if $j > 1 {
-          .total-slices-#{$i}.slice-#{$j} {
-            @include vend(transform, translate3d(0, #{100% - ($tilt-deg/180 * $j * .5) * 100%}, 0) rotateX(#{$tilt-deg}deg));
-          }
+    // say how big you would like tilt to be
+    $tilt-deg: 16deg;
+
+    // adjust background position based on slice index
+    $transform-pct: 100%;
+    $curr-tilt-deg: 0deg;
+
+    @for $i from 2 to 10 {
+      // adjust for total tilt
+      $curr-tilt-deg: $curr-tilt-deg + $tilt-deg;
+      $curr-tilt-cos: cos($curr-tilt-deg);
+
+      // adjust background position based on slice index
+      $curr-transform-pct: $transform-pct * $curr-tilt-cos;
+      @debug $curr-transform-pct;
+
+      @if $i > 1 {
+        .total-slices-6.slice-#{$i} {
+          @include vend(transform, translate3d(0,  $curr-transform-pct, 0) rotateX(#{$tilt-deg}));
         }
       }
     }
