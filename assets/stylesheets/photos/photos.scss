@@ -18,7 +18,9 @@
 
 #photos {
   text-align: center;
-  padding: 5%;
+  margin: 4% 5% 6%;
+  padding: 4.5% 0 0;
+  border-top: 1px solid #dfe7ed;
 
   img.float-fold {
     visibility: none;
@@ -26,15 +28,15 @@
 
   .float-fold {
     /////// sizing and positioning
-    margin: 1.5%;
+    margin: 2% 0 0 2.52%;
     display: inline-block;
     &.vertical {
-      height: 360px;
-      width: 17%;
+      height: 240px;
+      width: 12.5%;
     }
     &.horizontal {
-      height: 360px;
-      width: 27%;
+      height: 240px;
+      width: 22%;
     }
 
     /////// animation-related
@@ -66,14 +68,11 @@
 
   &:hover {
     .float-fold {
-      @include vend(transition, (transform 0.75s ease-in-out 0s, opacity 0.65s ease-in 0.1s, background-position 0.65s linear 0.1s));
       @include vend(transform, translate(0,0));
       opacity: 1;
       background-position: 0 -4%;
 
       .slice {
-         @include vend(transition, (transform 0.55s linear, background-position 0.65s linear 0.1s));
-
          &:not(.slice-1) {
            @include vend(transform, translate3d(0, 100% ,0));
          }
@@ -102,13 +101,8 @@
   }
   &:not(:hover) {
     .float-fold {
-      @include vend(transition, (transform 0.75s ease-in-out 0s, opacity .65s ease-in 0s, background-position 0.65s linear 0s));
       @include vend(transform, translate(5%, -3%));
       background-position: -1% 0;
-
-      .slice {
-        @include vend(transition, (transform 0.5s linear, background-position 0.65s linear 0s));
-      }
 
       // say how big you would like tilt to be
       $tilt-deg: 17deg;
@@ -147,6 +141,38 @@
             .total-slices-#{$i}.slice-#{$j} {
               background-position: center #{100%/($i - 1)*$j - 100%/($i - 1)}, center #{100%/($i - 1)*$j - 100%/($i - 1)}; // scooch image down so that it's consistent with slice above/below
             }
+          }
+        }
+      }
+    }
+  }
+  // chain transitions
+  $close-gap: 0.45s;
+
+  @for $i from 0 to 30 {
+    &:hover {
+      @if $i == 0 {
+        .float-fold-#{$i} {
+          @include vend(transition, (transform 0.75s ease-in-out 0s, opacity 0.65s ease-in 0.1s, background-position 0.65s linear 0.1s));
+          .slice {
+            @include vend(transition, (transform 0.55s linear 0s, background-position 0.65s linear 0.1s));
+          }
+        }
+      } @else {
+        .float-fold-#{$i} {
+          @include vend(transition, (transform 0.75s ease-in-out #{$i * (0.75s - $close-gap) + 0s }, opacity 0.65s ease-in #{$i * (0.75s - $close-gap) + 0.1s}, background-position 0.65s linear #{$i * (0.75s - $close-gap) + 0.1s}));
+          .slice {
+            @include vend(transition, (transform 0.55s linear #{$i * (0.75s - $close-gap) + 0s}, background-position 0.65s linear #{$i *(0.75s - $close-gap) + 0.1s}));
+          }
+        }
+      }
+    }
+    @for $j from 0 to ($i + 1) {
+      &:not(:hover) {
+        .float-fold-#{$j}.float-fold-total-#{$i} {
+          @include vend(transition, (transform 0.75s ease-in-out #{($i - $j) * (0.75s - $close-gap) + 0s}, opacity .65s ease-in #{($i - $j) * (0.75s - $close-gap) + 0s}, background-position 0.65s linear #{($i - $j) * (0.75s - $close-gap) + 0s}));
+          .slice {
+            @include vend(transition, (transform 0.5s linear #{($i - $j)* (0.75s - $close-gap) + 0s}, background-position 0.65s linear #{($i - $j) * (0.75s - $close-gap) + 0s}));
           }
         }
       }
