@@ -54,7 +54,7 @@ var main = function() {
 
     // add tags to string
     for(i = 1; i < totalSlices + 1; i++) {
-      struct	+= '<div class="slice total-slices-' + totalSlices + ' slice-' + i + '" style="background-image: url() ;"><span class="overlay" ></span>';
+      struct	+= '<div class="slice total-slices-' + totalSlices + ' slice-' + i + '" style="background-image: url(), linear-gradient(top, rgba(0,0,0,' + (Math.pow(2,(i - totalSlices - 2))) + ') 0%,rgba(0,0,0, ' + (Math.pow(2,(i - totalSlices)) - 1) + ') 100%); background-image: url(), -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0, .7) 100%);">';
     }
 
     for(i = totalSlices; i > 0; i--) {
