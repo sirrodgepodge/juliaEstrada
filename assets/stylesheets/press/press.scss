@@ -28,8 +28,10 @@
         }
         &.landing-icon-journal-tribune {
           background-image: url("/images/journal_tribune.png");
+          background-position: center;
+          border-radius: 50%;
           height: 100px;
-          width: 250px;
+          width: 100px;
         }
         &.landing-icon-seacoast {
           background-image: url("/images/sea_coast_online.png");
