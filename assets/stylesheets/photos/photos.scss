@@ -19,15 +19,15 @@
 }
 
 .float-fold {
-  @include vend(transition, (opacity 0.65s ease-in 0.1s, background-position 0.65s linear 0s));
+  @include vend(transition, (transform 0.75s ease-in-out 0s, opacity 0.65s ease-in 0.1s, background-position 0.65s linear 0.1s));
   @include vendVal(background-image, linear-gradient(top, #000 30%, #FFF 48%));
-  -webkit-backface-visibility: hidden;
+  // box-shadow: 0 0 4px rgba(0,0,0,0.14),0 4px 8px rgba(0,0,0,0.28), inset 0 0px 100px rgba(0,0,0,0.28);
   height: 480px;
   width: 720px;
   margin: 0 auto;
   background-size: 200%;
   background-repeat: no-repeat;
-  background-position: 0 -5%;
+  background-position: 0 -4%;
 
   .slice {
      @include vend(transition, (transform 0.5s linear, background-position 0.65s linear 0.1s));
@@ -76,9 +76,10 @@
 
 
   &:hover {
-    @include vend(transition, (transform .65s ease-in-out 0s, opacity .25s ease-in 0s, background-position 0.65s linear 0s));
-    // opacity: 0;
-    background-position: 0 0;
+    @include vend(transition, (transform 0.75s ease-in-out 0s, opacity .65s ease-in 0s, background-position 0.65s linear 0s));
+    @include vend(transform, translate(5%, -3%));
+    opacity: 0.3;
+    background-position: -1% 0;
 
     .slice {
        @include vend(transition, (transform 0.5s linear, background-position 0.65s linear 0s));
@@ -103,7 +104,7 @@
 
       @if $i > 1 {
         .slice-#{$i} {
-          @include vend(transform, translate3d(0, $transform-pct, 0) scale(1.004, .9) rotateX(#{$tilt-deg}));
+          @include vend(transform, translate3d(0.3%, $transform-pct, 0) scale(1.004, .9) rotateX(#{$tilt-deg}) skewX(3deg));
         }
       }
 
