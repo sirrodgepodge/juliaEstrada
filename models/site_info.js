@@ -13,7 +13,7 @@ module.exports = {
     },
     siteHeader: {
       image: '/images/juliaEstradaHeading.png',
-      resumeLink: 'https://drive.google.com/file/d/0B0sjwjXhovDMYXR1Q3hQb1pmeENjMWZBNWJyNUNXR3hjdHZV/view?usp=sharing'
+      resumeLink: '/images/Julia_Estrada Resume_Fall_2015.pdf'
     },
     fom: {
         header: 'Mi café es su café',
