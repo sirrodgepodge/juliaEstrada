@@ -1,11 +1,5 @@
 // Create static jQuery selector vars
 var $window = $(window),
-    $purchaseToggle = $('.purchase-toggle'),
-    $coffeeInd = $('.coffee-ind'),
-    $buyBtn = $('.buy-btn'),
-    $coffeePrice = $('.coffee-price'),
-    $merchIndBack = $('.merch-ind .back'),
-    $size = $merchIndBack.children('.size'),
     $placeHolder = $('.place-holder'),
     $landingHead = $('.landing-head'),
     $title = $('.title'),
@@ -19,8 +13,9 @@ var $window = $(window),
     $contactSubInside = $contactSub.find('.contact-sub-inside'),
     $scrollTo = $('.scroll-to'),
     $floatFold = $('.float-fold'),
-    $backToTop = $('.back-to-top'),
-    $paperResumeWrapper = $('.paper-resume-wrapper');
+    $photosSect = $('#photos'),
+    $videoBtn = $('.video-btn'),
+    $videos = $('.video');
 
 var floatFoldImgRegex = /background-image: url\(\)/g;
 
@@ -41,9 +36,10 @@ var landingTogglerClicked = false;
 var main = function() {
     //// Setting up scrollTo animation
     $scrollTo.click(function(){
+      console.log(this);
       $($(this).data("scrollTo")).ScrollTo({
         duration: 1000,
-        offsetTop: titleHeight - 16
+        offsetTop: titleHeight + ($(this).data("scrollTo") === '#videos' ? titleHeight : 3)
       });
     });
 
@@ -129,34 +125,60 @@ var main = function() {
         }
     });
 
-    //// Contact Section
-    //function for sliding box on text change in contact section
-    function slideSwitchText(val) {
-      $contactSubInside.toggleClass('show');
-          setTimeout(function(){
-              $contactSubInside.text(val);
-              $contactSubInside.toggleClass('show');
-              $contactSub.innerWidth($contactSubInside.width());
-          },525);
-    }
-
     // Add scroll and resize listeners
     listeners();
+
+    //////////////////////////////////////////////////////////
+    $videos.each(function(){
+      initBufferVideo($(this));
+    });
+
+    $videoBtn.on('click', function(){
+      var thisVideoBtn = $(this).addClass('bring-backward'); // remove link
+      playVideo(thisVideoBtn.siblings('.picture').children('.video'));  // play video
+      thisVideoBtn.siblings('.picture').addClass('bring-video-forward');  // fade in video
+    });
 };
+
+//// Contact Section
+//function for sliding box on text change in contact section
+function slideSwitchText(val) {
+  $contactSubInside.toggleClass('show');
+      setTimeout(function(){
+          $contactSubInside.text(val);
+          $contactSubInside.toggleClass('show');
+          $contactSub.innerWidth($contactSubInside.width());
+      },525);
+}
+
+function initBufferVideo(iframe){
+    playVideo(iframe);
+    setTimeout(stopVideo(iframe));
+}
+
+function playVideo(iframe){
+    iframe[0].contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+}
+
+function stopVideo(iframe){
+    iframe[0].contentWindow.postMessage('{"event":"command","func":"stopVideo","args":""}', '*');
+}
 
 // Store trigger points for state changes
 var titleTop,
     titleHeight,
     landingHeadFixPoint,
     contactTop,
-    downAnimReached;
+    downAnimReached,
+    photosSectTop;
 
 // State booleans
 var pagePos = 0,
     titleFixed = false,
     landingHeadFixed = false,
     topTextShowing = true,
-    contactPopped = false;
+    contactPopped = false,
+    photosTriggered = false;
 
 // Resize and Scroll listeners
 function listeners() {
@@ -176,9 +198,10 @@ function calcTriggerPoints() {
     // Calculate scroll values
     titleTop = Math.ceil($title.offset().top) + 1;
     titleHeight = Math.ceil($title.height());
-    landingHeadFixPoint = titleTop - Math.ceil($landingHead.position().top);
+    landingHeadFixPoint = titleTop - Math.ceil($landingHead.position().top) + 1;
     contactTop = Math.ceil($contact.offset().top) * 0.92;
     downAnimReached = titleTop * 0.395 + 4.5; //when page position is such that the centered landing header is right above the down arrow;
+    photosSectTop = Math.ceil($photosSect.offset().top) * 0.82;
 
     // Check if any changes in DOM occur as a result of these calculations
     landingScroll();
@@ -207,6 +230,12 @@ function landingScroll() {
         $title.toggleClass('sticky');
         $placeHolder.toggleClass('no-show');
         titleFixed = !titleFixed;
+    }
+
+    //triggers photo animation
+    if(!photosTriggered && pagePos > photosSectTop) {
+      $photosSect.addClass('triggered');
+      photosTriggered = true;
     }
 
     //make contact pop

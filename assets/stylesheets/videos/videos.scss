@@ -1,0 +1,121 @@
+$bill-yellow: #FBEF35;
+
+#videos {
+  margin: 7% 4.5% 0;
+  text-align: center;
+
+  .bill-container {
+    width: 24vw;
+    height: 37.561905vw;
+    margin: 0 3% 7%;
+    display: inline-block;
+    background-color: $white;
+
+    &, .top, .picture {
+      border: solid 1px $black;
+    }
+
+    .top, .picture {
+      box-sizing: content-box;
+      margin: 3%;
+    }
+
+    a.video-btn {
+      position: absolute;
+      display: block;
+      height: 100%;
+      width: 100%;
+      z-index: 1;
+      &.bring-backward {
+        z-index: -1;
+      }
+    }
+
+    .top {
+      height: 18%;
+      background-color: $bill-yellow;
+      white-space: nowrap;
+
+      .text-container {
+        @include vend(transform, translateY(-50%));
+        top: 50%;
+
+        .main-text {
+          line-height: 1.17;
+          font-weight: 900;
+          font-family: monospace;
+          font-size: 3.3vw;
+          text-transform: uppercase;
+          width: 100%;
+        }
+        .description-text {
+          line-height: 1;
+          font-weight: 500;
+          font-family: sans-serif;
+          font-size: 0.9vw;
+          text-transform: uppercase;
+        }
+      }
+    }
+
+    .picture {
+      @include vend(transition, background-color .5s ease-in-out);
+      margin-top: 0;
+      height: calc(76% - 2px);
+      background-size: cover;
+      background-position: center center;
+      background-color: rgba(0,0,0,0);
+      background-blend-mode: overlay;
+
+      .video-icon {
+        @include vend(transition, (fill .5s ease-in-out));
+        @include vend(transform, (translateX(-50%)));
+        position: absolute;
+        bottom: 5%;
+        width: 18%;
+        min-width: 43px;
+        fill: rgba(255, 255, 255, 0.5);
+      }
+      .video {
+        @include vend(transition, z-index .0s .5s);
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+      }
+      &.bring-video-forward {
+        background-color: rgba(0,0,0,1);
+        .video-icon {
+          fill: rgba(0,0,0,0) !important;
+        }
+        .video {
+          z-index: 1;
+        }
+      }
+    }
+
+    &:hover {
+      .picture {
+      }
+      .video-icon {
+        fill: $white;
+      }
+    }
+
+    // container-specific
+    &.bill-container-1 {
+      .top {
+        .main-text {
+          letter-spacing: -1px;
+        }
+      }
+    }
+
+    @media (max-width: $phone-max) {
+      height: 80.175vw;
+      width: 51.22743375vw;
+    }
+  }
+}

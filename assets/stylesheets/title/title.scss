@@ -23,10 +23,10 @@
     .title-section {
         @include vend(transition, (opacity .5s ease-in-out, text-shadow .25s ease-in-out));
         opacity: 0;
-        min-width: 100px;
+        min-width: 92px;
         width: 6.5%;
         font-size: 2rem;
-        font-weight: 500;
+        font-weight: 300;
         cursor: pointer;
         &:hover {
           text-shadow: 0 -1.5px 3px $white;
@@ -90,7 +90,7 @@
 }
 
 .paper-resume {
-    @include vend(transition, (transform .4s ease-in-out .04s, background-color .25s ease-in-out));
+    @include vend(transition, (transform .4s ease-in-out .04s, background-color .3s ease-in-out));
     display: block;
     background-image: url('/images/paper_resume.png');
     background-size: cover;
