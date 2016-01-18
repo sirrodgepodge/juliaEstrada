@@ -1,7 +1,7 @@
 script(type='text/javascript').
   // forces user to the top of the page on refresh
   window.onbeforeunload = function() {
-    setTimeout(window.scrollTo(0,0), 90);
+    setTimeout(window.scrollTo(0,0), 100);
   }
   
   // Converts touch to hover for mobile and tablet
@@ -10,6 +10,7 @@ script(type='text/javascript').
   // Handles expedited image load at top of page
   function landing(){
     setTimeout(function() {
+      window.scrollTo(0,0), 90
       document.getElementsByClassName('img-init')[0].className += ' show';
       document.getElementsByClassName('landing-head')[0].className += ' show';
       document.getElementsByClassName('landing-content')[0].className += ' show';
