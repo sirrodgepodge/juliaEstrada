@@ -153,7 +153,7 @@ function slideSwitchText(val) {
 
 function initBufferVideo(iframe){
     playVideo(iframe);
-    setTimeout(stopVideo(iframe));
+    setTimeout(stopVideo(iframe), 200);
 }
 
 function playVideo(iframe){
