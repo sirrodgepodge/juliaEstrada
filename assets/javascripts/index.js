@@ -20,13 +20,9 @@ var $window = $(window),
 var floatFoldImgRegex = /background-image: url\(\)/g;
 
 // Getting back end data
-var coffee = [],
-    merch = [],
-    contact = {};
+var contact = {};
 
 $.get('/api/info', function(data) {
-    coffee = data.coffee.product;
-    merch = data.merch;
     contact = data.contact;
 });
 

@@ -1,4 +1,9 @@
 script(type='text/javascript').
+  // forces user to the top of the page on refresh
+  window.onbeforeunload = function() {
+    setTimeout(window.scrollTo(0,0));
+  }
+  
   // Converts touch to hover for mobile and tablet
   document.addEventListener("touchstart", function(){}, true);
 
@@ -11,8 +16,6 @@ script(type='text/javascript').
       delete landing;
     },50);
   }
-  
-  //landing();
   
   // avoids showing page before javascript is loaded
   with(document.documentElement){className=className.replace(/\bno-js\b/,'js')}
