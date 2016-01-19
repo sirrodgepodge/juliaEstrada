@@ -1,104 +1,124 @@
 #press {
+  margin: 0 auto;
   text-align: center;
-  padding: 0 0 2%;
+  padding: 0 5% 2%;
 
-  .inner {
+  .table {
+    display: table;
     border-top: 1px solid #dfe7ed;
     border-bottom: 1px solid #dfe7ed;
     position: relative;
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 7% 5% 0;
+    padding: 5% 5% calc(5% + 37px);
     box-sizing: border-box;
     *zoom: 1;
 
-    .press-sect {
-      text-align: center;
-      vertical-align: top;
-      padding: 0 7% 7.776%;
-      width: 50%;
+    .table-row {
+      display: table-row;
 
-      .press-icon {
-        margin: 0 auto 20px;
-        background-color: $white;
-        background-blend-mode: luminosity;
-
-        .text-behind-logo {
-          display: none;
-        }
-        &.landing-icon-journal-tribune {
-          background-image: url("/images/journal_tribune.png");
-          background-position: center;
-          border-radius: 50%;
-          height: 100px;
-          width: 100px;
-        }
-        &.landing-icon-seacoast {
-          background-image: url("/images/sea_coast_online.png");
-          height: 100px;
-          width: 250px;
-        }
-      }
-
-      .quote {
-        display: inline-block;
-        color: $theme-color;
-        font-weight: 300;
-        font-size: 18px;
-        margin-top: 10px;
-        margin-bottom: 0;
+      .press-sect {
+        display: table-cell;
         text-align: center;
-        min-height: calc(254px - 10.4vw);
+        vertical-align: top;
+        padding: 0 7%;
+        width: 50%;
 
-        .fa-quote-left {
-          position: absolute;
-          color: theme-color-fade(.1);
-          left: -28px;
-          top: -3.5px;
-          left: -31px;
-          top: -4px;
-          font-size: 32px;
+        .press-icon {
+          margin: 0 auto 20px;
+          background-color: $white;
+          background-blend-mode: luminosity;
+
+          .text-behind-logo {
+            display: none;
+          }
+          &.landing-icon-journal-tribune {
+            background-image: url("/images/journal_tribune.png");
+            background-position: center;
+            border-radius: 50%;
+            height: 100px;
+            width: 100px;
+          }
+          &.landing-icon-seacoast {
+            background-image: url("/images/sea_coast_online.png");
+            height: 100px;
+            width: 250px;
+          }
         }
-      }
-      .author {
-        padding-top: 14px;
-        color: theme-color-fade(.8);
-        display: inline-block;
-        font-weight: 300;
-        font-size: 18px;
-        font-style: italic;
-        text-align: center;
-        white-space: nowrap;
-        width: 100%;
-      }
-
-      @media (min-width: 550px) {
-        float: left;
-        box-sizing: border-box;
-      }
-
-      @media (max-width: 767px) {
-        width: 100%;
 
         .quote {
-          min-height: initial;
+          display: inline-block;
+          color: $theme-color;
+          font-weight: 300;
+          font-size: 18px;
+          margin-top: 10px;
+          margin-bottom: 0;
+          text-align: center;
 
           .fa-quote-left {
+            position: absolute;
+            color: theme-color-fade(.1);
+            left: -28px;
+            top: -3.5px;
             left: -31px;
-            top: -5px;
+            top: -4px;
+            font-size: 32px;
+          }
+        }
+        .author {
+          @include vend(transform, translateX(-50%));
+          position: absolute;
+          top: calc(100% + 12px);
+          left: 50%;
+          color: theme-color-fade(.8);
+          display: inline-block;
+          font-weight: 300;
+          font-size: 18px;
+          font-style: italic;
+          text-align: center;
+          white-space: nowrap;
+          width: 100%;
+        }
+      }
+
+      &:before,
+      &:after {
+        content: "";
+        display: table;
+      }
+      &:after {
+        clear: both
+      }
+    }
+  }
+
+  @media (max-width: 767px) {
+    .table {
+      display: block;
+      .table-row {
+        display: block;
+        .press-sect {
+          display: block;
+          width: 100%;
+          padding: 0 7% 7.776%;
+
+          .quote {
+            min-height: initial;
+            .fa-quote-left {
+              left: -31px;
+              top: -5px;
+            }
+          }
+          .author {
+            @include vend(transform, initial);
+            position: relative;
+            top: initial;
+            left: initial;
+            padding-top: 12px;
           }
         }
       }
-    }
-
-    &:before,
-    &:after {
-      content: "";
-      display: table;
-    }
-    &:after {
-      clear: both
     }
   }
 }
