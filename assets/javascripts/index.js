@@ -121,6 +121,11 @@ var main = function() {
         }
     });
 
+    // disable following link on tablet and phone
+    $contactImg.click(function(){
+      if($window.width() < 768) return false;
+    });
+
     // Add scroll and resize listeners
     listeners();
 
@@ -129,7 +134,7 @@ var main = function() {
       initBufferVideo($(this));
     });
 
-    $videoBtn.on('click', function(){
+    $videoBtn.click(function(){
       var thisVideoBtn = $(this).addClass('bring-backward'); // remove link
       playVideo(thisVideoBtn.siblings('.picture').children('.video'));  // play video
       thisVideoBtn.siblings('.picture').addClass('bring-video-forward');  // fade in video
@@ -199,12 +204,12 @@ function calcTriggerPoints() {
     downAnimReached = Math.ceil(titleTop * 0.395 + 4.5); //when page position is such that the centered landing header is right above the down arrow;
     photosSectTop = Math.ceil($photosSect.offset().top * 0.82);
 
-    console.log('titleTop', titleTop);
-    console.log('titleHeight', titleHeight);
-    console.log('landingHeadFixPoint', landingHeadFixPoint);
-    console.log('contactTop', contactTop);
-    console.log('downAnimReached', downAnimReached);
-    console.log('photosSectTop', photosSectTop);
+    // console.log('titleTop', titleTop);
+    // console.log('titleHeight', titleHeight);
+    // console.log('landingHeadFixPoint', landingHeadFixPoint);
+    // console.log('contactTop', contactTop);
+    // console.log('downAnimReached', downAnimReached);
+    // console.log('photosSectTop', photosSectTop);
 
     // Check if any changes in DOM occur as a result of these calculations
     landingScroll();

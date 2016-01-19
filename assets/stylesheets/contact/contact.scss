@@ -5,7 +5,7 @@ $phone-adjust-factor: 0.6658;
 
 //// Height + width of contact image
 ////// This value drives all other calculations ///////
-$contact-side: 40vh;
+$contact-side: 36.8vh;
 $phone-contact-side: $contact-side * $phone-adjust-factor;
 $contact-margin-top: 18vh;
 $phone-contact-margin-top: $contact-margin-top * $phone-adjust-factor;
@@ -13,8 +13,8 @@ $phone-contact-margin-top: $contact-margin-top * $phone-adjust-factor;
 
 //// Border width & margin
 $contact-border-width: $contact-side/25;
-$contact-margin: $contact-margin-top 0 $contact-border-width/.8;
-$phone-contact-margin: $phone-contact-margin-top 0 $contact-border-width/1.75*$phone-adjust-factor;
+$contact-margin: $contact-margin-top 0 $contact-border-width/.4;
+$phone-contact-margin: $phone-contact-margin-top 0 $contact-border-width/.875*$phone-adjust-factor;
 
 //// Centering images behind contact and hanfling pop-out
 @mixin contactImgInit($name, $size-pct, $bg-color, $transition-time, $side, $dir-pct, $perp-pct) {
@@ -95,7 +95,7 @@ $phone-contact-margin: $phone-contact-margin-top 0 $contact-border-width/1.75*$p
     display: block;
     .contact-head {
         @include vend(border-radius, $contact-border-width/4);
-        border: $contact-border-width solid $theme-color;
+        box-shadow: 0 0 0 $contact-border-width $theme-color;
         display: inline-block;
         width: $contact-side;
         height: $contact-side;
@@ -149,13 +149,11 @@ $phone-contact-margin: $phone-contact-margin-top 0 $contact-border-width/1.75*$p
         &.phone {
             line-height: 1.44;
         }
-        a, i {
-          font-family: 'FontAwesome', sans-serif;
+        &, i {
+            font-family: 'FontAwesome', sans-serif;
         }
         &:hover {
-            a {
-                text-shadow: 0 0 25px #fff;
-            }
+            text-shadow: 0 0 25px #fff;
         }
     }
     .paper-resume {
@@ -164,11 +162,11 @@ $phone-contact-margin: $phone-contact-margin-top 0 $contact-border-width/1.75*$p
     }
     @media (max-width: $phone-max) {
         .contact-sub {
-            @include vend(border-radius, $contact-border-width/4 * $phone-adjust-factor);
-            border-top: $theme-color solid $contact-border-width/7.15 * $phone-adjust-factor;
+            @include vend(border-radius, $contact-border-width/2 * $phone-adjust-factor);
+            border-top: $theme-color solid $contact-border-width/2 * $phone-adjust-factor;
             // border-bottom: $theme-color solid $contact-border-width/6.25 * $phone-adjust-factor;
-            border-left: $theme-color solid $contact-border-width/3.55 * $phone-adjust-factor;
-            border-right: $theme-color solid $contact-border-width/3.55 * $phone-adjust-factor;
+            border-left: $theme-color solid $contact-border-width/1.75 * $phone-adjust-factor;
+            border-right: $theme-color solid $contact-border-width/1.75 * $phone-adjust-factor;
             font-size: $contact-side/12 * $phone-adjust-factor * 1.25;
             margin-bottom: 30px;
         }
@@ -178,8 +176,8 @@ $phone-contact-margin: $phone-contact-margin-top 0 $contact-border-width/1.75*$p
     }
 }
 
-@include contactImgInit(facebook, .6666666, theme-color-fade(0.13), .55s, left, .87, -.25);
-@include contactImgInit(phone, .4166666, theme-color-fade(0.23), .6s, left, .87, .705);
-@include contactImgInit(email, .3448275, theme-color-fade(0.34), .65s, top, .905, -.1);
-@include contactImgInit(address, .37037037, theme-color-fade(0.44), .5s, right, .85, .83);
-@include contactImgInit(instagram, .5, theme-color-fade(0.61), .45s, right, .9, .05);
+@include contactImgInit(facebook, .6666666, theme-color-fade(0.13), .55s, left, .9, -.27);
+@include contactImgInit(phone, .4166666, theme-color-fade(0.23), .6s, left, .92, .725);
+@include contactImgInit(email, .3448275, theme-color-fade(0.34), .65s, top, .985, -.1);
+@include contactImgInit(address, .37037037, theme-color-fade(0.44), .5s, right, .825, .865);
+@include contactImgInit(instagram, .5, theme-color-fade(0.61), .45s, right, .91, .05);

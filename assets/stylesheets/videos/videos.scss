@@ -120,9 +120,11 @@ $bill-yellow: #FBEF35;
       }
     }
 
-    @media (max-width: $phone-max) {
+    @media (max-width: 1100px) {
       height: 80.175vw;
       width: 51.22743375vw;
+      min-height: 430.396828125px;
+      min-width: 275px;
       margin: 0 0 7%;
 
       .top {
@@ -135,6 +137,22 @@ $bill-yellow: #FBEF35;
           }
           .description-text {
             font-size: 1.92102vw;
+          }
+        }
+      }
+    }
+    // adjusting font when min-width/min-height is hit
+    @media (max-width: 537px) {
+      .top {
+        .text-container {
+          .main-text {
+            font-size: 37.825px;
+            &.two-lines {
+              font-size: 26.3629px;
+            }
+          }
+          .description-text {
+            font-size: 10.3159px;
           }
         }
       }
