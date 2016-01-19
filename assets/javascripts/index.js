@@ -39,30 +39,28 @@ var main = function() {
       });
     });
 
-    if(true) { //$window.width() > 550
-      // how many times images will get sliced for animation
-      var totalSlices = 6,
-          struct	= '',
-          i;
+    // how many times images will get sliced for animation
+    var totalSlices = 6,
+        struct	= '',
+        i;
 
-      // add tags to string
-      for(i = 1; i < totalSlices + 1; i++) {
-        struct	+= '<div class="slice total-slices-' + totalSlices + ' slice-' + i + '" style="background-image: url(), linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0, .7) 100%); background-image: url(), -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0, .7) 100%); background-image: url(), -moz-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0, .7) 100%); background-image: url(), -ms-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0, .7) 100%); background-image: url(), -o-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0, .7) 100%);">';
-      }
-
-      for(i = totalSlices; i > 0; i--) {
-        struct	+= '</div>';
-      }
-
-  	  $floatFold.each(function(i) {
-      	var $this = $(this),
-      		imgPath	= $this.attr('src'),
-          imgClasses = $this.attr('class');
-
-          $this.replaceWith($('<div class="' + imgClasses + ' float-fold-' + i + ' float-fold-total-' + $floatFold.length + '"></div>')
-               .append($(struct.replace(floatFoldImgRegex, 'background-image: url('+ imgPath +')' ))));
-      });
+    // add tags to string
+    for(i = 1; i < totalSlices + 1; i++) {
+      struct	+= '<div class="slice total-slices-' + totalSlices + ' slice-' + i + '" style="background-image: url(), linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0, .7) 100%); background-image: url(), -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0, .7) 100%); background-image: url(), -moz-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0, .7) 100%); background-image: url(), -ms-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0, .7) 100%); background-image: url(), -o-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0, .7) 100%);">';
     }
+
+    for(i = totalSlices; i > 0; i--) {
+      struct	+= '</div>';
+    }
+
+	  $floatFold.each(function(i) {
+    	var $this = $(this),
+    		imgPath	= $this.attr('src'),
+        imgClasses = $this.attr('class');
+
+        $this.replaceWith($('<div class="' + imgClasses + ' float-fold-' + i + ' float-fold-total-' + $floatFold.length + '"></div>')
+             .append($(struct.replace(floatFoldImgRegex, 'background-image: url('+ imgPath +')' ))));
+    });
 
     //// Landing Section
     $landingTogglers.click(function() {

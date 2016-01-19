@@ -180,4 +180,4 @@ $phone-contact-margin: $phone-contact-margin-top 0 $contact-border-width/.875*$p
 @include contactImgInit(phone, .4166666, theme-color-fade(0.23), .6s, left, .92, .725);
 @include contactImgInit(email, .3448275, theme-color-fade(0.34), .65s, top, .985, -.1);
 @include contactImgInit(address, .37037037, theme-color-fade(0.44), .5s, right, .825, .865);
-@include contactImgInit(instagram, .5, theme-color-fade(0.61), .45s, right, .91, .05);
+@include contactImgInit(instagram, .5, theme-color-fade(0.61), .45s, right, .915, .05);

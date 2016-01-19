@@ -16,49 +16,69 @@
 //     }
 // }
 
+$widthHeightRatioVert: 35.845/53.3;
+$widthHeightRatioHoriz: 58.155/53.3;
+$wideVertRatio: 35.845/58.155;
+
+@mixin photosSizer($mobile-container-margin, $mobile-photos-margin, $mobile-vert-width) {
+    #photos {
+        padding: #{2.8235 * $mobile-container-margin} 0 0;
+        margin: 0 $mobile-container-margin #{$mobile-container-margin * 2.8235 - $mobile-photos-margin * 2 * 1.033333333333};
+        .float-fold {
+            margin: 0 $mobile-photos-margin #{$mobile-photos-margin * 2 * 1.033333333333};
+
+            // mobile view
+            $mobile-height: $mobile-vert-width * 1/$widthHeightRatioVert;
+            height: $mobile-height;
+            &.vertical {
+                width: $mobile-height * $widthHeightRatioVert;
+            }
+            &.horizontal {
+                width: $mobile-height * $widthHeightRatioHoriz;
+            }
+        }
+    }
+}
+
+@include photosSizer(2.125vw, 2vw, 31.7vw);
+@media (min-width: 768px) {
+  @include photosSizer(2.125vw, 1.5vw, 33.19vw * 1/2);
+}
+@media (min-width: 1350px) {
+  @include photosSizer(2.125vw, 1.5vw, 33.19vw * 1/2.75);
+}
+@media (min-width: 2000px) {
+  @include photosSizer(2.125vw, 1.5vw, 33.19vw * 1/4);
+}
+
 #photos {
   text-align: center;
-  margin: 0 5% 6%;
-  padding: 4.5% 0 0;
   border-top: 1px solid #dfe7ed;
   z-index: 0;
+  line-height: 0;
 
-  @media (min-width: 550px) {
-    img.float-fold {
-      visibility: none;
-    }
+  img.float-fold {
+    visibility: none;
   }
 
   .float-fold {
     /////// sizing and positioning
-    margin: 2% 0 0 2.52%;
     display: inline-block;
     text-align: center;
-    // mobile view
-    &.vertical {
-      height: 200px;
-      width: 36%;
-      max-width: 136px;
-    }
-    &.horizontal {
-      height: 200px;
-      width: 56%;
-      max-width: 270px;
-    }
-    // biggest screen view
-    @media (min-width: 550px) {
-      margin: 2% 0 0 2.52%;
-      &.vertical {
-        height: 300px;
-        width: 16%;
-        max-width: 200px;
-      }
-      &.horizontal {
-        height: 300px;
-        width: 31.75%;
-        max-width: 395px;
-      }
-    }
+
+    // // biggest screen view
+    //   margin: 2% 0 0 2.52%;
+    //   &.vertical {
+    //     height: 300px;
+    //     width: 16%;
+    //     max-width: 200px;
+    //   }
+    //   &.horizontal {
+    //     height: 300px;
+    //     width: 31.75%;
+    //     max-width: 395px;
+    //   }
+
     &:before {
       @include vend(box-shadow, 1px 2px 6px 0 rgba(0,0,0,0.3));
       content: "";

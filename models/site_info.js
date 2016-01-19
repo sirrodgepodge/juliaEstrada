@@ -3,7 +3,7 @@ module.exports = {
     landing: {
         init: {
           label: 'Upcoming',
-          image: '/images/smiling_editted.jpg'
+          image: '/images/smile2.png'
         },
         tab2: {
           label: 'About Julia',

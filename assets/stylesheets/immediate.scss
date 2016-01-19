@@ -181,7 +181,6 @@ img {
     background-color: rgb(16,19,29);
     position: relative;
     z-index: -4;
-    height: 100vh;
     display: block;
     overflow: hidden;
     border-bottom: solid 2px #222;
@@ -191,7 +190,14 @@ img {
         @include vend(transition, 1.5s);
         position: absolute;
         min-height: 100vh;
-        min-width: 100vw;
+        width: 100vw;
+        @media (max-aspect-ratio: 156/100) {
+          height: calc(100vh + 150px);
+          min-width: 100vw;
+          width: initial;
+          right: 0;
+          top: calc(-275px + 27.5vh);
+        }
         &.img-init {
             z-index: -2;
         }
