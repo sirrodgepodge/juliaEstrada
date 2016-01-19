@@ -25,14 +25,14 @@
         opacity: 0;
         min-width: 92px;
         width: 6.5%;
-        font-size: 2rem;
+        font-size: 2.25vh;
         font-weight: 300;
         cursor: pointer;
         &:hover {
           text-shadow: 0 -1.5px 3px $white;
         }
-        @media (min-width: 1700px) {
-          font-size: 2em;
+        @media (max-height: 888px) {
+          font-size: 2.25rem;
         }
     }
     &-main {
