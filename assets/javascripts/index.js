@@ -39,7 +39,7 @@ var main = function() {
       });
     });
 
-    if($window.width() > 550) {
+    if(true) { //$window.width() > 550
       // how many times images will get sliced for animation
       var totalSlices = 6,
           struct	= '',
@@ -108,8 +108,8 @@ var main = function() {
         }, titleTop - $(window).scrollTop() * 0.8);
     });
 
-    // set initial contact sub width
-    $contactSub.innerWidth($contactSubInside.width());
+    // set initial contact sub width, adjusted because loaded font is skinnier
+    $contactSub.innerWidth($contactSubInside.width() * 0.95);
 
     // update contact sub width
     $contactImg.mouseenter(function() {
@@ -139,17 +139,17 @@ var main = function() {
 //// Contact Section
 //function for sliding box on text change in contact section
 function slideSwitchText(val) {
-  $contactSubInside.toggleClass('show');
-      setTimeout(function(){
-          $contactSubInside.text(val);
-          $contactSubInside.toggleClass('show');
-          $contactSub.innerWidth($contactSubInside.width());
-      },525);
+    $contactSubInside.toggleClass('show');
+    setTimeout(function(){
+        $contactSubInside.text(val);
+        $contactSubInside.toggleClass('show');
+        $contactSub.innerWidth($contactSubInside.width());
+    },525);
 }
 
 function initBufferVideo(iframe){
     playVideo(iframe);
-    setTimeout(stopVideo(iframe), 200);
+    setTimeout(stopVideo(iframe), 400);
 }
 
 function playVideo(iframe){
@@ -196,8 +196,15 @@ function calcTriggerPoints() {
     titleHeight = Math.ceil($title.height());
     landingHeadFixPoint = titleTop - Math.ceil($landingHead.position().top) + 1;
     contactTop = Math.ceil($contact.offset().top) * 0.92;
-    downAnimReached = titleTop * 0.395 + 4.5; //when page position is such that the centered landing header is right above the down arrow;
-    photosSectTop = Math.ceil($photosSect.offset().top) * 0.82;
+    downAnimReached = Math.ceil(titleTop * 0.395 + 4.5); //when page position is such that the centered landing header is right above the down arrow;
+    photosSectTop = Math.ceil($photosSect.offset().top * 0.82);
+
+    console.log('titleTop', titleTop);
+    console.log('titleHeight', titleHeight);
+    console.log('landingHeadFixPoint', landingHeadFixPoint);
+    console.log('contactTop', contactTop);
+    console.log('downAnimReached', downAnimReached);
+    console.log('photosSectTop', photosSectTop);
 
     // Check if any changes in DOM occur as a result of these calculations
     landingScroll();

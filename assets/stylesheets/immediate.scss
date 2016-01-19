@@ -1,12 +1,51 @@
 // Shared vars
 @import 'init/init';
-@include addFont('FaberSansPro-Normal');
+@font-face {
+   font-family: 'FaberSansPro-Normal';
+   src: url('/fonts/FaberSansPro-Normal/FaberSansPro-Normal.eot');
+   src: url('/fonts/FaberSansPro-Normal/FaberSansPro-Normal.eot?#iefix') format('embedded-opentype'),
+        url('/fonts/FaberSansPro-Normal/FaberSansPro-Normal.woff') format('woff'),
+        url('/fonts/FaberSansPro-Normal/FaberSansPro-Normal.svg#FaberSansPro-Normal') format('svg');
+}
 
-// Pre-Load Shader
-// head:before {
-//     display: none;
-//     content: url('/images/shader.png');
+// @font-face {
+//   font-family: 'fontello';
+//   src: url('/fonts/fontello.eot?');
+//   src: url('/fonts/fontello.eot?#iefix') format('embedded-opentype'),
+//        url('/fonts/fontello.woff') format('woff'),
+//        url('/fonts/fontello.ttf') format('truetype'),
+//        url('/fonts/fontello.svg?#fontello') format('svg');
 // }
+//
+// [class^="icon-"]:before, [class*=" icon-"]:before {
+//   font-family: "fontello";
+//   font-style: normal;
+//   font-weight: normal;
+//   speak: none;
+//   display: inline-block;
+//   text-decoration: inherit;
+//   width: 1em;
+//   margin-right: .2em;
+//   text-align: center;
+//
+//   /* For safety - reset parent styles, that can break glyph codes*/
+//   font-variant: normal;
+//   text-transform: none;
+//   line-height: 1.42857;
+//   margin-left: .2em;
+//   -webkit-font-smoothing: antialiased;
+//   -moz-osx-font-smoothing: grayscale;
+// }
+// // Add icon
+// .icon-down-open-big:before { content: '\e800'; }
+
+// Attempting to prevent zoom
+html {
+  -webkit-text-size-adjust: none;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -ms-text-size-adjust: none;
+  font-size: 10px;
+}
 
 // Base formatting
 html, body {
@@ -18,14 +57,37 @@ html, body {
     cursor: default;
 }
 
-body * {
+body {
+  line-height: 1.42857;
+
+  * {
     position: relative;
+    font-family:  'FaberSansPro-Normal', sans-serif;
+  }
+}
+
+* {
+  @include vend(box-sizing, border-box);
 }
 
 a, a:hover, a:visited {
     color: white !important;
     text-decoration: none !important;
     transition: .25s;
+}
+
+img {
+  border: 0;
+  vertical-align: middle;
+}
+
+.fa {
+  display: inline-block;
+  line-height: 1.42857 !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: auto;
+  transform: translate(0, 0);
 }
 
 .dim {
@@ -161,7 +223,6 @@ a, a:hover, a:visited {
             position: absolute;
             text-align: center;
             margin: 0 9vw;
-            font-family: 'FaberSansPro-Normal', sans-serif;
             vertical-align: top;
             .landing-tab {
                 margin: 0 1.5vw;

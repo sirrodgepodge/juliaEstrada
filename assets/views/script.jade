@@ -1,8 +1,8 @@
 script(type='text/javascript').
   // forces user to the top of the page on refresh
-  window.onbeforeunload = function() {
-    setTimeout(window.scrollTo(0,0), 100);
-  }
+  window.onunload = function() {
+    window.scrollTo(0,0);
+  };
   
   // Converts touch to hover for mobile and tablet
   document.addEventListener("touchstart", function(){}, true);

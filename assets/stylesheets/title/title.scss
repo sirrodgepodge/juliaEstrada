@@ -12,7 +12,7 @@
     background-size: 0 !important;
     left: 0;
     padding: 2px 0;
-    margin-bottom: 0;
+    margin: 0;
     z-index: 6;
     box-shadow: 0 0 4px rgba(16,19,29,0.14), 0 4px 8px rgba(16,19,29,0.28);
     text-align: center;
@@ -20,7 +20,7 @@
     white-space: nowrap;
     max-width: 100%;
 
-    .title-section {
+    &-section {
         @include vend(transition, (opacity .5s ease-in-out, text-shadow .25s ease-in-out));
         opacity: 0;
         min-width: 92px;
@@ -32,14 +32,14 @@
           text-shadow: 0 -1.5px 3px $white;
         }
     }
-    .title-main {
+    &-main {
         @include vend(transform, translateY(-50%));
         top: 50%;
         max-height: 100%;
         max-width: 100%;
         visibility: hidden;
     }
-    .title-main, .title-section {
+    &-main, &-section {
         display: inline-block;
     }
     .paper-resume-wrapper {
@@ -82,7 +82,7 @@
             opacity: 1;
         }
     }
-    @media (max-aspect-ratio: 1/1) {
+    @media (max-aspect-ratio: 11/10) {
       .title-section {
         display: none;
       }

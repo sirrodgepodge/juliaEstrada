@@ -1,14 +1,24 @@
 $bill-yellow: #FBEF35;
 
+@font-face {
+   font-family: 'SpikeBold';
+   src: url('/fonts/SpikeBold/SpikeBold.eot');
+   src: url('/fonts/SpikeBold/SpikeBold.eot?#iefix') format('embedded-opentype'),
+        url('/fonts/SpikeBold/SpikeBold.woff2') format('woff2'),
+        url('/fonts/SpikeBold/SpikeBold.woff') format('woff'),
+        url('/fonts/SpikeBold/SpikeBold.ttf') format('truetype');
+}
+
 #videos {
-  margin: 7% 6% 0;
+  margin: 7% 0 0;
   text-align: center;
 
   .bill-container {
     width: 24vw;
     height: 37.561905vw;
-    margin: 0 2.23% 7%;
+    margin: 0 1.95% 7%;
     display: inline-block;
+    vertical-align: top;
     background-color: $white;
 
     &, .top, .picture {
@@ -42,11 +52,17 @@ $bill-yellow: #FBEF35;
 
         .main-text {
           line-height: 1.17;
-          font-weight: 900;
-          font-family: monospace;
+          font-weight: 500;
+          font-family: 'SpikeBold', monospace;
           font-size: 3.3vw;
           text-transform: uppercase;
+          letter-spacing: 1px;
           width: 100%;
+
+          &.two-lines {
+            white-space: normal;
+            font-size: 2.3vw;
+          }
         }
         .description-text {
           line-height: 1;
@@ -104,18 +120,24 @@ $bill-yellow: #FBEF35;
       }
     }
 
-    // container-specific
-    &.bill-container-1 {
-      .top {
-        .main-text {
-          letter-spacing: -1px;
-        }
-      }
-    }
-
     @media (max-width: $phone-max) {
       height: 80.175vw;
       width: 51.22743375vw;
+      margin: 0 0 7%;
+
+      .top {
+        .text-container {
+          .main-text {
+            font-size: 7.04377vw;
+            &.two-lines {
+              font-size: 4.9092957vw;
+            }
+          }
+          .description-text {
+            font-size: 1.92102vw;
+          }
+        }
+      }
     }
   }
 }

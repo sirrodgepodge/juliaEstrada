@@ -95,7 +95,7 @@ $phone-contact-margin: $phone-contact-margin-top 0 $contact-border-width/1.75*$p
     display: block;
     .contact-head {
         @include vend(border-radius, $contact-border-width/4);
-        border: $theme-color solid $contact-border-width;
+        border: $contact-border-width solid $theme-color;
         display: inline-block;
         width: $contact-side;
         height: $contact-side;
@@ -105,7 +105,7 @@ $phone-contact-margin: $phone-contact-margin-top 0 $contact-border-width/1.75*$p
         @media (max-width: $phone-max) {
             & {
                 @include vend(border-radius, #{$contact-border-width * $phone-adjust-factor});
-                border: $theme-color solid #{$contact-border-width * $phone-adjust-factor};
+                box-shadow: 0 0 0 #{$contact-border-width * $phone-adjust-factor} $theme-color;
                 width: $contact-side * $phone-adjust-factor;
                 height: $contact-side * $phone-adjust-factor;
                 margin: $phone-contact-margin;
@@ -117,15 +117,14 @@ $phone-contact-margin: $phone-contact-margin-top 0 $contact-border-width/1.75*$p
         @include vend(transition, .6s ease-in-out);
         display: block;
         margin: 0 auto 11.5vh;
-        border-top: $theme-color solid $contact-border-width/7.15;
-        border-bottom: $theme-color solid $contact-border-width/6.25;
+        border-top: $theme-color solid $contact-border-width/2;
+        // border-bottom: $theme-color solid $contact-border-width/6.25;
         border-left: $theme-color solid $contact-border-width/1.75;
         border-right: $theme-color solid $contact-border-width/1.75;
         background-color: $theme-color;
         text-align: center;
         font-size: $contact-side/12;
         color: $white;
-        font-family: lato, sans-serif;
 
         .contact-sub-inside {
             @include vend(transition, .5s);
@@ -143,9 +142,6 @@ $phone-contact-margin: $phone-contact-margin-top 0 $contact-border-width/1.75*$p
         @include vend(border-radius, 50%);
         z-index: 0;
         position: absolute;
-        i {
-        //   color: rgb(66,72,91);
-        }
         &.address {
             letter-spacing: -.45rem;
             line-height: 1.6;
@@ -153,8 +149,13 @@ $phone-contact-margin: $phone-contact-margin-top 0 $contact-border-width/1.75*$p
         &.phone {
             line-height: 1.44;
         }
-        a:hover {
-            text-shadow: 0 0 25px #fff;
+        a, i {
+          font-family: 'FontAwesome', sans-serif;
+        }
+        &:hover {
+            a {
+                text-shadow: 0 0 25px #fff;
+            }
         }
     }
     .paper-resume {
@@ -165,7 +166,7 @@ $phone-contact-margin: $phone-contact-margin-top 0 $contact-border-width/1.75*$p
         .contact-sub {
             @include vend(border-radius, $contact-border-width/4 * $phone-adjust-factor);
             border-top: $theme-color solid $contact-border-width/7.15 * $phone-adjust-factor;
-            border-bottom: $theme-color solid $contact-border-width/6.25 * $phone-adjust-factor;
+            // border-bottom: $theme-color solid $contact-border-width/6.25 * $phone-adjust-factor;
             border-left: $theme-color solid $contact-border-width/3.55 * $phone-adjust-factor;
             border-right: $theme-color solid $contact-border-width/3.55 * $phone-adjust-factor;
             font-size: $contact-side/12 * $phone-adjust-factor * 1.25;
@@ -180,5 +181,5 @@ $phone-contact-margin: $phone-contact-margin-top 0 $contact-border-width/1.75*$p
 @include contactImgInit(facebook, .6666666, theme-color-fade(0.13), .55s, left, .87, -.25);
 @include contactImgInit(phone, .4166666, theme-color-fade(0.23), .6s, left, .87, .705);
 @include contactImgInit(email, .3448275, theme-color-fade(0.34), .65s, top, .905, -.1);
-@include contactImgInit(address, .37037037, theme-color-fade(0.44), .5s, right, .9, .85);
-@include contactImgInit(instagram, .5, theme-color-fade(0.61), .45s, right, .9, .15);
+@include contactImgInit(address, .37037037, theme-color-fade(0.44), .5s, right, .85, .83);
+@include contactImgInit(instagram, .5, theme-color-fade(0.61), .45s, right, .9, .05);

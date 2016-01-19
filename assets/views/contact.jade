@@ -1,10 +1,10 @@
 #contact
-  .contact-head(style= "background: url(#{locals.contact.mainImg}) no-repeat center /cover;")
-  .contact-img.instagram #[a(href= locals.contact.instagram.link) #[i.fa.fa-instagram]]
-  .contact-img.address #[a(href= locals.contact.address.link) #[i.icon.ion-navigate]&nbsp;]
-  .contact-img.facebook #[a(href= locals.contact.facebook.link) #[i.icon.ion-social-facebook-outline]]
-  .contact-img.phone #[a(href= locals.contact.phone.link) #[i.fa.fa-phone]]
-  .contact-img.email #[a(href= locals.contact.email.link) #[i.fa.fa-envelope]]
+  a.contact-head(style= "background: url(#{locals.contact.mainImg}) no-repeat center /cover;")
+  a.contact-img.instagram(href= locals.contact.instagram.link) #[i.fa.fa-instagram]
+  a.contact-img.address(href= locals.contact.address.link) #[i.icon.ion-navigate]&nbsp;
+  a.contact-img.facebook(href= locals.contact.facebook.link) #[i.icon.ion-social-facebook-outline]
+  a.contact-img.phone(href= locals.contact.phone.link) #[i.fa.fa-phone]
+  a.contact-img.email(href= locals.contact.email.link) #[i.fa.fa-envelope]
   a.contact-sub(href= locals.contact.address.link, style='width:0;')
     .contact-sub-inside.show= locals.contact.address.text
   a.paper-resume(href= locals.siteHeader.resumeLink, target="_blank")

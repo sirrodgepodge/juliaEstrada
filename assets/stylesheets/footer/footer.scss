@@ -16,7 +16,7 @@ $triangle-phone-size: 30px;
     border-bottom: #{$triangle-size - 1} solid $theme-color;
     border-left: #{$triangle-size - 1} solid transparent;
     border-right: #{$triangle-size - 1} solid transparent;
-    height: $triangle-size;
+    height: $triangle-size + 1;
     top: #{$triangle-size * -1};
     display: block;
     text-align: center;
@@ -49,6 +49,8 @@ footer {
   margin: 0 auto;
   padding: 0 !important;
   z-index: 10;
+  width: 100%;
+  float: left;
 
   .footer-logo {
     margin: 10px 0 5px;
@@ -58,6 +60,8 @@ footer {
   }
 
   .footer-copyright {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
     text-align: center;
     margin-bottom: 20px;
     color: rgba(255,255,255,.125);
