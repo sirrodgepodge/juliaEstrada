@@ -104,7 +104,7 @@ $phone-contact-margin: $phone-contact-margin-top 0 $contact-border-width/.875*$p
         z-index: 1;
         @media (max-width: $phone-max) {
             & {
-                @include vend(border-radius, #{$contact-border-width * $phone-adjust-factor});
+                @include vend(border-radius, #{$contact-border-width/4 * $phone-adjust-factor});
                 box-shadow: 0 0 0 #{$contact-border-width * $phone-adjust-factor} $theme-color;
                 width: $contact-side * $phone-adjust-factor;
                 height: $contact-side * $phone-adjust-factor;
