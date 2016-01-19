@@ -188,14 +188,19 @@ img {
     // Image
     .landing-img {
         @include vend(transition, 1.5s);
+        @include vend(filter, blur(1.25px));
         position: absolute;
+
         min-height: 100vh;
         width: 100vw;
         @media (max-aspect-ratio: 156/100) {
-          height: calc(100vh + 150px);
+          height: 100vh;
           min-width: 100vw;
           width: initial;
           right: 0;
+        }
+        @media (max-aspect-ratio: 156/100) and (max-height: 1000px) {
+          height: calc(100vh + 150px);
           top: calc(-275px + 27.5vh);
         }
         &.img-init {
