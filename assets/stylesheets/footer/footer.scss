@@ -40,7 +40,7 @@ $triangle-phone-size: 30px;
       border-left: #{$triangle-phone-size - 1} solid transparent;
       border-right: #{$triangle-phone-size - 1} solid transparent;
       height: $triangle-phone-size;
-      top: #{$triangle-phone-size * -1};
+      top: #{$triangle-phone-size * -1 + 1};
     }
 }
 
