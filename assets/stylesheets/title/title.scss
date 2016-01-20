@@ -1,11 +1,7 @@
 // Title section
-.place-holder.no-show {
-    display: none;
-}
 .title, .place-holder {
     height: #{$title-height}vh;
     min-height: 80px;
-    width: 100%;
 }
 .title {
     background-color: $theme-color !important;
@@ -64,7 +60,7 @@
         }
 
         @media (max-width: $phone-max) {
-          visibility: none;
+          display: none;
           .paper-resume {
             @include vend(transform, rotateZ(90deg) translateY(calc(-100% - 25px)) !important);
           }
