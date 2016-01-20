@@ -52,6 +52,7 @@ $wideVertRatio: 35.845/58.155;
 }
 
 #photos {
+  overflow: hidden;
   text-align: center;
   border-top: 1px solid #dfe7ed;
   z-index: 0;
