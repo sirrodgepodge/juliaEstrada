@@ -72,7 +72,7 @@ var main = function() {
     	var $this = $(this),
     		imgPath	= $this.attr('src'),
         imgClasses = $this.attr('class');
-
+        if(!$this.complete) $.get(imgPath);
         $this.replaceWith($('<div class="' + imgClasses + ' float-fold-' + i + ' float-fold-total-' + $floatFold.length + '"></div>')
              .append($(struct.replace(floatFoldImgRegex, 'background-image: url('+ imgPath +')' ))));
     });

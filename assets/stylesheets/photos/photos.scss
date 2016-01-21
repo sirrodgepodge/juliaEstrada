@@ -81,7 +81,7 @@ $wideVertRatio: 35.845/58.155;
     //   }
 
     &:before {
-      @include vend(box-shadow, 1px 2px 6px 0 rgba(0,0,0,0.3));
+      @include vend(box-shadow, 1px 2px 6px 0 rgba(0,0,0,0.4));
       content: "";
       position: absolute;
       display: block;

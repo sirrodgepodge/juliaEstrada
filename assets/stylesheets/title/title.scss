@@ -5,6 +5,7 @@
     width: 100vw;
 }
 #title {
+    @include vend(transform, translateZ(0));
     background-color: $theme-color !important;
     background-size: 0 !important;
     left: 0;
