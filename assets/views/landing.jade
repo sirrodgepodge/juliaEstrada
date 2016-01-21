@@ -1,15 +1,15 @@
-.place-holder.no-show
-.landing-head(style="opacity: 0; background: url(#{locals.landing.logoImage}) no-repeat center/contain")
-.down-anim.glyphicon.glyphicon-menu-down
+#place-holder.no-show
+#landing-head(style="opacity: 0; background: url(#{locals.landing.logoImage}) no-repeat center/contain")
 #landing
-  .shading(style="transition: opacity 1s ease-in-out 1.15s; background-color: rgba(16,19,29,0.57); position: absolute; width: 100%; height: 100%;")
-  .landing-content(style="transition: 1s ease-in-out 1.15s")
-    .landing-info
-      .landing-tab.tab-1
+  #shading(style="transition: opacity 1s ease-in-out 1.15s; background-color: rgba(16,19,29,0.57); position: absolute; width: 100%; height: 100%;")
+  #landing-content(style="transition: 1s ease-in-out 1.15s")
+    #landing-info
+      #tab-1.landing-tab
         .head= locals.landing.init.label
         .full Julia will complete her studies at Texas State University, graduating with a BFA in musical theatre in Spring 2016.
-      .landing-tab.tab-2
+      #tab-2.landing-tab
         .head= locals.landing.tab2.label
         .full Julia is a New York-based actress, singer, and activist....
-  img(src="#{locals.landing.init.image}", onload="landing()", style="opacity:0; transition: opacity 1.5s;").landing-img.img-init
-  .landing-img.img-tab-2(style="background: url(#{locals.landing.tab2.image}) no-repeat 50% 0% /cover; opacity:0;")
+    #down-anim.glyphicon.glyphicon-menu-down.scroll-to(data-scroll-to="#videos")
+  img(src="#{locals.landing.init.image}", onload="landing()", style="opacity:0; transition: opacity 1.5s;")#img-init.landing-img
+  #img-tab-2.landing-img(style="background: url(#{locals.landing.tab2.image}) no-repeat 50% 0% /cover; opacity:0;")

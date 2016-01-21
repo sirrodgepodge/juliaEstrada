@@ -11,10 +11,9 @@ script(type='text/javascript').
   function landing(){
     setTimeout(function() {
       window.scrollTo(0,0);
-      document.getElementsByClassName('img-init')[0].className += ' show';
-      document.getElementsByClassName('landing-head')[0].className += ' show';
-      document.getElementsByClassName('down-anim')[0].className += ' show';
-      document.getElementsByClassName('landing-content')[0].className += ' show';
+      document.getElementById('img-init').className += ' show';
+      document.getElementById('landing-head').className += ' show';
+      document.getElementById('landing-content').className += ' show';
       delete landing;
     },50);
   }

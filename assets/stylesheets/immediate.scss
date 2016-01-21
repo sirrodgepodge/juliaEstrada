@@ -50,7 +50,8 @@ html {
 // Base formatting
 html, body {
     margin: 0;
-    width: 100vw;
+    width: 100%;
+    height: 100%;
     padding: 0;
     position: absolute;
     z-index: 0;
@@ -59,10 +60,12 @@ html, body {
 
 body {
   line-height: 1.42857;
+  font-family:  'FaberSansPro-Normal', sans-serif !important;
+  overflow-y: scroll;
+  overflow-x: hidden;
 
   * {
     position: relative;
-    font-family:  'FaberSansPro-Normal', sans-serif;
   }
 }
 
@@ -71,7 +74,6 @@ body {
 }
 
 a, a:hover, a:visited {
-  @include vend(transition, .25s linear);
   color: white !important;
   text-decoration: none !important;
 }
@@ -81,26 +83,22 @@ img {
   vertical-align: middle;
 }
 
-.fa {
-  display: inline-block;
-  line-height: 1.42857 !important;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: auto;
-  transform: translate(0, 0);
-}
+// .fa {
+//   display: inline-block;
+//   line-height: 1.42857 !important;
+//   -webkit-font-smoothing: antialiased;
+//   -moz-osx-font-smoothing: grayscale;
+//   text-rendering: auto;
+//   transform: translate(0, 0);
+// }
 
-.dim {
-    opacity: .12!important;
-}
+// .dim {
+//     opacity: .12!important;
+// }
 
 .disable-link {
     pointer-events: none;
     cursor: default;
-}
-
-.disable-link:hover {
-    text-shadow: none;
 }
 
 .show {
@@ -165,12 +163,12 @@ img {
 }
 
 // hide placeholder for fixing title to top
-.place-holder.no-show {
+#place-holder.no-show {
     display: none;
 }
 
 // Landing Head
-.landing-head {
+#landing-head {
     @include vend(transition, opacity 1s ease-in-out 1.15s);
     position: fixed;
     top: calc(39vh + 8px);
@@ -180,17 +178,15 @@ img {
     min-height: 76px;
 }
 
-.down-anim {
+#down-anim {
     @include vend(animation, (hover-bounce ease-in-out 1.5s infinite alternate));
-    @include vend(transition, (text-shadow .8s linear, opacity 1.5s linear));
-    opacity: 0;
     color: $white;
     cursor: pointer;
     position: absolute !important;
     top: 90vh !important;
-    width: 100vw;
+    left: calc(50% - 20px);
     font-size: 40px;
-    text-align: center;
+    width: 40px;
     text-shadow: 0 0 4px $theme-color;
     &:hover {
       text-shadow: 0 0 8px $white;
@@ -208,35 +204,18 @@ img {
     overflow: hidden;
     border-bottom: solid 2px #222;
     box-sizing: content-box;
+}
 
-    // Image
-    .landing-img {
-        @include vend(transition, opacity 1.5s linear);
-        // @include vend(filter, blur(1.25px));
-        position: absolute;
+// Image
+.landing-img {
+    @include vend(transition, opacity 1.5s linear);
+    // @include vend(filter, blur(1.25px));
+    position: absolute;
 
-        min-height: 100%;
-        width: 100%;
-        @media (max-aspect-ratio: 156/100) {
-          height: 100%;
-          min-width: 100%;
-          width: initial;
-          right: 0;
-        }
-        @media (max-aspect-ratio: 156/100) and (max-height: 1000px) {
-          height: calc(100% + 150px);
-          top: calc(-275px + 27.5%);
-        }
-        &.img-init {
-            z-index: -2;
-        }
-        &.img-tab-1 {
-            z-index: -3;
-        }
-        &.img-tab-2 {
-            z-index: -4;
-        }
-    }
+    min-height: 100%;
+    width: 100%;
+}
+
     // Shading
     // .shading {
     //     position: absolute;
@@ -245,78 +224,103 @@ img {
     //     height: 100%;
     //     background: url('/images/shader.png') repeat;
     // }
-    //white text in landing
-    .landing-content {
-        @include vend(transition, 1s ease-in-out 1.15s);
-        z-index: 1;
-        opacity: 0;
-        color: white;
+//white text in landing
+#landing-content {
+    @include vend(transition, 1s ease-in-out 1.15s);
+    z-index: 1;
+    opacity: 0;
+    color: white;
+}
 
-        // Landing Tabs
-        .landing-info {
-	        @include vendVal(display, flex);
-            position: absolute;
-            text-align: center;
-            margin: 0 9vw;
-            vertical-align: top;
-            .landing-tab {
-                margin: 0 1.5vw;
-                width: 38vw;
-                vertical-align: top;
-            }
-            .tab-1 .head {
-                text-align: right;
-            }
-            .tab-2 .head {
-                text-align: left;
-            }
-            .head {
-                @include vend(transition, border-bottom .75s linear);
-                cursor: pointer;
-                font-size: 2.25vh;
-                border-bottom: solid 3px rgba(255, 255, 255, 0);
-                @media (max-height: 888px) {
-                  font-size: 2rem;
-                }
-            }
-            .head:hover, .landing-active .head {
-                border-bottom-color: rgba(255, 255, 255, 1);
-            }
-            .full {
-                @include vend(transition, .5s);
-                @include vend(opacity, 0);
-                clear: both;
-                margin: 1.7vw 14px 0;
-                text-align: left;
-                font-size: 19px;
-                .quote {
-                    font-style: italic;
-                    text-align: right;
-                }
-                .email-link {
-                    @include vend(transition, text-shadow .3s linear);
-                    color: white;
-                    font-weight: 500;
-                }
-                .email-link:hover {
-                    text-shadow: 0 0 8px $white;
-                    text-decoration: none;
-                }
-            }
+// Landing Tabs
+#landing-info {
+  @include vendVal(display, flex);
+    position: absolute;
+    text-align: center;
+    margin: 0 9vw;
+    vertical-align: top;
+    .landing-tab {
+        margin: 0 1.5vw;
+        width: 38vw;
+        vertical-align: top;
+    }
+    .head {
+        @include vend(transition, border-bottom .75s linear);
+        cursor: pointer;
+        font-size: 2.25vh;
+        border-bottom: solid 3px rgba(255, 255, 255, 0);
+        @media (max-height: 888px) {
+          font-size: 2rem;
         }
     }
+    .head:hover, .landing-active .head {
+        border-bottom-color: rgba(255, 255, 255, 1);
+    }
+
+    .full {
+        @include vend(transition, .5s);
+        @include vend(opacity, 0);
+        clear: both;
+        margin: 1.7vw 14px 0;
+        text-align: left;
+        font-size: 19px;
+        // .quote {
+        //     font-style: italic;
+        //     text-align: right;
+        // }
+        // .email-link {
+        //     @include vend(transition, text-shadow .3s linear);
+        //     color: white;
+        //     font-weight: 500;
+        // }
+        // .email-link:hover {
+        //     text-shadow: 0 0 8px $white;
+        //     text-decoration: none;
+        // }
+    }
+}
+
+#tab-1 .head {
+    text-align: right;
+}
+#tab-2 .head {
+    text-align: left;
+}
+
+#img-init {
+    z-index: -2;
+}
+
+#img-tab-1 {
+    z-index: -3;
+}
+#img-tab-2 {
+    z-index: -4;
 }
 
 //hide info on phone
 @media(max-width: $phone-max) {
-    #landing {
-        .landing-info,
-        .img-tab-1,
-        .img-tab-2 {
-            display: none !important;
-        }
-        .img-init {
-            right: -222px;
-        }
-    }
+  #landing-info,
+  #img-tab-1,
+  #img-tab-2 {
+      display: none !important;
+  }
+}
+
+@media (max-aspect-ratio: 156/100) {
+  .landing-img {
+    height: 100%;
+    min-width: 100%;
+    width: initial;
+    right: 0;
+  }
+}
+@media (max-aspect-ratio: 156/100) and (max-height: 1000px) {
+  .landing-img {
+    height: calc(100% + 150px);
+    top: calc(-275px + 27.5%);
+  }
+  #img-init {
+      right: -222px;
+  }
 }

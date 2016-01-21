@@ -3,11 +3,11 @@ module.exports = {
     landing: {
         init: {
           label: 'Upcoming',
-          image: '/images/smile2.png'
+          image: '/images/smiling_editted_maybe_altered.jpg'
         },
         tab2: {
           label: 'About Julia',
-          image: '/images/protest.png'
+          image: '/images/protest.jpg'
         },
         logoImage: '/images/juliaEstradaHeading.png'
     },
@@ -15,60 +15,60 @@ module.exports = {
       image: '/images/juliaEstradaHeading.png',
       resumeLink: '/images/Julia_Estrada Resume_Fall_2015.pdf'
     },
-    fom: {
-        header: 'Mi café es su café',
-        subHeader: 'Get at me yo',
-        image: {
-            filename: 'production_two_2.png',
-            x: 50,
-            y: 50
-        },
-        name: 'ETHIOPIA HAMBELA ALAKA',
-        flavors: [
-            "JASMINE",
-            "MANDARIN",
-            "FLORAL"
-        ]
-    },
-    coffee: {
-        header: 'Las Cafés Sabrosas',
-        subHeader: 'Taxes and Shipping included in all prices',
-        purchaseLabel: 'One Time Purchase',
-        subscriptionLabel: 'Monthly Subscription',
-        subscriptionSavingsClaim: 'Save $1/bag',
-        product: [{
-            name: '1 bag',
-            subscribe: 15,
-            purchase: 16
-        }, {
-            name: '2 bags',
-            subscribe: 27.50,
-            purchase: 29.50
-        }, {
-            name: '3 bags',
-            subscribe: 37.50,
-            purchase: 40.50
-        }, {
-            name: '4 bags',
-            subscribe: 45,
-            purchase: 49
-        }]
-    },
-    merch: [{
-        name: 'tshirt',
-        price: 20,
-        sizes: ['S', 'M', 'L', 'XL']
-    },
+    // fom: {
+    //     header: 'Mi café es su café',
+    //     subHeader: 'Get at me yo',
+    //     image: {
+    //         filename: 'production_two_2.jpg',
+    //         x: 50,
+    //         y: 50
+    //     },
+    //     name: 'ETHIOPIA HAMBELA ALAKA',
+    //     flavors: [
+    //         "JASMINE",
+    //         "MANDARIN",
+    //         "FLORAL"
+    //     ]
+    // },
+    // coffee: {
+    //     header: 'Las Cafés Sabrosas',
+    //     subHeader: 'Taxes and Shipping included in all prices',
+    //     purchaseLabel: 'One Time Purchase',
+    //     subscriptionLabel: 'Monthly Subscription',
+    //     subscriptionSavingsClaim: 'Save $1/bag',
+    //     product: [{
+    //         name: '1 bag',
+    //         subscribe: 15,
+    //         purchase: 16
+    //     }, {
+    //         name: '2 bags',
+    //         subscribe: 27.50,
+    //         purchase: 29.50
+    //     }, {
+    //         name: '3 bags',
+    //         subscribe: 37.50,
+    //         purchase: 40.50
+    //     }, {
+    //         name: '4 bags',
+    //         subscribe: 45,
+    //         purchase: 49
+    //     }]
+    // },
+    // merch: [{
+    //     name: 'tshirt',
+    //     price: 20,
+    //     sizes: ['S', 'M', 'L', 'XL']
+    // },
     // {
     //     name: 'mug',
     //     price: 12,
     //     sizes: []
     // },
-    {
-        name: 'girlt',
-        price: 20,
-        sizes: ['S', 'M', 'L', 'XL']
-    } //, {
+    // {
+    //     name: 'girlt',
+    //     price: 20,
+    //     sizes: ['S', 'M', 'L', 'XL']
+    // } //, {
     //     name: 'jefe-hoodie',
     //     price: 20,
     //     sizes: ['S', 'M', 'L', 'XL']
@@ -77,7 +77,7 @@ module.exports = {
     //     price: 20,
     //     sizes: ['S', 'M', 'L', 'XL']
     // }
-    ],
+    // ],
     contact: {
         mainImg: '/images/headshot_1.jpg',
         instagram: {

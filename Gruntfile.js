@@ -9,7 +9,7 @@ module.exports = function(grunt) {
                 beautify: false
             },
             build: {
-                src: 'assets/javascripts/index.js',
+                src: ['public/vendor/jquery/dist/jquery.js','public/vendor/jquery-scrollto/jquery-scrollto.js','assets/javascripts/index.js'],
                 dest: 'public/javascripts/index.min.js'
             }
         },
