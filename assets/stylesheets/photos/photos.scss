@@ -64,6 +64,7 @@ $wideVertRatio: 35.845/58.155;
 
   .float-fold {
     /////// sizing and positioning
+    @include vend(transform, translateZ(0));
     display: inline-block;
     text-align: center;
 

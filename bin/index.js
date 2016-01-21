@@ -15,6 +15,9 @@ var http = require('http');
 var port = normalizePort(process.env.PORT || 3000);
 app.set('port', port);
 
+// cache views
+app.set('view cache', true);
+
 // Run HTTPS server if not in Heroku
 if (process.env.NODE_ENV !== 'production') {
     // Load self-signed certificate
