@@ -7,7 +7,6 @@ var $window = $(window),
     $landing = $('#landing'),
     $landingContent = $landing.find('#landing-content').children(),
     $landingTogglers = $landing.find('.landing-tab'),
-    $downAnim = $('#down-anim'),
     $contactImg = $('.contact-img'),
     $contactSub = $('.contact-sub'),
     $contactSubInside = $contactSub.find('.contact-sub-inside'),
@@ -49,7 +48,7 @@ var main = function() {
     //// Setting up scrollTo animation
     $scrollTo.click(function(){
       $($(this).data("scrollTo")).ScrollTo({
-        duration: 1000,
+        duration: $(this).data("scrollDuration") || 1000,
         offsetTop: titleHeight + ($(this).data("scrollTo") === '#videos'? titleHeight/2 : 3)
       });
     });

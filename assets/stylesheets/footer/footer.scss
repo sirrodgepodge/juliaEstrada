@@ -1,16 +1,6 @@
-// Footer section
-.footer-split {
-    border-top: solid 2px #eee;
-    margin: 0;
-}
-
-.back-to-top {
-    display: none;
-}
-
 $triangle-size: 40px;
 $triangle-phone-size: 30px;
-.back-to-top {
+#back-to-top {
     @include vend(border-radius, (3px 3px 0 0));
     @include vend(transform, translateZ(0));
     border-bottom: #{$triangle-size - 1} solid $theme-color;
@@ -30,10 +20,8 @@ $triangle-phone-size: 30px;
     margin: auto;
     cursor: pointer;
     font-family: FontAwesome;
+    max-width: 100%;
 
-    .fa-angle-double-up {
-        @include vend(transform, translate(-50%, 8.5%));
-    }
 
     @media (max-width: $phone-max) {
       border-bottom: #{$triangle-phone-size - 1} solid $theme-color;
@@ -44,46 +32,48 @@ $triangle-phone-size: 30px;
     }
 }
 
-footer {
+#up-arrow {
+    @include vend(transform, translate(-50%, 8.5%));
+}
+
+#footer {
+  border-top: solid 2px #eee;
   background-color: $theme-color;
   margin: 0 auto;
   padding: 0 !important;
   z-index: 10;
   width: 100%;
   float: left;
+}
 
-  .footer-logo {
-    margin: 10px 0 5px;
-    width: 100%;
-    height: 32px;
-    background: $theme-color url("../images/juliaEstradaFooter.png") no-repeat center /contain;
-  }
+#footer-logo {
+  margin: 10px 0 5px;
+  width: 100%;
+  height: 32px;
+  background: $theme-color url("../images/juliaEstradaFooter.png") no-repeat center /contain;
+}
 
-  .footer-copyright {
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size: 14px;
-    text-align: center;
-    margin-bottom: 20px;
-    color: rgba(255,255,255,.125);
-    white-space: nowrap;
-  }
+#footer-copyright {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 20px;
+  color: rgba(255,255,255,.125);
+  white-space: nowrap;
 }
 
 @media (max-width: $phone-max) {
-  footer {
-    .footer-logo {
-      margin: 5px 0 2px;
-    }
-
-    .footer-copyright {
-      margin-bottom: 5px;
-    }
+  #footer-logo {
+    margin: 5px 0 2px;
   }
 
-  .back-to-top {
-    .fa-angle-double-up {
-        @include vend(transform, translate(-50%, -7%));
-        font-size: 25px;
-    }
+  #footer-copyright {
+    margin-bottom: 5px;
+    font-size: 11.5px;
+  }
+
+  #up-arrow {
+      @include vend(transform, translate(-50%, -7%));
+      font-size: 25px;
   }
 }
