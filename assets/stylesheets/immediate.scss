@@ -174,7 +174,7 @@ img {
     top: calc(39vh + 8px);
     z-index: 10;
     width: 100%;
-    height: calc(#{$title-height}vh - 3.5px);
+    height: calc(#{$title-height}vh - 4px);
     min-height: 76px;
 }
 
@@ -237,11 +237,12 @@ img {
   @include vendVal(display, flex);
     position: absolute;
     text-align: center;
-    margin: 0 9vw;
+    width: 100%;
+    margin: 0 9%;
     vertical-align: top;
     .landing-tab {
-        margin: 0 1.5vw;
-        width: 38vw;
+        margin: 0 1.5%;
+        width: 38%;
         vertical-align: top;
     }
     .head {
@@ -261,7 +262,7 @@ img {
         @include vend(transition, .5s);
         @include vend(opacity, 0);
         clear: both;
-        margin: 1.7vw 14px 0;
+        margin: 1.7% 14px 0;
         text-align: left;
         font-size: 19px;
         // .quote {
