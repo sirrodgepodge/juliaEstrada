@@ -7,15 +7,21 @@ script(type='text/javascript').
   // Converts touch to hover for mobile and tablet
   document.addEventListener("touchstart", function(){}, true);
 
+  // move to the top of site
+  window.onunload = function(){
+    document.getElementById('img-init').className.replace(' show','');
+    window.scrollTo(0,0);
+  };
+
   // Handles expedited image load at top of page
   function landing(){
+    document.getElementById('loader-wrapper').className += 'loading-spinner-hide';
     setTimeout(function() {
-      window.scrollTo(0,0);
       document.getElementById('img-init').className += ' show';
       document.getElementById('landing-head').className += ' show';
       document.getElementById('landing-content').className += ' show';
       delete landing;
-    },50);
+    },250);
   }
   
   // avoids showing page before javascript is loaded

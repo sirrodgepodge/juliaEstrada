@@ -2,11 +2,8 @@ $bill-yellow: #FBEF35;
 
 @font-face {
    font-family: 'SpikeBold';
-   src: url('/fonts/SpikeBold/SpikeBold.eot');
-   src: url('/fonts/SpikeBold/SpikeBold.eot?#iefix') format('embedded-opentype'),
-        url('/fonts/SpikeBold/SpikeBold.woff2') format('woff2'),
-        url('/fonts/SpikeBold/SpikeBold.woff') format('woff'),
-        url('/fonts/SpikeBold/SpikeBold.ttf') format('truetype');
+   src: url('/fonts/SpikeBold/SpikeBold.woff2') format('woff2'),
+        url('/fonts/SpikeBold/SpikeBold.woff') format('woff');
 }
 
 #videos {

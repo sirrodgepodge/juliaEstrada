@@ -210,7 +210,7 @@ function landingScroll() {
 
     //fixes title header to proper position
     if (!landingTogglerClicked && (pagePos >= landingHeadFixPoint && !landingHeadFixed || pagePos < landingHeadFixPoint && landingHeadFixed)) {
-        $landingHead.toggleClass('hide');
+        $landingHead.toggleClass('landing-head-hide');
         $title.toggleClass('show-logo');
         landingHeadFixed = !landingHeadFixed;
     }

@@ -84,8 +84,10 @@
     @include vend(transform, translateY(-50%));
     top: 50%;
     max-height: 100%;
+    max-width: 100%;
     visibility: hidden;
 }
+
 #title-main, .title-section {
     display: inline-block;
 }

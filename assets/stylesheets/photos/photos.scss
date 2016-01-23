@@ -16,6 +16,8 @@
 //     }
 // }
 
+$numSlices: 6;
+
 $widthHeightRatioVert: 35.845/53.3;
 $widthHeightRatioHoriz: 58.155/53.3;
 $wideVertRatio: 35.845/58.155;
@@ -106,7 +108,7 @@ $wideVertRatio: 35.845/58.155;
        background-blend-mode: overlay;
     }
 
-    @for $i from 1 to 10 {
+    @for $i from 1 to ($numSlices + 1) {
       & > .total-slices-#{$i} {
         height: calc(#{100%/$i + 0.10%} + 1px);
       }
@@ -134,7 +136,7 @@ $wideVertRatio: 35.845/58.155;
          }
       }
 
-      @for $i from 1 to 10 {
+      @for $i from 1 to ($numSlices + 1) {
         // delay folding for "peeling" effect
         .slice-#{$i} {
           @include vend(transition-delay, (#{$i*50ms}, 0s));
@@ -208,7 +210,7 @@ $wideVertRatio: 35.845/58.155;
   // needs to happen after/before the rest
   $opacity-duration: 0.5s;
 
-  @for $i from 0 to 30 {
+  @for $i from 0 to 15 {
     &.triggered {
       @if $i == 0 {
         .float-fold-0 {
@@ -248,5 +250,12 @@ $wideVertRatio: 35.845/58.155;
         z-index: #{$i - $j};
       }
     }
+  }
+}
+
+.Modal {
+  position: absolute;
+  &.hidden {
+    visibility: hidden;
   }
 }

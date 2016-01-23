@@ -93,19 +93,25 @@
   }
 
   @media (max-width: 767px) {
+    padding-left: 0;
+    padding-right: 0;
     .table {
       display: block;
-      padding: 5% 5%;
+      padding: 5% 0%;
       .table-row {
         display: block;
         .press-sect {
           display: block;
           width: 100%;
+          padding-left: 0;
+          padding-right: 0;
           & + .press-sect {
-            padding: 7.776% 7% 0;
+            padding-top: 7.776%;
           }
           .quote {
             min-height: initial;
+            margin-left: 14.195%;
+            margin-right: 14.195%;
             .fa-quote-left {
               left: -31px;
               top: -5px;
