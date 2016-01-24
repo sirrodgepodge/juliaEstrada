@@ -128,7 +128,7 @@ var main = function() {
     }
 
     // set initial contact sub width, adjusted because loaded font is skinnier
-    $contactSub.innerWidth($contactSubInside.width() * 0.95);
+    $contactSub.innerWidth($contactSubInside.width());
 
     // update contact sub width
     $contactImg.mouseenter(function() {
