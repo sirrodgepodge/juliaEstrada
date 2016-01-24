@@ -1,15 +1,15 @@
 #photos
-  img(src="/images/headshot_2.jpg").float-fold.vertical
-  img(src="/images/production_one_1.jpg").float-fold.horizontal
-  img(src="/images/production_one_4.jpg").float-fold.horizontal  
-  img(src="/images/production_one_5.jpg").float-fold.vertical
-  img(src="/images/production_one_3.jpg").float-fold.vertical
-  img(src="/images/production_two_2.jpg").float-fold.horizontal
-  img(src="/images/headshot_3.jpg").float-fold.horizontal
-  img(src="/images/production_two_1.jpg").float-fold.vertical
-  img(src="/images/production_two_3.jpg").float-fold.vertical
-  img(src="/images/production_one_2.jpg").float-fold.horizontal
-  img(src="/images/production_one_6.jpg").float-fold.horizontal
+  .float-fold.vertical(data-src="/images/headshot_2.jpg")
+  .float-fold.horizontal(data-src="/images/production_one_1.jpg")
+  .float-fold.horizontal(data-src="/images/production_one_4.jpg")
+  .float-fold.vertical(data-src="/images/production_one_5.jpg")
+  .float-fold.vertical(data-src="/images/production_one_3.jpg")
+  .float-fold.horizontal(data-src="/images/production_two_2.jpg")
+  .float-fold.horizontal(data-src="/images/headshot_3.jpg")
+  .float-fold.vertical(data-src="/images/production_two_1.jpg")
+  .float-fold.vertical(data-src="/images/production_two_3.jpg")
+  .float-fold.horizontal(data-src="/images/production_one_2.jpg")
+  .float-fold.horizontal(data-src="/images/production_one_6.jpg")
   .Modal(class="hidden")
     img.Modal-content-container-current-photo(src="")
     .Modal-content-container-closeBtn(class="module-btn")

@@ -3,7 +3,7 @@
 @import 'loadingSpinner/loadingSpinner';
 @font-face {
    font-family: 'FaberSansPro-Normal';
-   src: url('/fonts/FaberSansPro-Normal/FaberSansPro-Normal.woff') format('woff');
+   src: url('/fonts/FaberSansPro-Normal.woff') format('woff');
 }
 
 // @font-face {
@@ -71,12 +71,13 @@ body {
   @include vend(box-sizing, border-box);
 }
 
-a, a:hover, a:visited {
+a, a:hover, a:visited, a:active, a:focus {
   color: white !important;
   text-decoration: none !important;
+  outline: 0;
 }
 
-img {
+img, iframe {
   border: 0;
   vertical-align: middle;
 }

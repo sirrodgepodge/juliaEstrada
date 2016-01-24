@@ -2,8 +2,8 @@ $bill-yellow: #FBEF35;
 
 @font-face {
    font-family: 'SpikeBold';
-   src: url('/fonts/SpikeBold/SpikeBold.woff2') format('woff2'),
-        url('/fonts/SpikeBold/SpikeBold.woff') format('woff');
+   src: url('/fonts/SpikeBold.woff2') format('woff2'),
+        url('/fonts/SpikeBold.woff') format('woff');
 }
 
 #videos {
@@ -13,18 +13,19 @@ $bill-yellow: #FBEF35;
   .bill-container {
     width: 24vw;
     height: 37.561905vw;
-    margin: 0 1.95% 7%;
+    margin: 0 2.15% 7%;
     display: inline-block;
     vertical-align: top;
     background-color: $white;
 
-    &, .top, .picture {
-      border: solid 1px $black;
+    &, .top, .video-container {
+        box-shadow: 0 0 0 1px #000;
+    //   border: solid 1px $black;
     }
 
-    .top, .picture {
+    .top, .video-container {
       box-sizing: content-box;
-      margin: 3%;
+      margin: 3.6%;
     }
 
     a.video-btn {
@@ -71,14 +72,22 @@ $bill-yellow: #FBEF35;
       }
     }
 
-    .picture {
-      @include vend(transition, background-color .5s ease-in-out);
+    .video-container {
       margin-top: 0;
-      height: calc(76% - 2px);
-      background-size: cover;
-      background-position: center center;
-      background-color: rgba(0,0,0,0);
-      background-blend-mode: overlay;
+      height: calc(76% - 8px);
+      border: 2px inset;
+      background-color: #000;
+
+      .video-picture {
+          @include vend(transition, opacity .5s ease-in-out);
+          height: calc(100% + 4px);
+          width: calc(100% + 4px);
+          top: -2px;
+          left: -2px;
+          background-size: cover;
+          background-position: center center;
+          opacity: 1;
+      }
 
       .video-icon {
         @include vend(transition, (fill .5s ease-in-out));
@@ -91,6 +100,7 @@ $bill-yellow: #FBEF35;
       }
       .video {
         @include vend(transition, z-index .0s .5s);
+        // border: 2px inset;
         position: absolute;
         left: 0;
         top: 0;
@@ -99,7 +109,9 @@ $bill-yellow: #FBEF35;
         z-index: -1;
       }
       &.bring-video-forward {
-        background-color: rgba(0,0,0,1);
+        .video-picture {
+          opacity: 0;
+        }
         .video-icon {
           fill: rgba(0,0,0,0) !important;
         }
@@ -110,8 +122,6 @@ $bill-yellow: #FBEF35;
     }
 
     &:hover {
-      .picture {
-      }
       .video-icon {
         fill: $white;
       }

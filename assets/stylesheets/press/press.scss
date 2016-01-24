@@ -29,13 +29,7 @@
         .press-icon {
           margin: 0 auto 20px;
           background-color: $white;
-          background-blend-mode: luminosity;
-
-          &.landing-icon-journal-tribune,
-          &.landing-icon-seacoast {
-            @include vend(filter, grayscale(100%));
-            height: 100px;
-          }
+          height: 100px;
 
           &.landing-icon-journal-tribune {
             @include vend(border-radius, 50%);
@@ -70,7 +64,7 @@
           position: absolute;
           top: calc(100% + 12px);
           left: 50%;
-          color: theme-color-fade(.8);
+          color: $theme-color;
           display: inline-block;
           font-weight: 300;
           font-size: 18px;

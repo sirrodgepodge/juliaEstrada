@@ -16,14 +16,6 @@
     "debug": "^2.1.1",
     "express": "^4.13.3",
     "express-session": "^1.11.3",
-    "grunt": "^0.4.5",
-    "grunt-cli": "^0.1.13",
-    "grunt-contrib-compass": "^1.0.4",
-    "grunt-contrib-jshint": "^0.11.2",
-    "grunt-contrib-uglify": "^0.9.1",
-    "grunt-contrib-watch": "^0.6.1",
-    "grunt-exec": "^0.4.6",
-    "grunt-scss-lint": "^0.3.6",
     "jade": "^1.9.2",
     "mongoose": "^4.1.1",
     "morgan": "^1.5.3",
@@ -34,5 +26,21 @@
     "passport": "^0.2.2",
     "redis": "^0.12.1",
     "serve-favicon": "^2.2.0"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-compass": "^1.0.4",
+    "grunt-contrib-jshint": "^0.11.2",
+    "grunt-contrib-uglify": "^0.9.1",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-exec": "^0.4.6",
+    "grunt-scss-lint": "^0.3.6",
+    "grunt-changed": "^0.1.1",
+    "grunt-contrib-copy": "^0.8.2",
+    "grunt-contrib-imagemin": "^1.0.0",
+    "imagemin-gifsicle": "^4.2.0",
+    "imagemin-mozjpeg": "4.0.0",
+    "imagemin-pngquant": "^4.2.0"
   }
 }

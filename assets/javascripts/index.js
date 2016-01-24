@@ -70,9 +70,11 @@ var main = function() {
 
 	  $floatFold.each(function(i) {
     	var $this = $(this),
-    		imgPath	= $this.attr('src'),
-        imgClasses = $this.attr('class');
-        if(!$this.complete) $.get(imgPath);
+    		imgPath	= $this.data('src');
+        // if(!$this.complete) $.get(imgPath);
+        // $this.addClass('float-fold-' + i + ' float-fold-total-' + $floatFold.length)
+        //     .append($(struct.replace(floatFoldImgRegex, 'background-image: url('+ imgPath +')' )));
+        var imgClasses = $this.attr('class');
         $this.replaceWith($('<div class="' + imgClasses + ' float-fold-' + i + ' float-fold-total-' + $floatFold.length + '"></div>')
              .append($(struct.replace(floatFoldImgRegex, 'background-image: url('+ imgPath +')' ))));
     });
@@ -146,8 +148,8 @@ var main = function() {
 
     $videoBtn.click(function(){
       var thisVideoBtn = $(this).addClass('bring-backward'); // remove link
-      playVideo(thisVideoBtn.siblings('.picture').children('.video'));  // play video
-      thisVideoBtn.siblings('.picture').addClass('bring-video-forward');  // fade in video
+      playVideo(thisVideoBtn.siblings('.video-container').children('.video'));  // play video
+      thisVideoBtn.siblings('.video-container').addClass('bring-video-forward');  // fade in video
     });
 };
 
@@ -182,6 +184,10 @@ function listeners() {
 
   // update state and recalculate trigger points when screen is resized
   window.onresize = calcTriggerPoints;
+  window.addEventListener("orientationchange", function() {
+	// Announce the new orientation number
+	alert(window.orientation);
+  }, false);
 
   // update state based on scroll position
   window.onscroll = landingScroll;

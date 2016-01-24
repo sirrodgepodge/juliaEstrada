@@ -1,3 +1,6 @@
+// Importing icons
+@import 'iconFonts/iconFonts';
+
 // For contact section
 
 // For phone view
@@ -143,14 +146,12 @@ $phone-contact-margin: $phone-contact-margin-top 0 $contact-border-width/.875*$p
         z-index: 0;
         position: absolute;
         &.address {
-            letter-spacing: -.45rem;
-            line-height: 1.6;
+            letter-spacing: -.145em;
+            line-height: 1.5;
         }
-        &.phone {
-            line-height: 1.44;
-        }
-        &, i {
-            font-family: 'FontAwesome', sans-serif;
+        &.instagram {
+            letter-spacing: -.145em;
+            line-height: 1.5;
         }
         &:hover {
             text-shadow: 0 0 25px #fff;
