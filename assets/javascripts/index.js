@@ -142,9 +142,9 @@ var main = function() {
 
 
     //////////////////////////////////////////////////////////
-    $videos.each(function(){
-      initBufferVideo($(this));
-    });
+    // $videos.each(function(){
+    //   initBufferVideo($(this));
+    // });
 
     $videoBtn.click(function(){
       var thisVideoBtn = $(this).addClass('bring-backward'); // remove link
