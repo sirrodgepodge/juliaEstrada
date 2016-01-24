@@ -13,7 +13,7 @@ var $window = $(window),
     $scrollTo = $('.scroll-to'),
     $floatFold = $('.float-fold'),
     $photosSect = $('#photos'),
-    $videoBtn = $('.video-btn'),
+    $videoContainer = $('.video-container'),
     $videos = $('.video');
 
 var floatFoldImgRegex = /background-image: url\(\)/g;
@@ -146,10 +146,10 @@ var main = function() {
     //   initBufferVideo($(this));
     // });
 
-    $videoBtn.click(function(){
-      var thisVideoBtn = $(this).addClass('bring-backward'); // remove link
-      playVideo(thisVideoBtn.siblings('.video-container').children('.video'));  // play video
-      thisVideoBtn.siblings('.video-container').addClass('bring-video-forward');  // fade in video
+    $videoContainer.click(function(){
+      playVideo();  // play video
+      $(this).addClass('fade-to-youtube'); // remove link
+    //   thisVideoBtn.siblings('.video-container').addClass('bring-video-forward');  // fade in video
     });
 };
 
@@ -164,18 +164,30 @@ function slideSwitchText(val) {
     },525);
 }
 
-function initBufferVideo(iframe){
-    playVideo(iframe);
-    setTimeout(stopVideo(iframe), 400);
+function playVideo() {
+    var iframe = document.createElement("iframe");
+    iframe.className = "video";
+    iframe.setAttribute("src", "//www.youtube.com/embed/" +
+                        this.parentNode.dataset.youtubeId + "?" +
+                        (this.parentNode.dataset.start ? "start=" + this.parentNode.dataset.start + "&" : "") +
+                        (this.parentNode.dataset.start ? "end=" + this.parentNode.dataset.end + "&" : "") +
+                        "autoplay=1&autohide=2&border=0&wmode=opaque&controls=1&showinfo=0&rel=0&modestbranding=0");
+    iframe.setAttribute("allowfullscreen", "");
+    this.parentNode.replaceChild(iframe, this);
 }
 
-function playVideo(iframe){
-    iframe[0].contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-}
+// function initBufferVideo(iframe){
+//     playVideo(iframe);
+//     setTimeout(stopVideo(iframe), 400);
+// }
 
-function stopVideo(iframe){
-    iframe[0].contentWindow.postMessage('{"event":"command","func":"stopVideo","args":""}', '*');
-}
+// function playVideo(iframe){
+//     iframe[0].contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+// }
+
+// function stopVideo(iframe){
+//     iframe[0].contentWindow.postMessage('{"event":"command","func":"stopVideo","args":""}', '*');
+// }
 
 // Resize and Scroll listeners
 function listeners() {
