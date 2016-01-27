@@ -1,20 +1,4 @@
-// Create static jQuery selector vars
-var $window = $(window),
-    $placeHolder = $('#place-holder'),
-    $landingHead = $('#landing-head'),
-    $title = $('#title'),
-    $contact = $('#contact'),
-    $landing = $('#landing'),
-    $landingContent = $landing.find('#landing-content').children(),
-    $landingTogglers = $landing.find('.landing-tab'),
-    $contactImg = $('.contact-img'),
-    $contactSub = $('.contact-sub'),
-    $contactSubInside = $contactSub.find('.contact-sub-inside'),
-    $scrollTo = $('.scroll-to'),
-    $floatFold = $('.float-fold'),
-    $photosSect = $('#photos'),
-    $videoContainer = $('.video-container'),
-    $videos = $('.video');
+var $window = $(window);
 
 var floatFoldImgRegex = /background-image: url\(\)/g;
 
@@ -44,7 +28,26 @@ $.get('/api/info', function(data) {
 // UI Functionality
 var landingTogglerClicked = false;
 
-var main = function() {
+function main() {
+    // Create static jQuery selector vars
+    with('window.') {
+      $placeHolder = $('#place-holder');
+      $landingHead = $('#landing-head');
+      $landing = $('#landing');
+      $title = $('#title');
+      $contact = $('#contact');
+      $landingContent = $landing.find('#landing-content').children();
+      $landingTogglers = $landing.find('.landing-tab');
+      $contactImg = $('.contact-img');
+      $contactSub = $('.contact-sub');
+      $contactSubInside = $contactSub.find('.contact-sub-inside');
+      $scrollTo = $('.scroll-to');
+      $floatFold = $('.float-fold');
+      $photosSect = $('#photos');
+      $videoContainer = $('.video-container');
+      $videos = $('.video');
+    }
+
     //// Setting up scrollTo animation
     $scrollTo.click(function(){
       $($(this).data("scrollTo")).ScrollTo({
@@ -140,18 +143,64 @@ var main = function() {
         }
     });
 
+    // async load youtube API
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0].parentNode.insertBefore(tag, firstScriptTag);
+}
 
-    //////////////////////////////////////////////////////////
-    // $videos.each(function(){
-    //   initBufferVideo($(this));
-    // });
+//// Create click events to play Youtube videos
+function onYouTubeIframeAPIReady() {
+  $videoContainer.click(function(){
+    if(this.className.indexOf('fade-to-youtube') === -1) {
+      addPlayerAndPlay.call(this);  // play video
+      this.className += ' fade-to-youtube'; // remove link
+    }
+  });
+}
 
-    $videoContainer.click(function(){
-      playVideo();  // play video
-      $(this).addClass('fade-to-youtube'); // remove link
-    //   thisVideoBtn.siblings('.video-container').addClass('bring-video-forward');  // fade in video
+//// Add player and play it
+function addPlayerAndPlay() {
+    var player = new YT.Player(this.dataset.elemId, {
+      videoId: this.dataset.youtubeId,
+      playerVars: {
+        start: +this.dataset.start,
+        end: +this.dataset.end
+      },
+      events: {
+        onReady: function(event) {
+          event.target.playVideo();
+          event.target.setVolume(0);
+        },
+        onStateChange: function(event) {
+          if(event.data === YT.PlayerState.PLAYING && event.target.f.className.indexOf('showYoutube') === -1) {
+            var volume = 0;
+            var fadeInVolume = setInterval(function(){
+              volume = volume += 10;
+              event.target.setVolume(volume);
+              volume === 100 && clearInterval(fadeInVolume);
+            }, 150);
+            event.target.f.className += ' showYoutube';
+          }
+        }
+      }
     });
-};
+    // var iframe = document.createElement("iframe");
+    // console.dir(iframe);
+    // iframe.className = "video";
+    // iframe.setAttribute("src", "//www.youtube.com/embed/" +
+    //                     this.dataset.youtubeId + "?" +
+    //                     (this.dataset.start ? "start=" + this.dataset.start + "&" : "") +
+    //                     (this.dataset.end ? "end=" + this.dataset.end + "&" : "") +
+    //                     "autoplay=1&controls=1&showinfo=0&rel=0&modestbranding=0&enablejsapi=1");
+    // iframe.setAttribute("allowfullscreen", "");
+    // this.appendChild(iframe, this);
+    // window.addEventListener("message", function(message){
+    //   console.log('message');
+    //   console.log(message);
+    //   iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+    // }, false);
+}
 
 //// Contact Section
 //function for sliding box on text change in contact section
@@ -162,18 +211,6 @@ function slideSwitchText(val) {
         $contactSubInside.toggleClass('show');
         $contactSub.innerWidth($contactSubInside.width());
     },525);
-}
-
-function playVideo() {
-    var iframe = document.createElement("iframe");
-    iframe.className = "video";
-    iframe.setAttribute("src", "//www.youtube.com/embed/" +
-                        this.parentNode.dataset.youtubeId + "?" +
-                        (this.parentNode.dataset.start ? "start=" + this.parentNode.dataset.start + "&" : "") +
-                        (this.parentNode.dataset.start ? "end=" + this.parentNode.dataset.end + "&" : "") +
-                        "autoplay=1&autohide=2&border=0&wmode=opaque&controls=1&showinfo=0&rel=0&modestbranding=0");
-    iframe.setAttribute("allowfullscreen", "");
-    this.parentNode.replaceChild(iframe, this);
 }
 
 // function initBufferVideo(iframe){
@@ -196,23 +233,23 @@ function listeners() {
 
   // update state and recalculate trigger points when screen is resized
   window.onresize = calcTriggerPoints;
-  window.addEventListener("orientationchange", function() {
-	// Announce the new orientation number
-	alert(window.orientation);
-  }, false);
 
   // update state based on scroll position
   window.onscroll = landingScroll;
+  window.onorientationchange = function(){
+    calcTriggerPoints();
+    landingScroll();
+  };
 }
 
 
 // Store trigger points for state changes
 function calcTriggerPoints() {
     // Calculate scroll values
-    titleTop = Math.ceil($title.offset().top);
+    titleTop =  Math.ceil($landing.outerHeight());
     titleHeight = Math.ceil($title.height());
-    landingHeadFixPoint = titleTop - Math.ceil($landingHead.offset().top - window.pageYOffset) + 2.5; //distance from top of window calculation
-    contactTop = Math.ceil($contact.offset().top) * 0.92;
+    landingHeadFixPoint = $landing.height() * 0.61 + ($title.outerHeight() - $landingHead.height())/2 - 6; // when to fix image to title bar, don't ever mess with this, finalllly got it!
+    contactTop = ($window.height() - $contact.height()) * 0.90;
     downAnimReached = Math.ceil(titleTop * 0.395 + 4.5); //when page position is such that the centered landing header is right above the down arrow;
     photosSectTop = Math.ceil($photosSect.offset().top * 0.82);
 
@@ -244,6 +281,11 @@ function landingScroll() {
         $placeHolder.toggleClass('no-show');
         titleFixed = !titleFixed;
     }
+    // if (pagePos >= titleTop) {
+    //   // console.log(pagePos - titleTop);
+    //   // console.log($title.css('transform'));
+    //   $title.css('transform', 'translateY(' + (pagePos - titleTop) + 'px)');
+    // }
 
     //triggers photo animation
     if(!photosTriggered && pagePos > photosSectTop) {

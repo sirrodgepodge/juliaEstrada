@@ -13,16 +13,6 @@ module.exports = function(grunt) {
                 dest: 'public/index.min.js'
             }
         },
-        // scsslint: {
-        //     allFiles: [
-        //         'assets/stylesheets/*.scss'
-        //     ],
-        //     options: {
-        //         colorizeOutput: true,
-        //         compact: true,
-        //         force: true
-        //     }
-        // },
         jshint: {
             options: {
                 curly: false,
@@ -44,26 +34,8 @@ module.exports = function(grunt) {
                     outputStyle: 'compressed',
                     cache: false
                 }
-    		}
-    	},
-		watch: {
-			css: {
-				files: '**/*.scss',
-				tasks: ['compass']
-			},
-            js: {
-				files: '**/*.js',
-				tasks: ['jshint', 'uglify']
-			},
-            fonts: {
-                files: 'assets/fonts/**/*',
-				tasks: ['fontmin']
-            },
-            images: {
-                files: 'assets/images/*',
-				tasks: ['imagemin']
-            }
-		},
+      		}
+      	},
         copy: {
           main: {
             cwd: 'assets/fonts/',
@@ -104,7 +76,25 @@ module.exports = function(grunt) {
                     dest: 'public/'                  // Destination path prefix
                 }]
             }
-        }
+        },
+        watch: {
+    			css: {
+    				files: 'assets/stylesheets/**/*.scss',
+    				tasks: ['compass']
+    			},
+                js: {
+    				files: 'assets/javascripts/**/*.js',
+    				tasks: ['jshint', 'uglify']
+    			},
+                fonts: {
+                    files: 'assets/fonts/**/*',
+    				tasks: ['fontmin']
+                },
+                images: {
+                    files: 'assets/images/*',
+    				tasks: ['imagemin']
+                }
+    		},
         // exec: {
         //     browserifying: {
         //         cmd: 'echo heyhey'
@@ -119,7 +109,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-compass');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-imagemin');
-	grunt.loadNpmTasks('grunt-contrib-watch');
+	  grunt.loadNpmTasks('grunt-contrib-watch');
     //grunt.loadNpmTasks('grunt-exec');
 
     // Set default tasks

@@ -9,158 +9,156 @@ $bill-yellow: #FBEF35;
 #videos {
   margin: 7% 0 0;
   text-align: center;
+}
 
-  .bill-container {
-    width: 24vw;
-    height: 37.561905vw;
-    margin: 0 2.15% 7%;
-    display: inline-block;
-    vertical-align: top;
-    background-color: $white;
+.bill-container {
+  width: 24vw;
+  height: 37.561905vw;
+  margin: 0 2.15% 7%;
+  display: inline-block;
+  vertical-align: top;
+  background-color: $white;
 
-    &, .top, .video-container {
-        box-shadow: 0 0 0 1px #000;
-    //   border: solid 1px $black;
+  &, .top, .video-container {
+      box-shadow: 0 0 0 1px #000;
+  //   border: solid 1px $black;
+  }
+
+  .top, .video-container {
+    box-sizing: content-box;
+    margin: 3.6%;
+  }
+
+  .top {
+    height: 18%;
+    background-color: $bill-yellow;
+    white-space: nowrap;
+
+    .text-container {
+      @include vend(transform, translateY(-50%));
+      top: 50%;
+
+      .main-text {
+        line-height: 1.17;
+        font-weight: 500;
+        font-family: 'SpikeBold', monospace;
+        font-size: 3.3vw;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        width: 100%;
+
+        &.two-lines {
+          white-space: normal;
+          font-size: 2.3vw;
+        }
+      }
+      .description-text {
+        line-height: 1;
+        font-weight: 500;
+        font-family: sans-serif;
+        font-size: 0.9vw;
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  .video-container {
+    margin-top: calc(3.6% + 1px);
+    height: calc(76% - 10px);
+    border: 2px inset;
+    background-color: #000;
+    cursor: pointer;
+
+    .video-picture {
+        @include vend(transition, opacity .5s ease-in-out);
+        height: calc(100% + 4px);
+        width: calc(100% + 4px);
+        top: -2px;
+        left: -2px;
+        background-size: cover;
+        background-position: center center;
+        opacity: 1;
     }
 
-    .top, .video-container {
-      box-sizing: content-box;
-      margin: 3.6%;
-    }
-
-    a.video-btn {
+    .video-icon {
+      @include vend(transition, (fill .5s ease-in-out));
+      @include vend(transform, (translateX(-50%)));
       position: absolute;
-      display: block;
-      height: 100%;
+      bottom: 5%;
+      width: 18%;
+      min-width: 43px;
+      fill: rgba(255, 255, 255, 0.5);
+    }
+
+    .video {
+      @include vend(transition, (opacity 0.5s 0s, z-index 0s 0.5s));
+      position: absolute;
       width: 100%;
-      z-index: 1;
-      &.bring-backward {
-        z-index: -1;
+      height: 100%;
+      left: 0;
+      top: 0;
+      z-index: -1;
+      opacity: 0;
+
+      &.showYoutube {
+        opacity: 1;
       }
     }
 
+    &.fade-to-youtube {
+      cursor: default;
+
+      .video-picture {
+        opacity: 0;
+      }
+      .video-icon {
+        fill: rgba(0,0,0,0) !important;
+      }
+      .video {
+        z-index: 1;
+      }
+    }
+  }
+
+  &:hover {
+    .video-icon {
+      fill: $white;
+    }
+  }
+
+  @media (max-width: 1100px) {
+    height: 80.175vw;
+    width: 51.22743375vw;
+    min-height: 430.396828125px;
+    min-width: 275px;
+    margin: 0 0 7%;
+
     .top {
-      height: 18%;
-      background-color: $bill-yellow;
-      white-space: nowrap;
-
       .text-container {
-        @include vend(transform, translateY(-50%));
-        top: 50%;
-
         .main-text {
-          line-height: 1.17;
-          font-weight: 500;
-          font-family: 'SpikeBold', monospace;
-          font-size: 3.3vw;
-          text-transform: uppercase;
-          letter-spacing: 1px;
-          width: 100%;
-
+          font-size: 7.04377vw;
           &.two-lines {
-            white-space: normal;
-            font-size: 2.3vw;
+            font-size: 4.9092957vw;
           }
         }
         .description-text {
-          line-height: 1;
-          font-weight: 500;
-          font-family: sans-serif;
-          font-size: 0.9vw;
-          text-transform: uppercase;
+          font-size: 1.92102vw;
         }
       }
     }
-
-    .video-container {
-      margin-top: calc(3.6% + 1px);
-      height: calc(76% - 10px);
-      border: 2px inset;
-      background-color: #000;
-
-      .video-picture {
-          @include vend(transition, opacity .5s ease-in-out);
-          height: calc(100% + 4px);
-          width: calc(100% + 4px);
-          top: -2px;
-          left: -2px;
-          background-size: cover;
-          background-position: center center;
-          opacity: 1;
-      }
-
-      .video-icon {
-        @include vend(transition, (fill .5s ease-in-out));
-        @include vend(transform, (translateX(-50%)));
-        position: absolute;
-        bottom: 5%;
-        width: 18%;
-        min-width: 43px;
-        fill: rgba(255, 255, 255, 0.5);
-      }
-      .video {
-        @include vend(transition, z-index .0s .5s);
-        // border: 2px inset;
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-      }
-      &.bring-video-forward {
-        .video-picture {
-          opacity: 0;
-        }
-        .video-icon {
-          fill: rgba(0,0,0,0) !important;
-        }
-        .video {
-          z-index: 1;
-        }
-      }
-    }
-
-    &:hover {
-      .video-icon {
-        fill: $white;
-      }
-    }
-
-    @media (max-width: 1100px) {
-      height: 80.175vw;
-      width: 51.22743375vw;
-      min-height: 430.396828125px;
-      min-width: 275px;
-      margin: 0 0 7%;
-
-      .top {
-        .text-container {
-          .main-text {
-            font-size: 7.04377vw;
-            &.two-lines {
-              font-size: 4.9092957vw;
-            }
-          }
-          .description-text {
-            font-size: 1.92102vw;
+  }
+  // adjusting font when min-width/min-height is hit
+  @media (max-width: 537px) {
+    .top {
+      .text-container {
+        .main-text {
+          font-size: 37.825px;
+          &.two-lines {
+            font-size: 26.3629px;
           }
         }
-      }
-    }
-    // adjusting font when min-width/min-height is hit
-    @media (max-width: 537px) {
-      .top {
-        .text-container {
-          .main-text {
-            font-size: 37.825px;
-            &.two-lines {
-              font-size: 26.3629px;
-            }
-          }
-          .description-text {
-            font-size: 10.3159px;
-          }
+        .description-text {
+          font-size: 10.3159px;
         }
       }
     }

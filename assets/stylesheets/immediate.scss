@@ -1,10 +1,6 @@
 // Shared vars
 @import 'init/init';
 @import 'loadingSpinner/loadingSpinner';
-@font-face {
-   font-family: 'FaberSansPro-Normal';
-   src: url('/fonts/FaberSansPro-Normal.woff') format('woff');
-}
 
 // @font-face {
 //   font-family: 'fontello';
@@ -112,48 +108,50 @@ img, iframe {
 
 ////Landing
 // Animation for bottom hover
+$animStart: -160%;
+$animEnd: -140%;
 @keyframes hover-bounce {
     from {
-        transform: translate3d(0,0,0);
+        transform: translate3d(0,$animStart,0);
     }
     to {
-        transform: translate3d(0,1.5vh,0);
+        transform: translate3d(0,$animEnd,0);
     }
 }
 
 @-o-keyframes hover-bounce {
     from {
-        -o-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,$animStart,0);
     }
     to {
-        -o-transform: translate3d(0,1.5vh,0);
+        -o-transform: translate3d(0,$animEnd,0);
     }
 }
 
 @-ms-keyframes hover-bounce {
     from {
-        -ms-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,$animStart,0);
     }
     to {
-        -ms-transform: translate3d(0,1.5vh,0);
+        -ms-transform: translate3d(0,$animEnd,0);
     }
 }
 
 @-moz-keyframes hover-bounce {
     from {
-        -moz-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,$animStart,0);
     }
     to {
-        -moz-transform: translate3d(0,1.5vh,0);
+        -moz-transform: translate3d(0,$animEnd,0);
     }
 }
 
 @-webkit-keyframes hover-bounce {
     from {
-        -webkit-transform: translate3d(0,0,0);
+        -webkit-transform: translate3d(0,$animStart,0);
     }
     to {
-        -webkit-transform: translate3d(0,1.5vh,0);
+        -webkit-transform: translate3d(0,$animEnd,0);
     }
 }
 
@@ -165,12 +163,16 @@ img, iframe {
 // Landing Head
 #landing-head {
     @include vend(transition, opacity 1s ease-in-out 1.15s);
+    @include vend(transform, translateX(-50%));
     position: fixed;
     top: calc(39vh + 8px);
     z-index: 10;
-    width: 100%;
-    height: calc(#{$title-height}vh - 4px);
-    min-height: 76px;
+    left: 50%;
+    max-height: calc(#{$title-height}vh - 4px);
+    max-width: 100%;
+    @media (min-aspect-ratio: 1/1) {
+      min-height: 76px;
+    }
 }
 
 .landing-head-hide {
@@ -182,7 +184,7 @@ img, iframe {
     color: $white;
     cursor: pointer;
     position: absolute !important;
-    top: 87vh !important;
+    top: 100vh !important;
     left: calc(50% - 28px);
     width: 56px;
     text-shadow: 0 0 4px $theme-color;

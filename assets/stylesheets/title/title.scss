@@ -1,3 +1,8 @@
+@font-face {
+   font-family: 'FaberSansPro-Normal';
+   src: url('/fonts/FaberSansPro-Normal.woff') format('woff');
+}
+
 // Title section
 #title, #place-holder {
     height: #{$title-height}vh;
