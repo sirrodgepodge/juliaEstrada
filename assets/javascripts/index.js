@@ -49,11 +49,12 @@ function main() {
     }
 
     //// Setting up scrollTo animation
-    $scrollTo.click(function(){
+    $scrollTo.click(function(event){
       $($(this).data("scrollTo")).ScrollTo({
         duration: $(this).data("scrollDuration") || 1000,
         offsetTop: titleHeight + ($(this).data("scrollTo") === '#videos'? titleHeight/2 : 3)
       });
+      if(event.bubbles) event.stopPropogation();
     });
 
     //// Crazy photo animation setup
@@ -87,7 +88,7 @@ function main() {
 
     if($window.width() > 768) {
       //// Landing Section
-      $landingTogglers.click(function() {
+      $landingTogglers.click(function(event) {
           var notSelImg;
           var tempThis; //for storing context
           if (!$(this).hasClass('landing-active')) {
@@ -122,10 +123,12 @@ function main() {
                   }, 400);
               }
           }
+          event.stopImmediatePropagation();
       });
     } else {
       // disable following link on tablet and phone
-      $contactImg.click(function(){
+      $contactImg.click(function(event){
+        event.stopImmediatePropagation();
         return false;
       });
     }
@@ -134,12 +137,13 @@ function main() {
     $contactSub.innerWidth($contactSubInside.width());
 
     // update contact sub width
-    $contactImg.mouseenter(function() {
+    $contactImg.mouseenter(function(event) {
         var selected = $(this).attr('class').split(' ')[1];
         if ($contactSubInside.text() !== contact[selected].text) {
             $contactSub.attr('href', contact[selected].link);
             if (!!contact[selected].link === $contactSub.hasClass('disable-link')) $contactSub.toggleClass('disable-link');  // check if there's a link for the contact button toggled
             slideSwitchText(contact[selected].text);
+            event.stopImmediatePropagation();
         }
     });
 
@@ -151,13 +155,16 @@ function main() {
 
 //// Create click events to play Youtube videos
 function onYouTubeIframeAPIReady() {
-  $videoContainer.click(function(){
+  $videoContainer.click(function(event){
     if(this.className.indexOf('fade-to-youtube') === -1) {
       addPlayerAndPlay.call(this);  // play video
       this.className += ' fade-to-youtube'; // remove link
     }
+    event.stopImmediatePropagation();
   });
 }
+
+var isIOS = navigator.userAgent.match(/iPhone|ipod|iPad/i);
 
 //// Add player and play it
 function addPlayerAndPlay() {
@@ -173,7 +180,7 @@ function addPlayerAndPlay() {
           event.target.setVolume(0);
         },
         onStateChange: function(event) {
-          if(event.data === YT.PlayerState.PLAYING && event.target.f.className.indexOf('showYoutube') === -1) {
+          if((event.data === YT.PlayerState.PLAYING || isIOS && event.data === YT.PlayerState.BUFFERING) && event.target.f.className.indexOf('showYoutube') === -1) {
             var volume = 0;
             var fadeInVolume = setInterval(function(){
               volume = volume += 10;
@@ -226,42 +233,64 @@ function slideSwitchText(val) {
 //     iframe[0].contentWindow.postMessage('{"event":"command","func":"stopVideo","args":""}', '*');
 // }
 
+// scroll event vars
+var latestKnownScrollY = 0,
+    ticking = false;
+
 // Resize and Scroll listeners
 function listeners() {
+
   // initial sync of state with HTML elements
   calcTriggerPoints();
 
-  // update state and recalculate trigger points when screen is resized
-  window.onresize = calcTriggerPoints;
-
   // update state based on scroll position
-  window.onscroll = landingScroll;
-  window.onorientationchange = function(){
-    calcTriggerPoints();
-    landingScroll();
-  };
+  window.addEventListener('scroll', onScroll);
+
+  // update state and recalculate trigger points when screen is resized
+  window.addEventListener('resize', calcTriggerPoints);
+
+  // on orientation change fire both
+  window.addEventListener('orientationchange', calcTriggerPoints);
 }
 
 
 // Store trigger points for state changes
-function calcTriggerPoints() {
+function calcTriggerPoints(event) {
     // Calculate scroll values
-    titleTop =  Math.ceil($landing.outerHeight());
-    titleHeight = Math.ceil($title.height());
-    landingHeadFixPoint = $landing.height() * 0.61 + ($title.outerHeight() - $landingHead.height())/2 - 6; // when to fix image to title bar, don't ever mess with this, finalllly got it!
-    contactTop = ($window.height() - $contact.height()) * 0.90;
+    titleTop = $landing.outerHeight();
+    titleHeight = $title.height();
+    landingHeadFixPoint = $landing.outerHeight() * 0.61 + ($title.outerHeight() - $landingHead.outerHeight())/2 - 7.5; // when to fix image to title bar, don't ever mess with this, finalllly got it!
+    contactTop = Math.ceil($contact.offset().top) * 0.92;
     downAnimReached = Math.ceil(titleTop * 0.395 + 4.5); //when page position is such that the centered landing header is right above the down arrow;
     photosSectTop = Math.ceil($photosSect.offset().top * 0.82);
 
     // Check if any changes in DOM occur as a result of these calculations
-    landingScroll();
+    scrollTriggers();
+    event && event.stopImmediatePropagation();
+}
+
+
+// debounce scroll handling
+function onScroll(event) {
+  latestKnownScrollY = window.scrollY;
+  requestTick();
+  event.stopImmediatePropagation();
+}
+
+
+// attempt animation
+function requestTick() {
+  if(!ticking)
+    requestAnimationFrame(scrollTriggers);
+  ticking = true;
 }
 
 
 // Check for DOM updates on scroll
-function landingScroll() {
+function scrollTriggers() {
     //calculates current vertical scroll position
-    pagePos = window.pageYOffset;
+    ticking = false;
+    pagePos = latestKnownScrollY;
 
     //fixes title header to proper position
     if (!landingTogglerClicked && (pagePos >= landingHeadFixPoint && !landingHeadFixed || pagePos < landingHeadFixPoint && landingHeadFixed)) {
