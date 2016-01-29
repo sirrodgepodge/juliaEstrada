@@ -259,7 +259,10 @@ function calcTriggerPoints(event) {
     // Calculate scroll values
     titleTop = $landing.outerHeight();
     titleHeight = $title.height();
-    landingHeadFixPoint = $landing.outerHeight() * 0.61 + ($title.outerHeight() - $landingHead.outerHeight())/2 - 7.5; // when to fix image to title bar, don't ever mess with this, finalllly got it!
+    // when to fix image to title bar, don't ever mess with this, finalllly got it!  Needs to be forced to bottom of stack for iPhone
+    setTimeout(function(){
+      landingHeadFixPoint = $landing.outerHeight() * 0.61 + ($title.outerHeight() - $landingHead.outerHeight())/2 - 7.5;
+    });
     contactTop = Math.ceil($contact.offset().top) * 0.92;
     downAnimReached = Math.ceil(titleTop * 0.395 + 4.5); //when page position is such that the centered landing header is right above the down arrow;
     photosSectTop = Math.ceil($photosSect.offset().top * 0.82);
