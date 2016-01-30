@@ -36,14 +36,12 @@ $phone-contact-margin: $phone-contact-margin-top 0 $contact-border-width/.875*$p
     top: $contact-margin-top + $contact-side/2 - $img-size/2;
     font-size: $img-size/1.5;
     background-color: $bg-color;
-    @media (max-width: $phone-max) {
-      & {
+    @media (max-width: $phone-max) and (orientation:portrait) {
         width: $phone-img-size;
         height: $phone-img-size;
         font-size: $phone-img-size/1.5;
         left: calc(50vw - #{$phone-img-size/2});
         top: $phone-contact-margin-top + $phone-contact-side/2 - $phone-img-size/2;
-      }
     }
   }
   .poppin .#{$name} {
@@ -75,10 +73,8 @@ $phone-contact-margin: $phone-contact-margin-top 0 $contact-border-width/.875*$p
 
     //Apply result with transform, regular and phone
     @include vend(transform, ($side-transform $perp-side-transform translateZ(0)));
-    @media (max-width: $phone-max) {
-        & {
-            @include vend(transform, ($phone-side-transform $phone-perp-side-transform translateZ(0)));
-        }
+    @media (max-width: $phone-max) and (orientation:portrait) {
+        @include vend(transform, ($phone-side-transform $phone-perp-side-transform translateZ(0)));
     }
 
   	@media (max-width: $tablet-max) {
@@ -105,7 +101,7 @@ $phone-contact-margin: $phone-contact-margin-top 0 $contact-border-width/.875*$p
         margin: $contact-margin;
         padding: 0;
         z-index: 1;
-        @media (max-width: $phone-max) {
+        @media (max-width: $phone-max) and (orientation:portrait) {
             & {
                 @include vend(border-radius, #{$contact-border-width/4 * $phone-adjust-factor});
                 box-shadow: 0 0 0 #{$contact-border-width * $phone-adjust-factor} $theme-color;
@@ -161,7 +157,7 @@ $phone-contact-margin: $phone-contact-margin-top 0 $contact-border-width/.875*$p
       display: none;
       margin: 0 auto 50px;
     }
-    @media (max-width: $phone-max) {
+    @media (max-width: $phone-max) and (orientation:portrait) {
         .contact-sub {
             @include vend(border-radius, $contact-border-width/2 * $phone-adjust-factor);
             border-top: $theme-color solid $contact-border-width/2 * $phone-adjust-factor;
