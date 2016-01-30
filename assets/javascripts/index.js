@@ -1,3 +1,6 @@
+loadCSS('/style.css');
+loadCSS('/fonts.css');
+
 var $window = $(window);
 
 var floatFoldImgRegex = /background-image: url\(\)/g;
@@ -164,7 +167,7 @@ function onYouTubeIframeAPIReady() {
   });
 }
 
-var isIOS = navigator.userAgent.match(/iPhone|ipod|iPad/i);
+var isIOS = navigator.userAgent.match(/iPhone|ipod/i);
 
 //// Add player and play it
 function addPlayerAndPlay() {
@@ -261,7 +264,10 @@ function calcTriggerPoints(event) {
     titleHeight = $title.height();
     // when to fix image to title bar, don't ever mess with this, finalllly got it!  Needs to be forced to bottom of stack for iPhone
     setTimeout(function(){
-      landingHeadFixPoint = $landing.outerHeight() * 0.61 + ($title.outerHeight() - $landingHead.outerHeight())/2 - 7.5;
+      landingHeadFixPoint = $window.innerHeight() * 0.61 - ($title.outerHeight() - $landingHead.outerHeight())/2 - 6.25;
+      console.log('window.innerHeight',window.innerHeight);
+      console.log('$window.innerHeight()',$window.innerHeight());
+      console.log('landingHeadFixPoint',landingHeadFixPoint);
     });
     contactTop = Math.ceil($contact.offset().top) * 0.92;
     downAnimReached = Math.ceil(titleTop * 0.395 + 4.5); //when page position is such that the centered landing header is right above the down arrow;

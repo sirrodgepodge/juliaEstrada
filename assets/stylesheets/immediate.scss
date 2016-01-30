@@ -1,6 +1,6 @@
 // Shared vars
 @import 'init/init';
-@import 'loadingSpinner/loadingSpinner';
+// @import 'loadingSpinner/loadingSpinner';
 
 // @font-face {
 //   font-family: 'fontello';
@@ -54,9 +54,13 @@ html, body {
 
 body {
   line-height: 1.42857;
-  font-family: 'FaberSansPro-Normal', 'Arial Narrow', 'Comic Sans MS', cursive, sans-serif !important;
+  font-family: 'Arial Narrow', 'Comic Sans MS', cursive, sans-serif;
   overflow-y: scroll;
   overflow-x: hidden;
+
+  /* Better Font Rendering, taken from IcoMoon =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 
   * {
     position: relative;
@@ -77,15 +81,6 @@ img, iframe {
   border: 0;
   vertical-align: middle;
 }
-
-// .fa {
-//   display: inline-block;
-//   line-height: 1.42857 !important;
-//   -webkit-font-smoothing: antialiased;
-//   -moz-osx-font-smoothing: grayscale;
-//   text-rendering: auto;
-//   transform: translate(0, 0);
-// }
 
 // .dim {
 //     opacity: .12!important;
@@ -163,10 +158,9 @@ $animEnd: -140%;
 // Landing Head
 #landing-head {
     @include vend(transition, opacity 1s ease-in-out 1.15s);
-    @include vend(transform, translateX(-50%));
+    @include vend(transform, translate3d(-50%,0,0));
     position: fixed;
     top: calc(39vh + 8px);
-    z-index: 10;
     left: 50%;
     max-height: calc(#{$title-height}vh - 4px);
     max-width: 100%;

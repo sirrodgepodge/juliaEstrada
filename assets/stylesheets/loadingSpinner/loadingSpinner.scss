@@ -1,3 +1,5 @@
+// being compiled and included in "style" tag
+
 $max: 10;
 $animTime: 2;
 $angle: 360/$max;
@@ -20,7 +22,7 @@ $size: 62px;
 }
 
 .loading-spinner-hide {
-  visibility: none;
+  visibility: hidden;
   opacity: 0;
 }
 
@@ -61,4 +63,68 @@ $size: 62px;
       transform-origin: 30px 30px;
       transform: scale(.75);
     }
+}
+
+@-o-keyframes transform {
+  10.5% {
+      -o-transform-origin: 30px 30px;
+      -o-transform: scale(.75);
+    }
+}
+
+@-o-keyframes opacity {
+  3% {
+    fill-opacity: 1;
+  }
+  75% {
+    fill-opacity: 0;
+  }
+}
+
+@-ms-keyframes transform {
+  10.5% {
+      -ms-transform-origin: 30px 30px;
+      -ms-transform: scale(.75);
+    }
+}
+
+@-ms-keyframes opacity {
+  3% {
+    fill-opacity: 1;
+  }
+  75% {
+    fill-opacity: 0;
+  }
+}
+
+@-moz-keyframes transform {
+  10.5% {
+      transform-origin: 30px 30px;
+      transform: scale(.75);
+    }
+}
+
+@-moz-keyframes opacity {
+  3% {
+    fill-opacity: 1;
+  }
+  75% {
+    fill-opacity: 0;
+  }
+}
+
+@-webkit-keyframes transform {
+  10.5% {
+      transform-origin: 30px 30px;
+      transform: scale(.75);
+    }
+}
+
+@-webkit-keyframes opacity {
+  3% {
+    fill-opacity: 1;
+  }
+  75% {
+    fill-opacity: 0;
+  }
 }

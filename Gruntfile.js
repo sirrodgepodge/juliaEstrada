@@ -9,7 +9,7 @@ module.exports = function(grunt) {
                 beautify: false
             },
             build: {
-                src: ['vendor/jquery/dist/jquery.js','vendor/jquery-scrollto/jquery-scrollto.js','assets/javascripts/index.js'],
+                src: ['vendor/jquery/dist/jquery.js','vendor/jquery-scrollto/jquery-scrollto.js', 'vendor/loadCSS/loadCSS.js','assets/javascripts/index.js'],
                 dest: 'public/index.min.js'
             }
         },
@@ -26,16 +26,28 @@ module.exports = function(grunt) {
             all: ['Gruntfile.js', 'assets/javascripts/*.js']
         },
         compass: {
-    		dist: {
-    			options: {
-                    sassDir: 'assets/stylesheets',
-                    specify: ['assets/stylesheets/immediate.scss', 'assets/stylesheets/style.scss'],
-                    cssDir: 'public',
-                    outputStyle: 'compressed',
-                    cache: false
-                }
-      		}
+      		dist: {
+      			options: {
+                      sassDir: 'assets/stylesheets',
+                      specify: ['assets/stylesheets/fonts.scss', 'assets/stylesheets/immediate.scss', 'assets/stylesheets/style.scss'],
+                      cssDir: 'public',
+                      outputStyle: 'compressed',
+                      cache: false
+                  }
+        		}
       	},
+        cssnano: {
+            options: {
+                sourcemap: false
+            },
+            dist: {
+                files: {
+                    'public/fonts.css': 'public/fonts.css',
+                    'public/immediate.css': 'public/immediate.css',
+                    'public/style.css': 'public/style.css'
+                }
+            }
+        },
         copy: {
           main: {
             cwd: 'assets/fonts/',
@@ -80,7 +92,7 @@ module.exports = function(grunt) {
         watch: {
     			css: {
     				files: 'assets/stylesheets/**/*.scss',
-    				tasks: ['compass']
+    				tasks: ['compass', 'cssnano']
     			},
                 js: {
     				files: 'assets/javascripts/**/*.js',
@@ -104,14 +116,13 @@ module.exports = function(grunt) {
 
     // Load tasks
     grunt.loadNpmTasks('grunt-contrib-uglify');
-    // grunt.loadNpmTasks('grunt-scss-lint');
+    grunt.loadNpmTasks('grunt-cssnano');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-compass');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-imagemin');
 	  grunt.loadNpmTasks('grunt-contrib-watch');
-    //grunt.loadNpmTasks('grunt-exec');
 
     // Set default tasks
-    grunt.registerTask('default', ['jshint', 'uglify', 'compass', 'copy', 'imagemin', 'watch']);
+    grunt.registerTask('default', ['jshint', 'uglify', 'compass', 'cssnano', 'copy', 'imagemin', 'watch']);
 };

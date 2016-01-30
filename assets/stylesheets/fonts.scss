@@ -1,0 +1,63 @@
+.icomoon {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    display: inline-block;
+    speak: none;
+    font-family: 'IcoMoon' !important;
+    font-size: inherit;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    vertical-align: middle;
+}
+
+@font-face {
+   font-family: 'FaberSansPro-Normal';
+   src: url('/fonts/FaberSansPro-Normal.woff') format('woff'),
+        url('/fonts/FaberSansPro-Normal.svg') format('svg');
+}
+
+@font-face {
+   font-family: 'SpikeBold';
+   src: url('/fonts/SpikeBold.woff2') format('woff2'),
+        url('/fonts/SpikeBold.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'IcoMoon';
+    src: url('fonts/icomoon.eot');
+    src: url('fonts/icomoon.eot#iefix') format('embedded-opentype'),
+         url('fonts/icomoon.ttf') format('truetype'),
+         url('fonts/icomoon.woff') format('woff'),
+         url('fonts/icomoon.svg#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+  font-family: 'FaberSansPro-Normal', 'Arial Narrow', 'Comic Sans MS', cursive, sans-serif !important;
+}
+
+.main-text {
+  font-family: 'SpikeBold', monospace !important;
+}
+
+.ion-social-facebook-outline:before {
+    content: "\f230";
+}
+.ion-navigate:before {
+    content: "\f2a3";
+}
+.fa-envelope:before {
+    content: "\f0e0";
+}
+.fa-phone:before {
+    content: "\f095";
+}
+.fa-instagram:before {
+    content: "\f16d";
+}
+.fa-angle-double-up:before {
+    content: "\f102";
+}
