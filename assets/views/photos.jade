@@ -1,18 +1,13 @@
+- var foldAmt = 4
+- var fold = 1
 #photos
-  .float-fold.vertical(data-src="/images/headshot_2.jpg")
-  .float-fold.horizontal(data-src="/images/production_one_1.jpg")
-  .float-fold.horizontal(data-src="/images/production_one_4.jpg")
-  .float-fold.vertical(data-src="/images/production_one_5.jpg")
-  .float-fold.vertical(data-src="/images/production_one_3.jpg")
-  .float-fold.horizontal(data-src="/images/production_two_2.jpg")
-  .float-fold.horizontal(data-src="/images/headshot_3.jpg")
-  .float-fold.vertical(data-src="/images/production_two_1.jpg")
-  .float-fold.vertical(data-src="/images/production_two_3.jpg")
-  .float-fold.horizontal(data-src="/images/production_one_2.jpg")
-  .float-fold.horizontal(data-src="/images/production_one_6.jpg")
+  each photo, index in photos
+    .float-fold(class="float-fold-#{index} float-fold-total-#{photos.length} #{photo.orientation}")
+      while fold < foldAmt + 1
+        | <div class="slice total-slices-#{foldAmt} slice-#{fold++}" style="background-image: url(#{photo.src}), linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0, .7) 100%); background-image: url(#{photo.src}), -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0, .7) 100%); background-image: url(#{photo.src}), -moz-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0, .7) 100%); background-image: url(#{photo.src}), -ms-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0, .7) 100%); background-image: url(#{photo.src}), -o-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0, .7) 100%);">
+      while fold > 1
+        | </div>
+        - fold--
   .Modal(class="hidden")
-    img.Modal-content-container-current-photo(src="")
-    .Modal-content-container-closeBtn(class="module-btn")
-      svg(viewBox="0 0 48 48", width="48", height="48")
-        path(d="M38 12.83l-2.83-2.83-11.17 11.17-11.17-11.17-2.83 2.83 11.17 11.17-11.17 11.17 2.83 2.83 11.17-11.17 11.17 11.17 2.83-2.83-11.17-11.17z")
-          path(d="M0 0h48v48h-48z", fill="none")
+    each photo in photos
+      .modal-image(class="#{photo.orientation}" style="background-image: url(#{photo.src})")

@@ -1,7 +1,7 @@
 //// maybe use later
 
 $numSlices: 6;
-$maxPhotos: 10;
+$maxPhotos: 11;
 
 $widthHeightRatioVert: 35.845/53.3;
 $widthHeightRatioHoriz: 58.155/53.3;
@@ -95,7 +95,7 @@ $wideVertRatio: 35.845/58.155;
 
     @for $i from 1 to ($numSlices + 1) {
       & > .total-slices-#{$i} {
-        height: calc(#{100%/$i + 0.10%} + 1px);
+        height: calc(#{100%/$i + 0.10%} + 1.5px);
       }
       // adjust slice height based on total number of slices
       .total-slices-#{$i} {
@@ -117,7 +117,7 @@ $wideVertRatio: 35.845/58.155;
 
       .slice {
          &:not(.slice-1) {
-           @include vend(transform, translate3d(0, calc(100% - 1px),0));
+           @include vend(transform, translate3d(0, calc(100% - .5px),0));
          }
       }
 

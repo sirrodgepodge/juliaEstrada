@@ -1,10 +1,10 @@
 #contact
-  a.contact-head(style= "background: url(#{locals.contact.mainImg}) no-repeat center /cover;")
+  a.contact-head(style= "background: url(#{locals.contact.mainImg}) no-repeat 0 5% /cover;")
   a.contact-img.instagram(href= locals.contact.instagram.link) #[i.icomoon.fa-instagram]
   a.contact-img.address(href= locals.contact.address.link) #[i.icomoon.ion-navigate]&nbsp;
   a.contact-img.facebook(href= locals.contact.facebook.link) #[i.icomoon.ion-social-facebook-outline]
   a.contact-img.phone(href= locals.contact.phone.link) #[i.icomoon.fa-phone]
   a.contact-img.email(href= locals.contact.email.link) #[i.icomoon.fa-envelope]
-  a.contact-sub(href= locals.contact.address.link, style='width:0;')
+  a.contact-sub(href= locals.contact.address.link, style='width:50%; overflow: hidden;')
     .contact-sub-inside.show= locals.contact.address.text
   a.paper-resume(href= locals.siteHeader.resumeLink, target="_blank")

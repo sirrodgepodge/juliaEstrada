@@ -15,71 +15,58 @@ module.exports = {
       image: '/images/juliaEstradaHeading.png',
       resumeLink: '/images/Julia_Estrada Resume_Fall_2015.pdf'
     },
-    // fom: {
-    //     header: 'Mi café es su café',
-    //     subHeader: 'Get at me yo',
-    //     image: {
-    //         filename: 'production_two_2.jpg',
-    //         x: 50,
-    //         y: 50
-    //     },
-    //     name: 'ETHIOPIA HAMBELA ALAKA',
-    //     flavors: [
-    //         "JASMINE",
-    //         "MANDARIN",
-    //         "FLORAL"
-    //     ]
-    // },
-    // coffee: {
-    //     header: 'Las Cafés Sabrosas',
-    //     subHeader: 'Taxes and Shipping included in all prices',
-    //     purchaseLabel: 'One Time Purchase',
-    //     subscriptionLabel: 'Monthly Subscription',
-    //     subscriptionSavingsClaim: 'Save $1/bag',
-    //     product: [{
-    //         name: '1 bag',
-    //         subscribe: 15,
-    //         purchase: 16
-    //     }, {
-    //         name: '2 bags',
-    //         subscribe: 27.50,
-    //         purchase: 29.50
-    //     }, {
-    //         name: '3 bags',
-    //         subscribe: 37.50,
-    //         purchase: 40.50
-    //     }, {
-    //         name: '4 bags',
-    //         subscribe: 45,
-    //         purchase: 49
-    //     }]
-    // },
-    // merch: [{
-    //     name: 'tshirt',
-    //     price: 20,
-    //     sizes: ['S', 'M', 'L', 'XL']
-    // },
-    // {
-    //     name: 'mug',
-    //     price: 12,
-    //     sizes: []
-    // },
-    // {
-    //     name: 'girlt',
-    //     price: 20,
-    //     sizes: ['S', 'M', 'L', 'XL']
-    // } //, {
-    //     name: 'jefe-hoodie',
-    //     price: 20,
-    //     sizes: ['S', 'M', 'L', 'XL']
-    // }, {
-    //     name: 'tank',
-    //     price: 20,
-    //     sizes: ['S', 'M', 'L', 'XL']
-    // }
-    // ],
+    photos : [
+      {
+        src: '/images/headshot_1.jpg',
+        orientation: 'horizontal'
+      },
+      {
+        src: '/images/headshot_2.jpg',
+        orientation: 'vertical'
+      },
+      {
+        src: '/images/headshot_3.jpg',
+        orientation: 'horizontal'
+      },
+      {
+        src: '/images/production_one_4.jpg',
+        orientation: 'horizontal'
+      },
+      {
+        src: '/images/production_one_5.jpg',
+        orientation: 'vertical'
+      },
+      {
+        src: '/images/production_one_3.jpg',
+        orientation: 'vertical'
+      },
+      {
+        src: '/images/production_two_2.jpg',
+        orientation: 'horizontal'
+      },
+      {
+        src: '/images/production_one_1.jpg',
+        orientation: 'horizontal'
+      },
+      {
+        src: '/images/production_two_1.jpg',
+        orientation: 'vertical'
+      },
+      {
+        src: '/images/production_two_3.jpg',
+        orientation: 'vertical'
+      },
+      {
+        src: '/images/production_one_2.jpg',
+        orientation: 'horizontal'
+      },
+      {
+        src: '/images/production_one_6.jpg',
+        orientation: 'horizontal'
+      }
+    ],
     contact: {
-        mainImg: '/images/headshot_1.jpg',
+        mainImg: '/images/contact.jpg',
         instagram: {
             text: 'instagram.com/Jempanada',
             link: 'http://www.instagram.com/Jempanada'

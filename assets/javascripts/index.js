@@ -1,5 +1,4 @@
 loadCSS('/style.css');
-loadCSS('/fonts.css');
 
 var $window = $(window);
 
@@ -32,24 +31,24 @@ $.get('/api/info', function(data) {
 var landingTogglerClicked = false;
 
 function main() {
+    loadCSS('/fonts.css');
+
     // Create static jQuery selector vars
-    with('window.') {
-      $placeHolder = $('#place-holder');
-      $landingHead = $('#landing-head');
-      $landing = $('#landing');
-      $title = $('#title');
-      $contact = $('#contact');
-      $landingContent = $landing.find('#landing-content').children();
-      $landingTogglers = $landing.find('.landing-tab');
-      $contactImg = $('.contact-img');
-      $contactSub = $('.contact-sub');
-      $contactSubInside = $contactSub.find('.contact-sub-inside');
-      $scrollTo = $('.scroll-to');
-      $floatFold = $('.float-fold');
-      $photosSect = $('#photos');
-      $videoContainer = $('.video-container');
-      $videos = $('.video');
-    }
+    window.$placeHolder = $('#place-holder');
+    window.$landingHead = $('#landing-head');
+    window.$landing = $('#landing');
+    window.$title = $('#title');
+    window.$contact = $('#contact');
+    window.$landingContent = $landing.find('#landing-content').children();
+    window.$landingTogglers = $landing.find('.landing-tab');
+    window.$contactImg = $('.contact-img');
+    window.$contactSub = $('.contact-sub');
+    window.$contactSubInside = $contactSub.find('.contact-sub-inside');
+    window.$scrollTo = $('.scroll-to');
+    window.$floatFold = $('.float-fold');
+    window.$photosSect = $('#photos');
+    window.$videoContainer = $('.video-container');
+    window.$videos = $('.video');
 
     //// Setting up scrollTo animation
     $scrollTo.click(function(event){
@@ -57,34 +56,36 @@ function main() {
         duration: $(this).data("scrollDuration") || 1000,
         offsetTop: titleHeight + ($(this).data("scrollTo") === '#videos'? titleHeight/2 : 3)
       });
-      if(event.bubbles) event.stopPropogation();
+      event.stopImmediatePropagation();
     });
 
-    //// Crazy photo animation setup
+    // Crazy photo animation setup
     // how many times images will get sliced for animation
-    var totalSlices = 6,
-        struct	= '',
-        i;
+    // var totalSlices = 4,
+    //     struct	= '',
+    //     i;
+    //
+    // // add tags to string
+    // for(i = 1; i < totalSlices + 1; i++) {
+    //   struct	+= '<div class="slice total-slices-' + totalSlices + ' slice-' + i + '" style="background-image: url(), linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0, .7) 100%); background-image: url(), -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0, .7) 100%); background-image: url(), -moz-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0, .7) 100%); background-image: url(), -ms-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0, .7) 100%); background-image: url(), -o-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0, .7) 100%);">';
+    // }
+    //
+    // for(i = totalSlices; i > 0; i--) {
+    //   struct	+= '</div>';
+    // }
 
-    // add tags to string
-    for(i = 1; i < totalSlices + 1; i++) {
-      struct	+= '<div class="slice total-slices-' + totalSlices + ' slice-' + i + '" style="background-image: url(), linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0, .7) 100%); background-image: url(), -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0, .7) 100%); background-image: url(), -moz-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0, .7) 100%); background-image: url(), -ms-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0, .7) 100%); background-image: url(), -o-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0, .7) 100%);">';
-    }
-
-    for(i = totalSlices; i > 0; i--) {
-      struct	+= '</div>';
-    }
-
-	  $floatFold.each(function(i) {
-    	var $this = $(this),
-    		imgPath	= $this.data('src');
-        // if(!$this.complete) $.get(imgPath);
-        // $this.addClass('float-fold-' + i + ' float-fold-total-' + $floatFold.length)
-        //     .append($(struct.replace(floatFoldImgRegex, 'background-image: url('+ imgPath +')' )));
-        var imgClasses = $this.attr('class');
-        $this.replaceWith($('<div class="' + imgClasses + ' float-fold-' + i + ' float-fold-total-' + $floatFold.length + '"></div>')
-             .append($(struct.replace(floatFoldImgRegex, 'background-image: url('+ imgPath +')' ))));
-    });
+	  // $floatFold.each(function(i) {
+    //   if(i !== 0) {
+    //   	var $this = $(this),
+    //   		imgPath	= $this.data('src');
+    //       // if(!$this.complete) $.get(imgPath);
+    //       // $this.addClass('float-fold-' + i + ' float-fold-total-' + $floatFold.length)
+    //       //     .append($(struct.replace(floatFoldImgRegex, 'background-image: url('+ imgPath +')' )));
+    //       var imgClasses = $this.attr('class');
+    //       $this.replaceWith($('<div class="' + imgClasses + ' float-fold-' + i + ' float-fold-total-' + $floatFold.length + '"></div>')
+    //            .append($(struct.replace(floatFoldImgRegex, 'background-image: url('+ imgPath +')' ))));
+    //   }
+    // });
 
     // Add scroll and resize listeners
     listeners();
@@ -136,9 +137,6 @@ function main() {
       });
     }
 
-    // set initial contact sub width, adjusted because loaded font is skinnier
-    $contactSub.innerWidth($contactSubInside.width());
-
     // update contact sub width
     $contactImg.mouseenter(function(event) {
         var selected = $(this).attr('class').split(' ')[1];
@@ -149,6 +147,11 @@ function main() {
             event.stopImmediatePropagation();
         }
     });
+
+    // set initial contact sub width, adjusted because loaded font is skinnier
+    setTimeout(function(){
+      $contactSub.innerWidth($contactSubInside.width());
+    }, 200);
 
     // async load youtube API
     var tag = document.createElement('script');
@@ -265,9 +268,6 @@ function calcTriggerPoints(event) {
     // when to fix image to title bar, don't ever mess with this, finalllly got it!  Needs to be forced to bottom of stack for iPhone
     setTimeout(function(){
       landingHeadFixPoint = $window.innerHeight() * 0.61 - ($title.outerHeight() - $landingHead.outerHeight())/2 - 6.25;
-      console.log('window.innerHeight',window.innerHeight);
-      console.log('$window.innerHeight()',$window.innerHeight());
-      console.log('landingHeadFixPoint',landingHeadFixPoint);
     });
     contactTop = Math.ceil($contact.offset().top) * 0.92;
     downAnimReached = Math.ceil(titleTop * 0.395 + 4.5); //when page position is such that the centered landing header is right above the down arrow;
