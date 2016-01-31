@@ -149,8 +149,12 @@ function main() {
     });
 
     // set initial contact sub width, adjusted because loaded font is skinnier
-    setTimeout(function(){
-      $contactSub.innerWidth($contactSubInside.width());
+    var count = 0;
+    var settingFunc = setInterval(function(){
+      if(count < 7) {
+        $contactSub.innerWidth($contactSubInside.width());
+        count++;
+      } else clearInterval(settingFunc);
     }, 200);
 
     // async load youtube API
