@@ -55,6 +55,24 @@
   overflow: visible;
 }
 
+@media (max-width: $tablet-max) {
+  .slick-slide {
+    margin: 0 0.025%;
+  }
+  .slick-list {
+    margin: 0 -0.025%;
+  }
+}
+
+@media (max-width: $phone-max) {
+  .slick-slide {
+    margin: 0 0.015%;
+  }
+  .slick-list {
+    margin: 0 -0.015%;
+  }
+}
+
 // .modal-image {
 //
 // }

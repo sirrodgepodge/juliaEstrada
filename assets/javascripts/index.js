@@ -33,7 +33,6 @@ var contact = {};
 // ajax for back end data
 $.get('/api/info', function(data) {
     contact = data.contact;
-    photos = data.photos;
 });
 
 // adding key events to modal carousel
@@ -137,25 +136,19 @@ function main() {
 
     $modal.slick({
       centerMode: true,
-      centerPadding: '60px',
       slidesToShow: 3,
       variableWidth: true,
       arrows: false,
-      adaptiveHeight: true,
       responsive: [
         {
           breakpoint: 768,
           settings: {
-            centerMode: true,
-            centerPadding: '40px',
             slidesToShow: 3
           }
         },
         {
-          breakpoint: 480,
+          breakpoint: 500,
           settings: {
-            centerMode: true,
-            centerPadding: '40px',
             slidesToShow: 1
           }
         }

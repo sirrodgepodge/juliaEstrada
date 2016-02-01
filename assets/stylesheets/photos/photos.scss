@@ -52,19 +52,6 @@ $wideVertRatio: 35.845/58.155;
     text-align: center;
     cursor: pointer;
 
-    // // biggest screen view
-    //   margin: 2% 0 0 2.52%;
-    //   &.vertical {
-    //     height: 300px;
-    //     width: 16%;
-    //     max-width: 200px;
-    //   }
-    //   &.horizontal {
-    //     height: 300px;
-    //     width: 31.75%;
-    //     max-width: 395px;
-    //   }
-
     &:before {
       @include vend(box-shadow, 1px 2px 6px 0 rgba(0,0,0,0.4));
       content: "";
