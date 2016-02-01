@@ -18,74 +18,74 @@ module.exports = {
     photos : [
       {
         src: '/images/headshot_1.jpg',
-        description: 'example text for image',
+        description: '',
         orientation: 'horizontal'
       },
       {
         src: '/images/headshot_2.jpg',
         orientation: 'vertical',
-        description: 'example text for image'
+        description: ''
       },
       {
         src: '/images/headshot_3.jpg',
         orientation: 'horizontal',
-        description: 'example text for image'
+        description: ''
       },
       {
         src: '/images/production_one_4.jpg',
         orientation: 'horizontal',
-        description: 'example text for image'
+        description: ''
       },
       {
         src: '/images/production_one_5.jpg',
         orientation: 'vertical',
-        description: 'example text for image'
+        description: ''
       },
       {
         src: '/images/production_one_3.jpg',
         orientation: 'vertical',
-        description: 'example text for image'
+        description: ''
       },
       {
         src: '/images/production_two_2.jpg',
         orientation: 'horizontal',
-        description: 'example text for image'
+        description: ''
       },
       {
         src: '/images/production_one_1.jpg',
         orientation: 'horizontal',
-        description: 'example text for image'
+        description: ''
       },
       {
         src: '/images/production_two_1.jpg',
         orientation: 'vertical',
-        description: 'example text for image'
+        description: ''
       },
       {
         src: '/images/production_two_3.jpg',
         orientation: 'vertical',
-        description: 'example text for image'
+        description: ''
       },
       {
         src: '/images/production_one_2.jpg',
         orientation: 'horizontal',
-        description: 'example text for image'
+        description: ''
       },
       {
         src: '/images/production_one_6.jpg',
         orientation: 'horizontal',
-        description: 'example text for image'
+        description: ''
       }
     ],
     contact: {
-        mainImg: '/images/contact.jpg',
+        mainImg: '/images/headshot_1.jpg',
         instagram: {
             text: 'instagram.com/Jempanada',
             link: 'http://www.instagram.com/Jempanada'
         },
         address: {
-            text: '6147 Lakeside Dr #102, Reno, NV 89511',
-            link: 'https://www.google.com/maps/place/Pedalers+Deli/@39.471266,-119.8087336,17z/data=!3m1!4b1!4m2!3m1!1s0x80994014c55a99eb:0xcf7d2a91ee0370be'
+            text: 'New York, NY',
+            link: 'https://www.google.com/maps/place/New+York,+NY/@40.7412455,-74.029458,13.16z/data=!4m2!3m1!1s0x89c24fa5d33f083b:0xc80b8f06e177fe62'
         },
         facebook: {
             text: 'facebook.com/julia.estrada1',
