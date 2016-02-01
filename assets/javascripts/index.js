@@ -1,7 +1,10 @@
 // load CSS files async
 setTimeout(function(){
-  loadCSS('//cdn.jsdelivr.net/jquery.slick/1.5.9/slick.css');
-  loadCSS('/style.css');
+  var stylesheet = loadCSS('/style.css');
+  onloadCSS(stylesheet, function(){
+    console.log('hmmm');
+    calcTriggerPoints();
+  });
 });
 
 var $window = $(window);
@@ -47,6 +50,8 @@ $(document).keyup(function(e) {
 // UI Functionality
 var landingTogglerClicked = false;
 
+
+
 function main() {
     // load CSS files following initial DOM render
     setTimeout(function(){
@@ -83,9 +88,6 @@ function main() {
       });
       event.stopImmediatePropagation();
     });
-
-    // Add scroll and resize listeners
-    listeners();
 
     if($window.width() > 768) {
       //// Landing Section
@@ -134,6 +136,7 @@ function main() {
       });
     }
 
+    // init slick
     $modal.slick({
       centerMode: true,
       slidesToShow: 3,
@@ -199,11 +202,11 @@ function main() {
     });
 
     // set initial contact sub width, adjusted because loaded font is skinnier
-    var count = 0;
+    var intervalCount = 0;
     var settingFunc = setInterval(function(){
-      if(count < 7) {
+      if(intervalCount < 7) {
         $contactSub.innerWidth($contactSubInside.width());
-        count++;
+        intervalCount++;
       } else clearInterval(settingFunc);
     }, 200);
 
@@ -211,6 +214,11 @@ function main() {
     var tag = document.createElement('script');
     tag.src = "https://www.youtube.com/iframe_api";
     var firstScriptTag = document.getElementsByTagName('script')[0].parentNode.insertBefore(tag, firstScriptTag);
+
+    // Add scroll and resize listeners
+    setTimeout(function(){
+      listeners();
+    });
 }
 
 //// Create click events to play Youtube videos
@@ -271,7 +279,6 @@ var latestKnownScrollY = 0,
 
 // Resize and Scroll listeners
 function listeners() {
-
   // initial sync of state with HTML elements
   calcTriggerPoints();
 
@@ -291,10 +298,17 @@ function calcTriggerPoints(event) {
     // Calculate scroll values
     titleTop = $landing.outerHeight();
     titleHeight = $title.height();
+
     // when to fix image to title bar, don't ever mess with this, finalllly got it!  Needs to be forced to bottom of stack for iPhone
-    setTimeout(function(){
-      landingHeadFixPoint = $window.innerHeight() * 0.61 - ($title.outerHeight() - $landingHead.outerHeight())/2 - 6.25;
+    var intervalCount = 0;
+    var interval = setInterval(function(){
+      if(intervalCount < 7) {
+        landingHeadFixPoint = $window.innerHeight() * 0.61 - ($title.outerHeight() - $landingHead.outerHeight())/2 - 6.25;
+        intervalCount++;
+      } else clearInterval(interval);
     });
+
+    // when to make contact buttons pop out
     contactTop = Math.ceil($contact.offset().top) * 0.92;
     downAnimReached = Math.ceil(titleTop * 0.395 + 4.5); //when page position is such that the centered landing header is right above the down arrow;
     photosSectTop = Math.ceil($photosSect.offset().top * 0.82);
@@ -383,6 +397,33 @@ function getScrollBarWidth() {
     document.body.removeChild (outer);
 
     return (w1 - w2);
+}
+
+function onloadCSS(ss, callback ){
+	var called;
+	function newcb(){
+			if( !called && callback ){
+				called = true;
+				callback.call( ss );
+			}
+	}
+	if( ss.addEventListener ){
+		ss.addEventListener( "load", newcb );
+	}
+	if( ss.attachEvent ){
+		ss.attachEvent( "onload", newcb );
+	}
+
+	// This code is for browsers that don’t support onload
+	// No support for onload (it'll bind but never fire):
+	//	* Android 4.3 (Samsung Galaxy S4, Browserstack)
+	//	* Android 4.2 Browser (Samsung Galaxy SIII Mini GT-I8200L)
+	//	* Android 2.3 (Pantech Burst P9070)
+
+	// Weak inference targets Android < 4.4
+ 	if( "isApplicationInstalled" in navigator && "onloadcssdefined" in ss ) {
+		ss.onloadcssdefined( newcb );
+	}
 }
 
 $(document).ready(main);

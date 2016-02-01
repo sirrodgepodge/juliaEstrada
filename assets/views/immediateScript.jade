@@ -1,9 +1,5 @@
 script(type='text/javascript').
-  // forces user to the top of the page on refresh
-  // window.onunload = function() {
-  //   window.scrollTo(0,0);
-  // };
-  
+
   // Converts touch to hover for mobile and tablet
   document.addEventListener("touchstart", function(){}, true);
 
@@ -20,6 +16,9 @@ script(type='text/javascript').
       document.getElementById('img-init').className += ' show';
       document.getElementById('landing-head').className += ' show';
       document.getElementById('landing-content').className += ' show';
+      setTimeout(function(){
+        if(calcTriggerPoints) calcTriggerPoints();
+      },250);
       delete landing;
     },250);
   }
