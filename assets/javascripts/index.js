@@ -1,6 +1,7 @@
 var $window = $(window),
     $body = $('body'),
-    $landing;
+    $landing,
+    $modal;
 
 // load CSS files async
 setTimeout(function(){
@@ -76,7 +77,7 @@ function main() {
     window.$videoContainer = $('.video-container');
     window.$videos = $('.video');
     window.$modalWrapper = $('#Modal-wrapper');
-    window.$modal = $modalWrapper.children('#Modal');
+    $modal = $modalWrapper.children('#Modal');
     window.$modalShadow = $modalWrapper.children('#Modal-shadow');
     window.$paperResumeWrapper = $('.paper-resume-wrapper');
 
@@ -175,12 +176,21 @@ function main() {
       });
     });
 
-    $('.modal-image-wrapper').each(function(i){
+    $('.slick-slide').each(function(i){
       var $this = $(this);
       $this.click(function(event){
         $modal.slick('slickGoTo', $this.data('slickIndex'));
         event.stopImmediatePropagation();
       });
+    });
+
+    $modal.on('setPosition', function(event, slick, currentSlide, nextSlide) {
+      var slidesShown = $modal.slick('slickGetOption', 'slidesToShow');
+      var numberOfSlides = $modal.find('.slick-slide').length;
+
+      if (slidesShown === numberOfSlides) {
+        $modal.find('.slick-track').css('transform', 'translate3d(0px, 0px, 0px)');
+      }
     });
 
     $modalShadow.click(function(){
@@ -285,7 +295,16 @@ function listeners() {
   window.addEventListener('scroll', onScroll);
 
   // update state and recalculate trigger points when screen is resized
-  window.addEventListener('resize', calcTriggerPoints);
+  var timeout;
+  window.addEventListener('resize', function(){
+    calcTriggerPoints();
+    if($modal) {
+      clearTimeout(timeout);
+      timeout = setTimeout(function() {
+        $modal.slick('slickGoTo', $modal.slick('slickCurrentSlide'));
+      }, 100);
+    }
+  });
 
   // on orientation change fire both
   window.addEventListener('orientationchange', calcTriggerPoints);
