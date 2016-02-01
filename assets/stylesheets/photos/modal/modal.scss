@@ -48,6 +48,9 @@
 
 .slick-slide {
   margin: 0 0.04%;
+  &:not(.slick-center) {
+    cursor: pointer;
+  }
 }
 
 .slick-list {

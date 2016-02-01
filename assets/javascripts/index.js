@@ -1,13 +1,14 @@
+var $window = $(window),
+    $body = $('body'),
+    $landing;
+
 // load CSS files async
 setTimeout(function(){
   var stylesheet = loadCSS('/style.css');
   onloadCSS(stylesheet, function(){
-    $landing && calcTriggerPoints();
+    if($landing) calcTriggerPoints();
   });
 });
-
-var $window = $(window);
-var $body = $('body');
 
 var floatFoldImgRegex = /background-image: url\(\)/g;
 
@@ -59,9 +60,9 @@ function main() {
     });
 
     // Create static jQuery selector vars
+    $landing = $('#landing');
     window.$placeHolder = $('#place-holder');
     window.$landingHead = $('#landing-head');
-    window.$landing = $('#landing');
     window.$title = $('#title');
     window.$contact = $('#contact');
     window.$landingContent = $landing.find('#landing-content').children();
@@ -83,7 +84,7 @@ function main() {
     $scrollTo.click(function(event){
       $($(this).data("scrollTo")).ScrollTo({
         duration: $(this).data("scrollDuration") || 1000,
-        offsetTop: titleHeight + ($(this).data("scrollTo") === '#videos'? titleHeight/2 : 3)
+        offsetTop: titleHeight + ($window.width() <= 768 ? titleHeight * 0.3 : $(this).data("scrollTo") === '#videos'? titleHeight/2 : 3)
       });
       event.stopImmediatePropagation();
     });
