@@ -233,8 +233,6 @@ function onYouTubeIframeAPIReady() {
   });
 }
 
-var isIOS = navigator.userAgent.match(/iPhone|ipod/i);
-
 //// Add player and play it
 function addPlayerAndPlay() {
     var player = new YT.Player(this.dataset.elemId, {

@@ -1,4 +1,7 @@
 script(type='text/javascript').
+  
+  // detect iPhone/ipod
+  window.isIOS = navigator.userAgent.match(/iPhone|ipod/i);
 
   // Converts touch to hover for mobile and tablet
   document.addEventListener("touchstart", function(){}, true);
@@ -6,11 +9,15 @@ script(type='text/javascript').
   // move to the top of site
   window.onunload = function(){
     document.getElementById('img-init').className.replace(' show','');
-    window.scrollTo(0,0);
+    if(!isIOS) window.scrollTo(0,0);
   };
 
   // Handles expedited image load at top of page
   function landing(){
+    if(isIOS && navigator.userAgent.match(/AppleWebKit/)) {
+      var downAnim = document.getElementById('down-anim')
+      downAnim.parentNode.removeChild(downAnim);
+    }
     document.getElementById('loader-wrapper').className += 'loading-spinner-hide';
     setTimeout(function() {
       document.getElementById('img-init').className += ' show';
