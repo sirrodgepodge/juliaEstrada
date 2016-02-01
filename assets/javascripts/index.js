@@ -31,7 +31,8 @@ var pagePos = 0,
     photosTriggered = false;
 
 // Getting back end data
-var contact = {};
+var contact = {},
+    photos = [];
 
 // ajax for back end data
 $.get('/api/info', function(data) {
@@ -77,7 +78,6 @@ function main() {
     window.$modalWrapper = $('#Modal-wrapper');
     window.$modal = $modalWrapper.children('#Modal');
     window.$modalShadow = $modalWrapper.children('#Modal-shadow');
-    window.$modalImageWrapper = $modal.children('.modal-image-wrapper');
     window.$paperResumeWrapper = $('.paper-resume-wrapper');
 
     //// Setting up scrollTo animation
@@ -175,9 +175,11 @@ function main() {
       });
     });
 
-    $modalImageWrapper.each(function(i){
-      $(this).click(function(event){
-        $modal.slick('slickGoTo', i);
+    $('.modal-image-wrapper').each(function(i){
+      var $this = $(this);
+      $this.click(function(event){
+        console.log($this.data('slickIndex'));
+        $modal.slick('slickGoTo', $this.data('slickIndex'));
         event.stopImmediatePropagation();
       });
     });
