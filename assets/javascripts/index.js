@@ -43,7 +43,12 @@ $.get('/api/info', function(data) {
 // adding key events to modal carousel
 $(document).keyup(function(e) {
     if(!$modalWrapper.hasClass('hidden')) {
-      if(e.keyCode == 27) $modalWrapper.addClass('hidden'); // escape key closes modal
+      if(e.keyCode == 27) {
+        $modalWrapper.addClass('hidden'); // escape key closes modal
+        $body.attr('style', $body.attr('style').replace("overflow: hidden; padding-right: " + scrollBarWidth + "px;", ""));
+        $title.attr('style', $title.attr('style').replace("padding-right: " + scrollBarWidth + "px;", ""));
+        $paperResumeWrapper.attr('style', "right: 0px;");
+      }
       if(e.keyCode == 39 || e.keyCode == 38) $modal.slick('slickGoTo', $modal.slick('slickCurrentSlide') + 1); // right key and up key move modal forwards
       if(e.keyCode == 37 || e.keyCode == 40) $modal.slick('slickGoTo', $modal.slick('slickCurrentSlide') - 1); // left key and down key move modal backwards
     }
