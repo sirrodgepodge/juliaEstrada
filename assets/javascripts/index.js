@@ -1,8 +1,15 @@
-loadCSS('/style.css');
+// load CSS files async
+setTimeout(function(){
+  loadCSS('//cdn.jsdelivr.net/jquery.slick/1.5.9/slick.css');
+  loadCSS('/style.css');
+});
 
 var $window = $(window);
+var $body = $('body');
 
 var floatFoldImgRegex = /background-image: url\(\)/g;
+
+var scrollBarWidth = getScrollBarWidth();
 
 // Store trigger points for state changes
 var titleTop,
@@ -23,15 +30,29 @@ var pagePos = 0,
 // Getting back end data
 var contact = {};
 
+// ajax for back end data
 $.get('/api/info', function(data) {
     contact = data.contact;
+    photos = data.photos;
+});
+
+// adding key events to modal carousel
+$(document).keyup(function(e) {
+    if(!$modalWrapper.hasClass('hidden')) {
+      if(e.keyCode == 27) $modalWrapper.addClass('hidden'); // escape key closes modal
+      if(e.keyCode == 39 || e.keyCode == 38) $modal.slick('slickGoTo', $modal.slick('slickCurrentSlide') + 1); // right key and up key move modal forwards
+      if(e.keyCode == 37 || e.keyCode == 40) $modal.slick('slickGoTo', $modal.slick('slickCurrentSlide') - 1); // left key and down key move modal backwards
+    }
 });
 
 // UI Functionality
 var landingTogglerClicked = false;
 
 function main() {
-    loadCSS('/fonts.css');
+    // load CSS files following initial DOM render
+    setTimeout(function(){
+      loadCSS('/fonts.css');
+    });
 
     // Create static jQuery selector vars
     window.$placeHolder = $('#place-holder');
@@ -43,12 +64,17 @@ function main() {
     window.$landingTogglers = $landing.find('.landing-tab');
     window.$contactImg = $('.contact-img');
     window.$contactSub = $('.contact-sub');
-    window.$contactSubInside = $contactSub.find('.contact-sub-inside');
+    window.$contactSubInside = $contactSub.children('.contact-sub-inside');
     window.$scrollTo = $('.scroll-to');
     window.$floatFold = $('.float-fold');
     window.$photosSect = $('#photos');
     window.$videoContainer = $('.video-container');
     window.$videos = $('.video');
+    window.$modalWrapper = $('#Modal-wrapper');
+    window.$modal = $modalWrapper.children('#Modal');
+    window.$modalShadow = $modalWrapper.children('#Modal-shadow');
+    window.$modalImageWrapper = $modal.children('.modal-image-wrapper');
+    window.$paperResumeWrapper = $('.paper-resume-wrapper');
 
     //// Setting up scrollTo animation
     $scrollTo.click(function(event){
@@ -58,34 +84,6 @@ function main() {
       });
       event.stopImmediatePropagation();
     });
-
-    // Crazy photo animation setup
-    // how many times images will get sliced for animation
-    // var totalSlices = 4,
-    //     struct	= '',
-    //     i;
-    //
-    // // add tags to string
-    // for(i = 1; i < totalSlices + 1; i++) {
-    //   struct	+= '<div class="slice total-slices-' + totalSlices + ' slice-' + i + '" style="background-image: url(), linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0, .7) 100%); background-image: url(), -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0, .7) 100%); background-image: url(), -moz-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0, .7) 100%); background-image: url(), -ms-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0, .7) 100%); background-image: url(), -o-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0, .7) 100%);">';
-    // }
-    //
-    // for(i = totalSlices; i > 0; i--) {
-    //   struct	+= '</div>';
-    // }
-
-	  // $floatFold.each(function(i) {
-    //   if(i !== 0) {
-    //   	var $this = $(this),
-    //   		imgPath	= $this.data('src');
-    //       // if(!$this.complete) $.get(imgPath);
-    //       // $this.addClass('float-fold-' + i + ' float-fold-total-' + $floatFold.length)
-    //       //     .append($(struct.replace(floatFoldImgRegex, 'background-image: url('+ imgPath +')' )));
-    //       var imgClasses = $this.attr('class');
-    //       $this.replaceWith($('<div class="' + imgClasses + ' float-fold-' + i + ' float-fold-total-' + $floatFold.length + '"></div>')
-    //            .append($(struct.replace(floatFoldImgRegex, 'background-image: url('+ imgPath +')' ))));
-    //   }
-    // });
 
     // Add scroll and resize listeners
     listeners();
@@ -136,6 +134,65 @@ function main() {
         return false;
       });
     }
+
+    $modal.slick({
+      centerMode: true,
+      centerPadding: '60px',
+      slidesToShow: 3,
+      variableWidth: true,
+      arrows: false,
+      adaptiveHeight: true,
+      responsive: [
+        {
+          breakpoint: 768,
+          settings: {
+            centerMode: true,
+            centerPadding: '40px',
+            slidesToShow: 3
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            centerMode: true,
+            centerPadding: '40px',
+            slidesToShow: 1
+          }
+        }
+      ]
+    });
+
+    var firstClick = true;
+    $floatFold.each(function(i) {
+      var $this = $(this);
+      $this.click(function(){
+        $modalWrapper.removeClass('hidden');
+        if(firstClick) {
+          $modalWrapper.attr('style', $modalWrapper.attr('style').replace("display: none;", ""));
+          firstClick = false;
+        }
+        $body.attr('style', ($body.attr('style') || '') + "overflow: hidden; padding-right: " + scrollBarWidth + "px;");
+        $title.attr('style', ($title.attr('style') || '') + "padding-right: " + scrollBarWidth + "px;");
+        $paperResumeWrapper.attr('style', ($paperResumeWrapper.attr('style') || '') + "right: " + scrollBarWidth + "px;");
+        $modal.slick('slickGoTo', i);
+        event.stopImmediatePropagation();
+      });
+    });
+
+    $modalImageWrapper.each(function(i){
+      $(this).click(function(event){
+        $modal.slick('slickGoTo', i);
+        event.stopImmediatePropagation();
+      });
+    });
+
+    $modalShadow.click(function(){
+      $modalWrapper.addClass('hidden');
+      $body.attr('style', $body.attr('style').replace("overflow: hidden; padding-right: " + scrollBarWidth + "px;", ""));
+      $title.attr('style', $title.attr('style').replace("padding-right: " + scrollBarWidth + "px;", ""));
+      $paperResumeWrapper.attr('style', "right: 0px;");
+      event.stopImmediatePropagation();
+    });
 
     // update contact sub width
     $contactImg.mouseenter(function(event) {
@@ -202,21 +259,6 @@ function addPlayerAndPlay() {
         }
       }
     });
-    // var iframe = document.createElement("iframe");
-    // console.dir(iframe);
-    // iframe.className = "video";
-    // iframe.setAttribute("src", "//www.youtube.com/embed/" +
-    //                     this.dataset.youtubeId + "?" +
-    //                     (this.dataset.start ? "start=" + this.dataset.start + "&" : "") +
-    //                     (this.dataset.end ? "end=" + this.dataset.end + "&" : "") +
-    //                     "autoplay=1&controls=1&showinfo=0&rel=0&modestbranding=0&enablejsapi=1");
-    // iframe.setAttribute("allowfullscreen", "");
-    // this.appendChild(iframe, this);
-    // window.addEventListener("message", function(message){
-    //   console.log('message');
-    //   console.log(message);
-    //   iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-    // }, false);
 }
 
 //// Contact Section
@@ -229,19 +271,6 @@ function slideSwitchText(val) {
         $contactSub.innerWidth($contactSubInside.width());
     },525);
 }
-
-// function initBufferVideo(iframe){
-//     playVideo(iframe);
-//     setTimeout(stopVideo(iframe), 400);
-// }
-
-// function playVideo(iframe){
-//     iframe[0].contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-// }
-
-// function stopVideo(iframe){
-//     iframe[0].contentWindow.postMessage('{"event":"command","func":"stopVideo","args":""}', '*');
-// }
 
 // scroll event vars
 var latestKnownScrollY = 0,
@@ -323,11 +352,6 @@ function scrollTriggers() {
         $placeHolder.toggleClass('no-show');
         titleFixed = !titleFixed;
     }
-    // if (pagePos >= titleTop) {
-    //   // console.log(pagePos - titleTop);
-    //   // console.log($title.css('transform'));
-    //   $title.css('transform', 'translateY(' + (pagePos - titleTop) + 'px)');
-    // }
 
     //triggers photo animation
     if(!photosTriggered && pagePos > photosSectTop) {
@@ -340,6 +364,32 @@ function scrollTriggers() {
         $contact.toggleClass('poppin');
         contactPopped = !contactPopped;
     }
+}
+
+function getScrollBarWidth() {
+    var inner = document.createElement('p');
+    inner.style.width = "100%";
+    inner.style.height = "200px";
+
+    var outer = document.createElement('div');
+    outer.style.position = "absolute";
+    outer.style.top = "0px";
+    outer.style.left = "0px";
+    outer.style.visibility = "hidden";
+    outer.style.width = "200px";
+    outer.style.height = "150px";
+    outer.style.overflow = "hidden";
+    outer.appendChild (inner);
+
+    document.body.appendChild (outer);
+    var w1 = inner.offsetWidth;
+    outer.style.overflow = 'scroll';
+    var w2 = inner.offsetWidth;
+    if (w1 == w2) w2 = outer.clientWidth;
+
+    document.body.removeChild (outer);
+
+    return (w1 - w2);
 }
 
 $(document).ready(main);

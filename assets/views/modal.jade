@@ -1,0 +1,7 @@
+#Modal-wrapper.hidden(style="display: none;")
+  #Modal-shadow
+  #Modal
+    each photo in photos
+      .modal-image-wrapper
+        img.modal-image(class="#{photo.orientation}" src="#{photo.src}")
+        .modal-caption= photo.description

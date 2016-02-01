@@ -238,9 +238,4 @@ $wideVertRatio: 35.845/58.155;
   }
 }
 
-.Modal {
-  position: absolute;
-  &.hidden {
-    visibility: hidden;
-  }
-}
+@import 'photos/modal/modal';

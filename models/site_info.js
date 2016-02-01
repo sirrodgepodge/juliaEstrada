@@ -18,51 +18,63 @@ module.exports = {
     photos : [
       {
         src: '/images/headshot_1.jpg',
+        description: 'example text for image',
         orientation: 'horizontal'
       },
       {
         src: '/images/headshot_2.jpg',
-        orientation: 'vertical'
+        orientation: 'vertical',
+        description: 'example text for image'
       },
       {
         src: '/images/headshot_3.jpg',
-        orientation: 'horizontal'
+        orientation: 'horizontal',
+        description: 'example text for image'
       },
       {
         src: '/images/production_one_4.jpg',
-        orientation: 'horizontal'
+        orientation: 'horizontal',
+        description: 'example text for image'
       },
       {
         src: '/images/production_one_5.jpg',
-        orientation: 'vertical'
+        orientation: 'vertical',
+        description: 'example text for image'
       },
       {
         src: '/images/production_one_3.jpg',
-        orientation: 'vertical'
+        orientation: 'vertical',
+        description: 'example text for image'
       },
       {
         src: '/images/production_two_2.jpg',
-        orientation: 'horizontal'
+        orientation: 'horizontal',
+        description: 'example text for image'
       },
       {
         src: '/images/production_one_1.jpg',
-        orientation: 'horizontal'
+        orientation: 'horizontal',
+        description: 'example text for image'
       },
       {
         src: '/images/production_two_1.jpg',
-        orientation: 'vertical'
+        orientation: 'vertical',
+        description: 'example text for image'
       },
       {
         src: '/images/production_two_3.jpg',
-        orientation: 'vertical'
+        orientation: 'vertical',
+        description: 'example text for image'
       },
       {
         src: '/images/production_one_2.jpg',
-        orientation: 'horizontal'
+        orientation: 'horizontal',
+        description: 'example text for image'
       },
       {
         src: '/images/production_one_6.jpg',
-        orientation: 'horizontal'
+        orientation: 'horizontal',
+        description: 'example text for image'
       }
     ],
     contact: {
