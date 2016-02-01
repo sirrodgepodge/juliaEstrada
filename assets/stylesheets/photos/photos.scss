@@ -45,15 +45,12 @@ $wideVertRatio: 35.845/58.155;
   z-index: 0;
   line-height: 0;
 
-  img.float-fold {
-    visibility: none;
-  }
-
   .float-fold {
     /////// sizing and positioning
     @include vend(transform, translateZ(0));
     display: inline-block;
     text-align: center;
+    cursor: pointer;
 
     // // biggest screen view
     //   margin: 2% 0 0 2.52%;
