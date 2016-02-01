@@ -2,8 +2,7 @@
 setTimeout(function(){
   var stylesheet = loadCSS('/style.css');
   onloadCSS(stylesheet, function(){
-    console.log('hmmm');
-    calcTriggerPoints();
+    $landing && calcTriggerPoints();
   });
 });
 
@@ -178,7 +177,6 @@ function main() {
     $('.modal-image-wrapper').each(function(i){
       var $this = $(this);
       $this.click(function(event){
-        console.log($this.data('slickIndex'));
         $modal.slick('slickGoTo', $this.data('slickIndex'));
         event.stopImmediatePropagation();
       });
