@@ -105,6 +105,7 @@ $phone-contact-margin: $phone-contact-margin-top 0 $contact-border-width/.875*$p
                 width: $contact-side * $phone-adjust-factor;
                 height: $contact-side * $phone-adjust-factor;
                 margin: $phone-contact-margin;
+                background-position: center !important;
             }
         }
     }

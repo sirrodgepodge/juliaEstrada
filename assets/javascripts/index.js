@@ -1,7 +1,8 @@
 var $window = $(window),
     $body = $('body'),
     $landing,
-    $modal;
+    $modal,
+    $modalWrapper;
 
 // load CSS files async
 setTimeout(function(){
@@ -42,7 +43,7 @@ $.get('/api/info', function(data) {
 
 // adding key events to modal carousel
 $(document).keyup(function(e) {
-    if(!$modalWrapper.hasClass('hidden')) {
+    if($modalWrapper && !$modalWrapper.hasClass('hidden')) {
       if(e.keyCode == 27) {
         $modalWrapper.addClass('hidden'); // escape key closes modal
         $body.attr('style', $body.attr('style').replace("overflow: hidden; padding-right: " + scrollBarWidth + "px;", ""));
@@ -81,7 +82,7 @@ function main() {
     window.$photosSect = $('#photos');
     window.$videoContainer = $('.video-container');
     window.$videos = $('.video');
-    window.$modalWrapper = $('#Modal-wrapper');
+    $modalWrapper = $('#Modal-wrapper');
     $modal = $modalWrapper.children('#Modal');
     window.$modalShadow = $modalWrapper.children('#Modal-shadow');
     window.$paperResumeWrapper = $('.paper-resume-wrapper');

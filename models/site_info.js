@@ -13,7 +13,7 @@ module.exports = {
     },
     siteHeader: {
       image: '/images/juliaEstradaHeading.png',
-      resumeLink: '/images/Julia_Estrada Resume_Fall_2015.pdf'
+      resumeLink: '/Julia_Estrada Resume_Fall_2015.pdf'
     },
     photos : [
       {
