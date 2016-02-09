@@ -181,6 +181,7 @@ $animEnd: -140%;
     top: 100vh !important;
     left: calc(50% - 28px);
     width: 56px;
+    height: 24px;
     text-shadow: 0 0 4px $theme-color;
 
     &:hover #down-anim-svg{

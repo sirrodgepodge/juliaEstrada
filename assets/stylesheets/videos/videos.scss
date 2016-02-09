@@ -79,6 +79,7 @@ $bill-yellow: #FBEF35;
       @include vend(transform, (translateX(-50%)));
       position: absolute;
       bottom: 5%;
+      padding-top: 18%;
       width: 18%;
       min-width: 43px;
       fill: rgba(255, 255, 255, 0.5);
