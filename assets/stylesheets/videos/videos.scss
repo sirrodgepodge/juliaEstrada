@@ -2,6 +2,7 @@ $bill-yellow: #FBEF35;
 
 #videos {
   margin: 7% 0 0;
+  text-align: center;
 }
 
 .bill-container {
@@ -14,7 +15,6 @@ $bill-yellow: #FBEF35;
 
   &, .top, .video-container {
       box-shadow: 0 0 0 1px #000;
-  //   border: solid 1px $black;
   }
 
   .top, .video-container {
