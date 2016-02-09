@@ -312,7 +312,7 @@ $animEnd: -140%;
     right: 0;
   }
 }
-@media (max-aspect-ratio: 156/100) and (max-height: 1000px) {
+@media (max-aspect-ratio: 156/100) and (max-height: 1000px) and (orientation: portrait) {
   .landing-img {
     height: calc(100% + 150px);
     top: calc(-275px + 27.5%);
