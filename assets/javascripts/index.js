@@ -319,6 +319,8 @@ function listeners() {
 
 // Store trigger points for state changes
 function calcTriggerPoints(event) {
+    if(!window.$title) return; //if jQuery vars don't exist yet don't run
+
     // Calculate scroll values
     titleTop = window.innerHeight + 2; // 2 takes into account bottom border on landing image
     titleHeight = $title.height();
