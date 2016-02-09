@@ -347,7 +347,7 @@ function calcTriggerPoints(event) {
 
 // debounce scroll handling
 function onScroll(event) {
-  latestKnownScrollY = window.scrollY;
+  latestKnownScrollY = window.scrollY || window.pageYOffset;
   requestTick();
   event.stopImmediatePropagation();
 }
