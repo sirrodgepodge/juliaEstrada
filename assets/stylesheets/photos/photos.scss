@@ -101,7 +101,11 @@ $wideVertRatio: 35.845/58.155;
 
       .slice {
          &:not(.slice-1) {
-           @include vend(transform, translate3d(0, calc(100% - .5px),0));
+           transform: translate3d(0, calc(100% - .5px),0);
+           -webkit-transform: translate3d(0, calc(100% - .5px),0);
+           -moz-transform: translate3d(0, calc(100% - .5px),0);
+           -ms-transform: translate3d(0, 99%,0);
+           -o-transform: translate3d(0, calc(100% - .5px),0);
          }
       }
 
