@@ -14,10 +14,10 @@ script(type='text/javascript').
 
   // Handles expedited image load at top of page
   function landing(){
-    if(isIOS && navigator.userAgent.match(/AppleWebKit/)) {
-      var downAnim = document.getElementById('down-anim')
-      downAnim.parentNode.removeChild(downAnim);
-    }
+    // if(isIOS && navigator.userAgent.match(/AppleWebKit/)) {
+    //   var downAnim = document.getElementById('down-anim')
+    //   downAnim.parentNode.removeChild(downAnim);
+    // }
     document.getElementById('loader-wrapper').className += 'loading-spinner-hide';
     setTimeout(function() {
       document.getElementById('img-init').className += ' show';
