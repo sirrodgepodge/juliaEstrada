@@ -320,7 +320,7 @@ function listeners() {
 // Store trigger points for state changes
 function calcTriggerPoints(event) {
     // Calculate scroll values
-    titleTop = $landing.outerHeight();
+    titleTop = window.innerHeight + 2; // 2 takes into account bottom border on landing image
     titleHeight = $title.height();
 
     // when to fix image to title bar, don't ever mess with this, finalllly got it!  Needs to be forced to bottom of stack for iPhone
