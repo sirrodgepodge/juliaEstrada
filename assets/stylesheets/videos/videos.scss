@@ -61,6 +61,7 @@ $bill-yellow: #FBEF35;
     border: 2px inset;
     background-color: #000;
     cursor: pointer;
+    text-align: left;
 
     .video-picture {
         @include vend(transition, opacity .5s ease-in-out);
