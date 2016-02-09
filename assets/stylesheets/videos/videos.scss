@@ -2,7 +2,6 @@ $bill-yellow: #FBEF35;
 
 #videos {
   margin: 7% 0 0;
-  text-align: center;
 }
 
 .bill-container {
@@ -78,6 +77,7 @@ $bill-yellow: #FBEF35;
       @include vend(transition, (fill .5s ease-in-out));
       @include vend(transform, (translateX(-50%)));
       position: absolute;
+      left: 50%;
       bottom: 5%;
       height: 14.5%;
       width: 18%;
