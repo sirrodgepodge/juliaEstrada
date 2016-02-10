@@ -10,14 +10,15 @@ module.exports = {
           image: '/images/protest.jpg',
           content: [ "Julia is a New York-based actress, singer and activist.  She is pursuing a Bachelor of Fine Arts in Musical Theatre at Texas State University, where she most recently played the role of Marisol in Jose Rivera's play Marisol.",
                      "As an activist, Julia speaks out on immigrant rights, women's rights, LGBTQIA rights and other issues of equal justice. She is an active member of the Texas State Chapter of the League of Latin American Citizens (LULAC) and recently represented the chapter at the 2016 Emerge Latino Conference in Washington, DC.",
-                     "Julia believes that art is a powerful tool for creating powerful change in our communities and the world, and she seeks out work that bridges her passion for activism with the power of art.",
+                     "Julia believes that art is a powerful tool for creating meaningful change in our communities and the world, and she seeks out work that bridges her passion for activism with the power of art.",
                      "In her spare time, she is an avid reader on non-fiction and fan of documentary films. She has a passion for walking and a love for dogs."]
         },
         logoImage: '/images/juliaEstradaHeading.png'
     },
     siteHeader: {
       image: '/images/juliaEstradaHeading.png',
-      resumeLink: '/Julia_Estrada.pdf'
+      resumeLink: '/Julia_Estrada.pdf',
+      mobileAbout: "Julia is a New York-based actress, singer, and activist. She is pursuing a Bachelor of Fine Arts in Musical Theatre at Texas State University. As an activist, Julia speaks out on immigrant rights, women's rights, LGBTQIA rights and other issues of equal justice. She believes that art is a powerful tool for creating meaningful change in our communities and the world, and she seeks out work that bridges her passion for activism with the power of art."
     },
     photos : [
       {
