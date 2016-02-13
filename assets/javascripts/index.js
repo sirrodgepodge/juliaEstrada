@@ -35,7 +35,9 @@ var pagePos = 0,
     landingHeadFixed = false,
     topTextShowing = true,
     contactPopped = false,
-    photosTriggered = false;
+    photosTriggered = false,
+    menuClickedScrolling = false,
+    landingTogglerClicked = false;
 
 // Getting back end data
 var contact = {},
@@ -59,9 +61,6 @@ $document.keyup(function(e) {
       if(e.keyCode == 37 || e.keyCode == 40) $modal.slick('slickGoTo', $modal.slick('slickCurrentSlide') - 1); // left key and down key move modal backwards
     }
 });
-
-// UI Functionality
-var landingTogglerClicked = false;
 
 function main() {
     // load CSS files following initial DOM render
@@ -93,10 +92,24 @@ function main() {
 
     //// Setting up scrollTo animation
     $scrollTo.click(function(event){
-      $($(this).data("scrollTo")).ScrollTo({
-        duration: $(this).data("scrollDuration") || 1000,
-        offsetTop: titleHeight + ($window.width() <= 768 ? titleHeight * 0.3 : $(this).data("scrollTo") === '#videos'? titleHeight/2 : 3)
+      var $this = $(this);
+      var dataStr = $this.data("scrollTo");
+      var scrollDuration = $this.data("scrollDuration") || 1000;
+
+      if(!$this.hasClass('active')) {
+        $this.siblings('.active').removeClass('active');
+        $this.addClass('active');
+        sectionMenuTrigger[dataStr].clicked = true;
+        menuClickedScrolling = true;
+      }
+      $(dataStr).ScrollTo({
+        duration: scrollDuration,
+        offsetTop: titleHeight + ($window.width() <= 768 ? titleHeight * 0.3 : $this.data("scrollTo") === '#videos'? titleHeight/2 : 3)
       });
+
+      setTimeout(function(){
+        menuClickedScrolling = false;
+      }, scrollDuration);
       event.stopImmediatePropagation();
     });
 
@@ -347,7 +360,7 @@ function calcTriggerPoints(event) {
 
     sectionMenuTrigger = [];
     if(windowWidth > 768) {
-      $titleSections.each(function(){
+      $titleSections.each(function(i){
         var $currentTitleSection = $(this);
         var elemIdStr = $currentTitleSection.data("scrollTo");
         var elem = $(elemIdStr);
@@ -356,9 +369,10 @@ function calcTriggerPoints(event) {
           elem: $currentTitleSection,
           top: Math.floor(Math.min(windowHeight + elem.offset().top - (elemIdStr === '#videos' ? titleHeight * 2 - 16 : titleHeight + 8), documentHeight) + (!titleFixed && elemIdStr === '#contact' && titleHeight - 40))
         });
-        sectionMenuTrigger.sort(function(a, b){
-          return b.top - a.top > 0;
-        });
+        sectionMenuTrigger[elemIdStr] = sectionMenuTrigger[i];
+      });
+      sectionMenuTrigger.sort(function(a, b){
+        return b.top - a.top > 0;
       });
     }
 
@@ -397,7 +411,7 @@ function scrollTriggers() {
         landingHeadFixed = !landingHeadFixed;
     }
 
-    if(windowWidth > 768) {
+    if(windowWidth > 768 && !menuClickedScrolling) {
       var haveHitActive = false;
       sectionMenuTrigger.forEach(function(val, index, arr){
         if(val.active) {
