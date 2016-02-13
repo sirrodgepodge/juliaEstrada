@@ -367,7 +367,7 @@ function calcTriggerPoints(event) {
         sectionMenuTrigger.push({
           active: false,
           elem: $currentTitleSection,
-          top: Math.floor(Math.min(windowHeight + elem.offset().top - (elemIdStr === '#videos' ? titleHeight * 2 - 16 : titleHeight + 8), documentHeight) + (!titleFixed && elemIdStr === '#contact' && titleHeight - 40))
+          top: Math.floor(Math.min(windowHeight + elem.offset().top - (elemIdStr === '#videos' ? titleHeight * 2 + 16 : titleHeight + 8), documentHeight) + (!titleFixed && elemIdStr === '#contact' && titleHeight - 40))
         });
         sectionMenuTrigger[elemIdStr] = sectionMenuTrigger[i];
       });
