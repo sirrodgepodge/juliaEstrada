@@ -53,7 +53,7 @@ $wideVertRatio: 35.845/58.155;
     cursor: pointer;
 
     &:before {
-      @include vend(box-shadow, 1px 2px 6px 0 rgba(0,0,0,0.4));
+      @include vend(box-shadow, 1px 2px 12px 0px rgba(0,0,0,1));
       content: "";
       position: absolute;
       display: block;
@@ -96,6 +96,11 @@ $wideVertRatio: 35.845/58.155;
       background-position: 0 -4%;
 
       &:before {
+        opacity: .4;
+      }
+
+      &:hover:before {
+        @include vend(transition, opacity 0.5s linear 0s);
         opacity: 1;
       }
 

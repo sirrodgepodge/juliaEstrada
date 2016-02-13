@@ -1,4 +1,5 @@
 var $window = $(window),
+    $document = $(document),
     $body = $('body'),
     $landing,
     $modal,
@@ -22,7 +23,11 @@ var titleTop,
     landingHeadFixPoint,
     contactTop,
     downAnimReached,
-    photosSectTop;
+    photosSectTop,
+    windowWidth,
+    windowHeight,
+    documentHeight,
+    sectionMenuTrigger = [];
 
 // State booleans
 var pagePos = 0,
@@ -42,7 +47,7 @@ $.get('/api/info', function(data) {
 });
 
 // adding key events to modal carousel
-$(document).keyup(function(e) {
+$document.keyup(function(e) {
     if($modalWrapper && !$modalWrapper.hasClass('hidden')) {
       if(e.keyCode == 27) {
         $modalWrapper.addClass('hidden'); // escape key closes modal
@@ -58,8 +63,6 @@ $(document).keyup(function(e) {
 // UI Functionality
 var landingTogglerClicked = false;
 
-
-
 function main() {
     // load CSS files following initial DOM render
     setTimeout(function(){
@@ -71,6 +74,7 @@ function main() {
     window.$placeHolder = $('#place-holder');
     window.$landingHead = $('#landing-head');
     window.$title = $('#title');
+    window.$titleSections = $title.children('.scroll-to');
     window.$contact = $('#contact');
     window.$landingContent = $landing.find('#landing-content').children();
     window.$landingTogglers = $landing.find('.landing-tab');
@@ -194,9 +198,8 @@ function main() {
       var slidesShown = $modal.slick('slickGetOption', 'slidesToShow');
       var numberOfSlides = $modal.find('.slick-slide').length;
 
-      if (slidesShown === numberOfSlides) {
+      if (slidesShown === numberOfSlides)
         $modal.find('.slick-track').css('transform', 'translate3d(0px, 0px, 0px)');
-      }
     });
 
     $modalShadow.click(function(){
@@ -209,13 +212,13 @@ function main() {
 
     // update contact sub width
     $contactImg.mouseenter(function(event) {
-        var selected = $(this).attr('class').split(' ')[1];
-        if ($contactSubInside.text() !== contact[selected].text) {
-            $contactSub.attr('href', contact[selected].link);
-            if (!!contact[selected].link === $contactSub.hasClass('disable-link')) $contactSub.toggleClass('disable-link');  // check if there's a link for the contact button toggled
-            slideSwitchText(contact[selected].text);
-            event.stopImmediatePropagation();
-        }
+      var selected = $(this).attr('class').split(' ')[1];
+      if ($contactSubInside.text() !== contact[selected].text) {
+        $contactSub.attr('href', contact[selected].link);
+        if (!!contact[selected].link === $contactSub.hasClass('disable-link')) $contactSub.toggleClass('disable-link');  // check if there's a link for the contact button toggled
+        slideSwitchText(contact[selected].text);
+        event.stopImmediatePropagation();
+      }
     });
 
     // set initial contact sub width, adjusted because loaded font is skinnier
@@ -324,6 +327,9 @@ function calcTriggerPoints(event) {
     // Calculate scroll values
     titleTop = $landing.outerHeight() + 2; // 2 takes into account bottom border on landing image
     titleHeight = $title.height();
+    windowHeight = $window.height();
+    windowWidth = $window.width();
+    documentHeight = $document.height();
 
     // when to fix image to title bar, don't ever mess with this, finalllly got it!  Needs to be forced to bottom of stack for iPhone
     var intervalCount = 0;
@@ -338,6 +344,23 @@ function calcTriggerPoints(event) {
     contactTop = Math.ceil($contact.offset().top) * 0.92;
     downAnimReached = Math.ceil(titleTop * 0.395 + 4.5); //when page position is such that the centered landing header is right above the down arrow;
     photosSectTop = Math.ceil($photosSect.offset().top * 0.82);
+
+    sectionMenuTrigger = [];
+    if(windowWidth > 768) {
+      $titleSections.each(function(){
+        var $currentTitleSection = $(this);
+        var elemIdStr = $currentTitleSection.data("scrollTo");
+        var elem = $(elemIdStr);
+        sectionMenuTrigger.push({
+          active: false,
+          elem: $currentTitleSection,
+          top: Math.floor(Math.min(windowHeight + elem.offset().top - (elemIdStr === '#videos' ? titleHeight * 2 - 16 : titleHeight + 8), documentHeight) + (!titleFixed && elemIdStr === '#contact' && titleHeight - 40))
+        });
+        sectionMenuTrigger.sort(function(a, b){
+          return b.top - a.top > 0;
+        });
+      });
+    }
 
     // Check if any changes in DOM occur as a result of these calculations
     scrollTriggers();
@@ -373,6 +396,25 @@ function scrollTriggers() {
         $title.toggleClass('show-logo');
         landingHeadFixed = !landingHeadFixed;
     }
+
+    if(windowWidth > 768) {
+      var haveHitActive = false;
+      sectionMenuTrigger.forEach(function(val, index, arr){
+        if(val.active) {
+          if(!haveHitActive && pagePos + windowHeight >= val.top) haveHitActive = true;
+          else {
+            val.elem.removeClass('active');
+            val.active = false;
+          }
+        }
+        else if(!val.active && pagePos + windowHeight >= val.top && !haveHitActive) {
+          val.elem.addClass('active');
+          val.active = true;
+          haveHitActive = true;
+        }
+      });
+    }
+
     //fades all but title with scroll
     if (pagePos < downAnimReached && !topTextShowing) topTextShowing = true;
     if (pagePos === 0) $landingContent.css('opacity', 1);
@@ -412,15 +454,15 @@ function getScrollBarWidth() {
     outer.style.width = "200px";
     outer.style.height = "150px";
     outer.style.overflow = "hidden";
-    outer.appendChild (inner);
+    outer.appendChild(inner);
 
-    document.body.appendChild (outer);
+    document.body.appendChild(outer);
     var w1 = inner.offsetWidth;
     outer.style.overflow = 'scroll';
     var w2 = inner.offsetWidth;
     if (w1 == w2) w2 = outer.clientWidth;
 
-    document.body.removeChild (outer);
+    document.body.removeChild(outer);
 
     return (w1 - w2);
 }
@@ -452,4 +494,4 @@ function onloadCSS(ss, callback ){
 	}
 }
 
-$(document).ready(main);
+$document.ready(main);

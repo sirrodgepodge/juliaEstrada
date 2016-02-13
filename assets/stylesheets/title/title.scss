@@ -26,7 +26,7 @@
         font-size: 2.25vh;
         font-weight: 300;
         cursor: pointer;
-        &:hover {
+        &:hover, &.active {
           text-shadow: 0 -1.5px 3px $white;
         }
         @media (max-height: 888px) {
