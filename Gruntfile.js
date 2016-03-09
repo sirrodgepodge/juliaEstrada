@@ -105,10 +105,6 @@ module.exports = function(grunt) {
     				files: 'assets/javascripts/**/*.js',
     				tasks: ['jshint', 'uglify']
     			},
-                fonts: {
-                    files: 'assets/fonts/**/*',
-    				tasks: ['fontmin']
-                },
                 images: {
                     files: 'assets/images/*',
     				tasks: ['imagemin']
