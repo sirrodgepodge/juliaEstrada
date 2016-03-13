@@ -279,14 +279,15 @@ function addPlayerAndPlay() {
           event.target.setVolume(0);
         },
         onStateChange: function(event) {
-          if((event.data === YT.PlayerState.PLAYING || isIOS && event.data === YT.PlayerState.BUFFERING) && event.target.f.className.indexOf('showYoutube') === -1) {
+          console.log(event);
+          if((event.data === YT.PlayerState.PLAYING || isIOS && event.data === YT.PlayerState.BUFFERING) && event.target.l.className.indexOf('showYoutube') === -1) {
             var volume = 0;
             var fadeInVolume = setInterval(function(){
               volume = volume += 10;
               event.target.setVolume(volume);
               volume === 100 && clearInterval(fadeInVolume);
             }, 150);
-            event.target.f.className += ' showYoutube';
+            $('#' + event.target.l.id).addClass('showYoutube');
           }
         }
       }
