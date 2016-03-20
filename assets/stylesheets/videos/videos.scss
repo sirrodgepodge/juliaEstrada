@@ -12,9 +12,10 @@ $bill-yellow: #FBEF35;
   display: inline-block;
   vertical-align: top;
   background-color: $white;
+  box-shadow: 1px 1px 10px -1px rgba(16,19,29,.32);
 
   &, .top, .video-container {
-      box-shadow: 0 0 0 1px #000;
+      outline: solid 1px #000;
   }
 
   .top, .video-container {
@@ -31,6 +32,11 @@ $bill-yellow: #FBEF35;
       @include vend(transform, translateY(-50%));
       top: 50%;
 
+      &.two-lines-container {
+        top: 13.3276%;
+        transform: none;
+      }
+
       .main-text {
         line-height: 1.17;
         font-weight: 500;
@@ -43,6 +49,7 @@ $bill-yellow: #FBEF35;
         &.two-lines {
           white-space: normal;
           font-size: 2.3vw;
+          line-height: .9;
         }
       }
       .description-text {

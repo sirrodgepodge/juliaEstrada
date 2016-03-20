@@ -160,7 +160,7 @@ $animEnd: -140%;
     @include vend(transition, opacity 1s ease-in-out 1.15s);
     @include vend(transform, translate3d(-50%,0,0));
     position: fixed;
-    top: calc(39vh + 8px);
+    top: calc(39.75vh + 8px);
     left: 50%;
     max-height: calc(#{$title-height}vh - 4px);
     max-width: 100%;

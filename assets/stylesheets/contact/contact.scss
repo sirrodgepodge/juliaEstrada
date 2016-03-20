@@ -1,5 +1,8 @@
 // For contact section
 
+//// Float shadow
+$float-shadow: 1px 1px 12px 1.472vh rgba(0,0,0,.5);
+
 // For phone view
 $phone-adjust-factor: 0.6658;
 
@@ -91,7 +94,7 @@ $phone-contact-margin: $phone-contact-margin-top 0 $contact-border-width/.875*$p
     display: block;
     .contact-head {
         @include vend(border-radius, $contact-border-width/4);
-        box-shadow: 0 0 0 $contact-border-width $theme-color;
+        box-shadow: 0 0 0 $contact-border-width $theme-color, $float-shadow;
         display: inline-block;
         width: $contact-side;
         height: $contact-side;
@@ -101,7 +104,7 @@ $phone-contact-margin: $phone-contact-margin-top 0 $contact-border-width/.875*$p
         @media (max-width: $phone-max) and (orientation:portrait) {
             & {
                 @include vend(border-radius, #{$contact-border-width/4 * $phone-adjust-factor});
-                box-shadow: 0 0 0 #{$contact-border-width * $phone-adjust-factor} $theme-color;
+                box-shadow: 0 0 0 #{$contact-border-width * $phone-adjust-factor} $theme-color, $float-shadow;
                 width: $contact-side * $phone-adjust-factor;
                 height: $contact-side * $phone-adjust-factor;
                 margin: $phone-contact-margin;
@@ -122,6 +125,7 @@ $phone-contact-margin: $phone-contact-margin-top 0 $contact-border-width/.875*$p
         text-align: center;
         font-size: $contact-side/12;
         color: $white;
+        box-shadow: 1px 1px 12px 0 rgba(0,0,0,.5);
 
         .contact-sub-inside {
             @include vend(transition, .5s);

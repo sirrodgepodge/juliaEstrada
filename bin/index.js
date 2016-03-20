@@ -12,7 +12,7 @@ var http = require('http');
 // var path = require('path');
 
 // Get port from environment and store in Express.
-var port = normalizePort(process.env.PORT || 3000);
+var port = normalizePort(process.env.PORT || 3002);
 app.set('port', port);
 
 // Run HTTPS server if not in Heroku

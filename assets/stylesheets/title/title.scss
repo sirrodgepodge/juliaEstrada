@@ -34,17 +34,19 @@
         }
     }
     .paper-resume-wrapper {
-        @include vend(transition, visibility 0s linear .4s);
+        @include vend(transition, (visibility 0s linear .4s, transform ease-in-out .4s));
+        @include vend(transform, translateX(calc(100% + 25px)));
+        @include vend(border-radius, 50%);
         position: absolute;
-        overflow: hidden;
         top: calc(100% + 25px);
-        right: 0;
+        right: 15px;
         height: 110px;
-        width: 125px;
+        width: 110px;
         opacity: .999; // super odd fix to webkit bug
+        box-shadow: 1px 1px 11px rgba(16,19,29,.28);
 
         .paper-resume {
-            @include vend(transform, rotateZ(90deg) translateY(calc(-100% - 25px)));
+            @include vend(transform, rotateZ(90deg));
             top: 5px;
             left: 5px;
             height: 100px;
@@ -61,6 +63,9 @@
     &.sticky {
         top: 0;
         position: fixed;
+        .paper-resume-wrapper {
+            @include vend(transform, rotateZ(0));
+        }
         .paper-resume {
             @include vend(transform, rotateZ(0));
         }
@@ -106,5 +111,9 @@
 
     &:hover {
         background-color: #B5C3EC;
+    }
+
+    &.mobile {
+      box-shadow: 0 0 0 5px #4a4849, 1px 1px 11px 5px rgba(16,19,29,.28);
     }
 }
