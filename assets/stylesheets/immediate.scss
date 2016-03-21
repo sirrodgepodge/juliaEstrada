@@ -166,7 +166,7 @@ $animEnd: -140%;
     @media (max-width: 466px) {
       min-width: 100%;
     }
-    @media (min-aspect-ratio: 1/1) {
+    @media (min-width: 467px) {
       height: calc(#{$title-height}vh - 4px);
       min-height: 76px;
     }
