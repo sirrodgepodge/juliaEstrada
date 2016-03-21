@@ -117,3 +117,44 @@
       box-shadow: 0 0 0 5px #4a4849, 1px 1px 11px 5px rgba(16,19,29,.28);
     }
 }
+
+#mobile-about-me-container {
+  display: none;
+}
+
+@media (max-width: $phone-max) {
+  #mobile-about-me-container {
+    display: block;
+    width: calc(51.22743375vw + 24px);
+    min-width: 277px;
+    margin: 11.25vh auto 11.5vh;
+    font-size: 19px;
+    overflow: hidden;
+  }
+
+  .mobile-about-me-shadow {
+    position: absolute;
+    width: 100%;
+    height: 0px;
+    left: 0;
+    z-index: 1;
+    box-shadow: 0 0px 30px 20px #fff;
+
+    &.top {
+      top: 0;
+    }
+    &.bottom {
+      bottom: 0;
+    }
+  }
+
+  #mobile-about-me-content {
+    z-index: 0;
+    max-height: 250px;
+    width: 100%;
+    left: -30px;
+    padding: 20px 30px;
+    overflow: auto;
+    box-sizing: content-box;
+  }
+}

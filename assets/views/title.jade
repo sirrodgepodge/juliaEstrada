@@ -6,3 +6,17 @@ ul#title
   li.title-section.scroll-to(data-scroll-to="#contact") Contact
   .paper-resume-wrapper
     a.paper-resume(href= locals.siteHeader.resumeLink, target="_blank")
+#mobile-about-me-container
+  .mobile-about-me-shadow.top
+  #mobile-about-me-content
+    each line in locals.landing.tab2.content
+      |  #{line} #[br] #[br]
+  .mobile-about-me-shadow.bottom(style='\
+  position: absolute;\
+  width: 100%;\
+  height: 0px;\
+  top: 100%;\
+  left: 0;\
+  z-index: 1;\
+  box-shadow: 0 0px 30px 20px #fff;\
+  ')
