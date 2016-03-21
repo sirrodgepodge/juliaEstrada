@@ -162,9 +162,12 @@ $animEnd: -140%;
     position: fixed;
     top: calc(39.75vh + 8px);
     left: 50%;
-    max-height: calc(#{$title-height}vh - 4px);
     max-width: 100%;
+    @media (max-width: 466px) {
+      min-width: 100%;
+    }
     @media (min-aspect-ratio: 1/1) {
+      height: calc(#{$title-height}vh - 4px);
       min-height: 76px;
     }
 }
