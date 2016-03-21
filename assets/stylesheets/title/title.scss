@@ -127,7 +127,7 @@
     display: block;
     width: calc(51.22743375vw + 24px);
     min-width: 277px;
-    margin: 11.25vh auto 11.5vh;
+    margin: 11.25vh auto 11.75vh;
     font-size: 19px;
     font-family: 'FaberSansPro-Normal', 'Arial Narrow', 'Comic Sans MS', sans-serif !important;
     overflow: hidden;
@@ -139,7 +139,7 @@
     width: 100%;
     height: 0px;
     z-index: 1;
-    box-shadow: 0 0px 30px 20px rgba(255,255,255,.9);
+    box-shadow: 0 0px 30px 30px #fff;
 
     &.top {
       top: 0;
@@ -170,7 +170,7 @@
     max-height: 250px;
     width: 100%;
     left: -30px;
-    padding: 20px 30px;
+    padding: 30px;
     overflow: auto;
     box-sizing: content-box;
   }
