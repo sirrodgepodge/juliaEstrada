@@ -29,7 +29,7 @@ $phone-contact-margin: $phone-contact-margin-top 0 $contact-border-width/.875*$p
   $phone-img-size: $size-pct*$contact-side*$phone-adjust-factor;
 
   .#{$name} {
-    @include vend(transition, ($transition-time ease-in-out));
+    @include vend(transition, ($transition-time 0s ease-in-out transform, .5s 0s ease-in-out text-shadow));
     width: $img-size;
     height: $img-size;
     left: calc(50vw - #{$img-size/2});
@@ -114,7 +114,7 @@ $phone-contact-margin: $phone-contact-margin-top 0 $contact-border-width/.875*$p
     }
     .contact-sub {
         @include vend(border-radius, $contact-border-width/4);
-        @include vend(transition, .6s ease-in-out);
+        @include vend(transition, .6s 0s ease-in-out);
         display: block;
         margin: 0 auto 11.5vh;
         border-top: $theme-color solid $contact-border-width/2;
@@ -128,15 +128,16 @@ $phone-contact-margin: $phone-contact-margin-top 0 $contact-border-width/.875*$p
         box-shadow: 1px 1px 12px 0 rgba(0,0,0,.5);
 
         .contact-sub-inside {
-            @include vend(transition, .5s);
+            @include vend(transition, (.5s 0s linear opacity, .3s 0s ease-in-out text-shadow));
             display: inline !important;
             white-space: nowrap;
             opacity: 0;
         }
 
         &:hover {
-            @include vend(transition, .375s ease-in-out);
-            text-shadow: 0 0 8px $white;
+            .contact-sub-inside {
+              text-shadow: 0 0 8px $white;
+            }
         }
     }
     .contact-img {

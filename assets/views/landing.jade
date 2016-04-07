@@ -32,10 +32,10 @@ img#landing-head(style="opacity: 0; z-index:7;", src="#{locals.landing.logoImage
   #landing-content(style="visibility: hidden; transition: 1s ease-in-out 1.15s")
     #landing-info
       #tab-1.landing-tab
-        .head= locals.landing.init.label
+        .head= locals.landing.tab1.label
         .full
-          | Julia will complete her studies at Texas State University, graduating with a BFA in Musical Theatre in Spring 2017.
-          | Julia will attend the Emerge Latino Conference in Spring 2016.
+          each line in locals.landing.tab1.content
+            |  #{line} #[br] #[br]
       #tab-2.landing-tab
         .head= locals.landing.tab2.label
         .full
