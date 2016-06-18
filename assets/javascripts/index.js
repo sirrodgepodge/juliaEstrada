@@ -15,8 +15,6 @@ setTimeout(function(){
 
 var floatFoldImgRegex = /background-image: url\(\)/g;
 
-var scrollBarWidth = getScrollBarWidth();
-
 // Store trigger points for state changes
 var titleTop,
     titleHeight,
@@ -63,6 +61,8 @@ $document.keyup(function(e) {
 });
 
 function main() {
+    window.scrollBarWidth = getScrollBarWidth();
+
     // load CSS files following initial DOM render
     setTimeout(function(){
       loadCSS('/fonts.css');
@@ -267,7 +267,9 @@ function onYouTubeIframeAPIReady() {
 
 //// Add player and play it
 function addPlayerAndPlay() {
-    var player = new YT.Player(this.dataset.elemId, {
+    var elemId = this.dataset.elemId;
+    var videoElem;
+    var player = new YT.Player(elemId, {
       videoId: this.dataset.youtubeId,
       playerVars: {
         start: +this.dataset.start,
@@ -277,17 +279,17 @@ function addPlayerAndPlay() {
         onReady: function(event) {
           event.target.playVideo();
           event.target.setVolume(0);
+          videoElem = $('#' + elemId);
         },
         onStateChange: function(event) {
-          console.log(event);
-          if((event.data === YT.PlayerState.PLAYING || isIOS && event.data === YT.PlayerState.BUFFERING) && event.target.l.className.indexOf('showYoutube') === -1) {
+          if((event.data === YT.PlayerState.PLAYING || isIOS && event.data === YT.PlayerState.BUFFERING) && !videoElem.hasClass('showYoutube')) {
             var volume = 0;
             var fadeInVolume = setInterval(function(){
               volume = volume += 10;
               event.target.setVolume(volume);
               volume === 100 && clearInterval(fadeInVolume);
             }, 150);
-            $('#' + event.target.l.id).addClass('showYoutube');
+            videoElem.addClass('showYoutube');
           }
         }
       }
