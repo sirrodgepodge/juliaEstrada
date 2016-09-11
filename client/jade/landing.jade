@@ -35,12 +35,12 @@ img#landing-head(style="opacity: 0; z-index:7;", src="#{locals.landing.logoImage
         .head= locals.landing.tab1.label
         .full
           each line in locals.landing.tab1.content
-            |  #{line} #[br]
+            |  #{line} #[br] #[br]
       #tab-2.landing-tab
         .head= locals.landing.tab2.label
         .full
           each line in locals.landing.tab2.content
-            |  #{line} #[br]
+            |  #{line} #[br] #[br]
     #down-anim.scroll-to(data-scroll-to="#videos")
       svg#down-anim-svg(version='1.1', xmlns='http://www.w3.org/2000/svg', xmlns:xlink='http://www.w3.org/1999/xlink', x='0px', y='0px', viewbox='0 280 612 260', style='enable-background:new 0 280 612 260;', xml:space='preserve')
         polygon(fill="#fff" points='474.1,271.8 471.9,362.9 286.1,532.4 119.3,355.4 117.6,259.1 288.8,441.7')
