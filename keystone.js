@@ -23,7 +23,7 @@ keystone.init({
 	'session': true,
 	'auth': true,
 	'user model': 'User',
-	'mongo': process.env.MONGO_URI || 'mongodb://localhost/juliaestrada',
+	'mongo': process.env.MONGODB_URI || 'mongodb://localhost/juliaestrada',
 });
 
 // Load your project's Models
