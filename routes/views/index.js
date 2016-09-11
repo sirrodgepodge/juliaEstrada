@@ -18,6 +18,7 @@ const propsTransform = {
 	},
 	'About Julia': (locals, obj) => {
 		_.set(locals, ['landing', 'tab2', 'image'], obj.image.url);
+		_.set(locals, ['siteHeader', 'mobileAbout'], landingTextParse(obj.content.brief));
 		_.set(locals, ['landing', 'tab2', 'content'], landingTextParse(obj.content.extended));
 	},
 	'Resume': (locals, obj) =>
