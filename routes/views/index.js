@@ -24,7 +24,48 @@ const propsTransform = {
 	'Resume': (locals, obj) =>
 		_.set(locals, ['siteHeader', 'resumeLink'], obj.image.url),
 	'Videos': (locals, obj) => {
-		// @TODO make video model more robust somehow
+		// init array
+		if (!locals.videos) locals.videos = [];
+
+		// create video object
+		const videoObj = {
+			title: obj.title,
+			image: obj.image.url,
+			subText: [],
+			videoData: {},
+		};
+		obj.content.brief.split('<em>').forEach((segment, index, array) => {
+			const strippedSegment = segment.replace(tagRemove, '');
+			if (!strippedSegment) return; // don't push an empty string
+			if (array.length === 1) { // handle case of no italics
+				return videoObj.subText.push({
+					fontStyle: 'normal',
+					text: strippedSegment,
+				});
+			}
+			const splitSegment = segment.split('</em>');
+			const italicSegment = splitSegment[0].replace(tagRemove, '');
+			const normalSegment = splitSegment[1].replace(tagRemove, '');
+			if (italicSegment) {
+				videoObj.subText.push({
+					fontStyle: 'italic',
+					text: splitSegment[0].replace(tagRemove, ''),
+				});
+			}
+			if (normalSegment) {
+				videoObj.subText.push({
+					fontStyle: 'normal',
+					text: splitSegment[1].replace(tagRemove, ''),
+				});
+			}
+		});
+		obj.content.extended.split('\n').forEach(pair => {
+			const splitPair = pair.replace(tagRemove, '').replace('\r', '').split('===');
+			videoObj.videoData[splitPair[0]] = splitPair[1];
+		});
+
+		// add video data to array
+		locals.videos.push(videoObj);
 	},
 	'Quotes': (locals, obj, number) => {
 		if (!locals.quotes) locals.quotes = [];
@@ -85,7 +126,7 @@ exports = module.exports = function (req, res) {
 	// Load other posts
 	view.on('init', function (next) {
 		Promise.all(queryPromiseObj).then(dbData => {
-			// sort by category an pull category off nesting
+			// sort by category and pull category prop off nesting
 			dbData[0].sort((a, b) => {
 				if (!a.category) {
 					a.category = _.get(a, ['categories', 0, 'name']);
@@ -105,7 +146,7 @@ exports = module.exports = function (req, res) {
 				: propsTransform[val.title]
 				? propsTransform[val.title](locals, val)
 				: propsTransform[val.category]
-				? propsTransform[val.category](locals, val) : null; // console.log(val);
+				? propsTransform[val.category](locals, val) : null;
 			});
 			next();
 		}).catch(err => next(err));
