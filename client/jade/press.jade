@@ -7,5 +7,7 @@
             img(src=quote.image).press-icon
             |         
             p.quote
-              | #[i.icomoon.fa-quote-left] #{quote.content}
+              | #[i.icomoon.fa-quote-left] 
+              each line in quote.content
+                |  #{line} #[br]
             span.author -#{quote.author}
