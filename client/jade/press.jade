@@ -1,0 +1,11 @@
+#press
+  .table
+    each quoteRow in quotes
+      .table-row
+        each quote in quoteRow
+          section.press-sect
+            img(src=quote.image).press-icon
+            |         
+            p.quote
+              | #[i.icomoon.fa-quote-left] #{quote.content}
+            span.author -#{quote.author}
