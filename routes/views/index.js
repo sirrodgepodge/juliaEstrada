@@ -29,8 +29,8 @@ const propsTransform = {
 		if (!locals.quotes) locals.quotes = [];
 		const quoteObj = {
 			image: obj.image.url,
-			content: obj.content.brief.replace(tagRemove, ''),
-			author: obj.content.extended.replace(tagRemove, ''),
+			content: obj.content.brief.replace(tagRemove, '').replace(breakDetect, ''),
+			author: obj.content.extended.replace(tagRemove, '').replace(breakDetect, ''),
 		};
 		// nest array
 		if (!(locals.quotes.length % 2)) {
