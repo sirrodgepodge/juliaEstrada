@@ -82,7 +82,7 @@ const propsTransform = {
 		}
 	},
 	'Contact Image': (locals, obj) =>
-		_.set(locals, ['contact', 'mainImg'], obj.heroImage.url),
+		_.set(locals, ['contact', 'mainImg'], obj.image.url),
 	'Photo Section': (locals, obj) =>
 		_.set(locals, 'photos', obj.images.map(imageObj => ({
 			src: imageObj.url,
@@ -115,8 +115,10 @@ exports = module.exports = function (req, res) {
 		}, { lean: true }).where('state', 'published').populate('categories', { _id: 0, name: 1 }).exec(),
 		keystone.list('Gallery').model.find({}, {
 			'_id': 0,
-			'heroImage.url': 1,
 			'name': 1,
+			'image.url': 1,
+			'image.height': 1,
+			'image.width': 1,
 			'images.url': 1,
 			'images.height': 1,
 			'images.width': 1,

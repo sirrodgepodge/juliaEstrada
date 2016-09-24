@@ -6,15 +6,16 @@ var Types = keystone.Field.Types;
  * =============
  */
 
-var Gallery = new keystone.List('Gallery', {
+ var Gallery = new keystone.List('Gallery', {
+	sortable: true,
 	autokey: { from: 'name', path: 'key', unique: true },
-});
+ });
 
-Gallery.add({
+ Gallery.add({
 	name: { type: String, required: true },
 	publishedDate: { type: Date, default: Date.now },
-	heroImage: { type: Types.CloudinaryImage },
+	image: { type: Types.CloudinaryImage },
 	images: { type: Types.CloudinaryImages },
-});
+ });
 
 Gallery.register();
