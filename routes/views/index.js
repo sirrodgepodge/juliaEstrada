@@ -23,22 +23,23 @@ const propsTransform = {
 	},
 	'Resume': (locals, obj) =>
 		_.set(locals, ['siteHeader', 'resumeLink'], obj.image.url),
-	'Videos': (locals, obj) => {
-		// init array
-		if (!locals.videos) locals.videos = [];
-
+	'Videos': (locals, obj) => _.set(locals, 'videos', obj.videos.map(videoObj => {
 		// create video object
-		const videoObj = {
-			title: obj.title,
-			image: obj.image.url,
+		const finalVideoObj = {
+			title: videoObj.name,
+			image: videoObj.image.url,
 			subText: [],
-			videoData: {},
+			videoData: {
+				youtubeId: videoObj.youtubeId,
+				start: videoObj['Seconds To Cut From Beginning'],
+				end: videoObj['Seconds To Cut From End'],
+			},
 		};
-		obj.content.brief.split('<em>').forEach((segment, index, array) => {
+		videoObj.subTitle.split('<em>').forEach((segment, index, array) => {
 			const strippedSegment = segment.replace(tagRemove, '');
 			if (!strippedSegment) return; // don't push an empty string
 			if (array.length === 1) { // handle case of no italics
-				return videoObj.subText.push({
+				return finalVideoObj.subText.push({
 					fontStyle: 'normal',
 					text: strippedSegment,
 				});
@@ -47,26 +48,21 @@ const propsTransform = {
 			const italicSegment = splitSegment[0].replace(tagRemove, '');
 			const normalSegment = splitSegment[1].replace(tagRemove, '');
 			if (italicSegment) {
-				videoObj.subText.push({
+				finalVideoObj.subText.push({
 					fontStyle: 'italic',
 					text: splitSegment[0].replace(tagRemove, ''),
 				});
 			}
 			if (normalSegment) {
-				videoObj.subText.push({
+				finalVideoObj.subText.push({
 					fontStyle: 'normal',
 					text: splitSegment[1].replace(tagRemove, ''),
 				});
 			}
 		});
-		obj.content.extended.split('\n').forEach(pair => {
-			const splitPair = pair.replace(tagRemove, '').replace('\r', '').split('===');
-			videoObj.videoData[splitPair[0]] = splitPair[1];
-		});
 
-		// add video data to array
-		locals.videos.push(videoObj);
-	},
+		return finalVideoObj;
+	})),
 	'Quotes': (locals, obj, number) => {
 		if (!locals.quotes) locals.quotes = [];
 		const quoteObj = {
@@ -121,6 +117,15 @@ exports = module.exports = function (req, res) {
 			'image.width': 1,
 			'description': 1,
 		}, { lean: true }).sort('sortOrder').exec(),
+		keystone.list('Video').model.find({}, {
+			'_id': 0,
+			'name': 1,
+			'subTitle': 1,
+			'image': 1,
+			'youtubeId': 1,
+			'Seconds To Cut From Beginning': 1,
+			'Seconds To Cut From End': 1,
+		}, { lean: true }).sort('sortOrder').exec(),
 	];
 
 	// Load other posts
@@ -140,10 +145,13 @@ exports = module.exports = function (req, res) {
 			});
 
 			// apply transforms to locals object
-			dbData[0].concat({
+			dbData[0].concat([{
 				name: 'Photos',
 				images: dbData[1],
-			}).forEach(val => {
+			}, {
+				name: 'Videos',
+				videos: dbData[2],
+			}]).forEach(val => {
 				propsTransform[val.name]
 				? propsTransform[val.name](locals, val)
 				: propsTransform[val.title]
