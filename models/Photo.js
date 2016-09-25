@@ -2,20 +2,20 @@ var keystone = require('keystone');
 var Types = keystone.Field.Types;
 
 /**
- * Gallery Model
+ * Photo Model
  * =============
  */
 
-var Gallery = new keystone.List('Gallery', {
+var Photo = new keystone.List('Photo', {
 	sortable: true,
 	autokey: { from: 'name', path: 'key', unique: true },
 });
 
-Gallery.add({
+Photo.add({
 	name: { type: String, required: true },
 	image: { type: Types.CloudinaryImage },
 	description: { type: String },
 });
 
-Gallery.defaultColumns = 'name, image';
-Gallery.register();
+Photo.defaultColumns = 'name, image';
+Photo.register();

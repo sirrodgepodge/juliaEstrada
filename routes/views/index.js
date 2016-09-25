@@ -113,7 +113,7 @@ exports = module.exports = function (req, res) {
 			'image.url': 1,
 			'categories': 1,
 		}, { lean: true }).where('state', 'published').populate('categories', { _id: 0, name: 1 }).exec(),
-		keystone.list('Gallery').model.find({}, {
+		keystone.list('Photo').model.find({}, {
 			'_id': 0,
 			'name': 1,
 			'image.url': 1,
