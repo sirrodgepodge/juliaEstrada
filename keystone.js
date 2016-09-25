@@ -44,7 +44,7 @@ keystone.set('routes', require('./routes'));
 
 // Configure the navigation bar in Keystone's Admin UI
 keystone.set('nav', {
-	'static text': 'posts',
+	'static content': 'posts',
 	'photos': 'photos',
 	// 'users': 'users',
 });
