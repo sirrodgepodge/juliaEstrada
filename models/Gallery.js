@@ -14,7 +14,7 @@ var Gallery = new keystone.List('Gallery', {
 Gallery.add({
 	name: { type: String, required: true },
 	image: { type: Types.CloudinaryImage },
-	images: { type: Types.CloudinaryImages },
+	description: { type: String },
 });
 
 Gallery.defaultColumns = 'name, image';

@@ -83,12 +83,12 @@ const propsTransform = {
 	},
 	'Contact Image': (locals, obj) =>
 		_.set(locals, ['contact', 'mainImg'], obj.image.url),
-	'Photo Section': (locals, obj) =>
+	'Photos': (locals, obj) =>
 		_.set(locals, 'photos', obj.images.map(imageObj => ({
-			src: imageObj.url,
-			orientation: imageObj.height > imageObj.width ? 'vertical' : 'horizontal',
-			width: imageObj.width,
-			description: '',
+			src: imageObj.image.url,
+			orientation: imageObj.image.height > imageObj.image.width ? 'vertical' : 'horizontal',
+			width: imageObj.image.width,
+			description: imageObj.description,
 		}))),
 };
 
@@ -119,9 +119,6 @@ exports = module.exports = function (req, res) {
 			'image.url': 1,
 			'image.height': 1,
 			'image.width': 1,
-			'images.url': 1,
-			'images.height': 1,
-			'images.width': 1,
 		}, { lean: true }).sort('sortOrder').exec(),
 	];
 
@@ -142,7 +139,10 @@ exports = module.exports = function (req, res) {
 			});
 
 			// apply transforms to locals object
-			_.flatten(dbData).forEach(val => {
+			dbData[0].concat({
+				name: 'Photos',
+				images: dbData[1],
+			}).forEach(val => {
 				propsTransform[val.name]
 				? propsTransform[val.name](locals, val)
 				: propsTransform[val.title]
