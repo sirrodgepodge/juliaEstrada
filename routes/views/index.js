@@ -119,6 +119,7 @@ exports = module.exports = function (req, res) {
 			'image.url': 1,
 			'image.height': 1,
 			'image.width': 1,
+			'description': 1,
 		}, { lean: true }).sort('sortOrder').exec(),
 	];
 

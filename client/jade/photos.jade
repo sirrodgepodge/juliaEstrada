@@ -2,7 +2,7 @@
 - var fold = 1
 #photos
   each photo, index in photos
-    .float-fold(class="float-fold-#{index} float-fold-total-#{photos.length} #{photo.orientation}")
+    .float-fold(class="float-fold-#{index} float-fold-total-#{photos.length} #{photo.orientation}" title=photo.description)
       while fold < foldAmt + 1
         | <div class="slice total-slices-#{foldAmt} slice-#{fold++}" style="background-image: url(#{photo.src}), linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0, .7) 100%); background-image: url(#{photo.src}), -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0, .7) 100%); background-image: url(#{photo.src}), -moz-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0, .7) 100%); background-image: url(#{photo.src}), -ms-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0, .7) 100%); background-image: url(#{photo.src}), -o-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0, .7) 100%);">
       while fold > 1
